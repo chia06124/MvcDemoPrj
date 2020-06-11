@@ -1958,6 +1958,7 @@
     <Content Include="Content\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="Content\vendor\jquery\jquery.min.map" />
     <Content Include="Content\vendor\jquery\jquery.slim.min.map" />
+    <None Include="Properties\PublishProfiles\mvcdemoprj-MvcDemoPrj - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\PrjAzureDemo - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\prjazuredemo-MvcDemoPrj - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\prjazuredemo-MvcDemoPrj - Web Deploy.pubxml" />
