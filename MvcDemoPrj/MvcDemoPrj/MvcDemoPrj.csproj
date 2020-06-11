@@ -1959,6 +1959,8 @@
     <Content Include="Content\vendor\jquery\jquery.min.map" />
     <Content Include="Content\vendor\jquery\jquery.slim.min.map" />
     <None Include="Properties\PublishProfiles\PrjAzureDemo - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\prjazuredemo-MvcDemoPrj - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\prjazuredemo-MvcDemoPrj - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
