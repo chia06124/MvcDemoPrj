@@ -20,6 +20,17 @@ namespace MvcDemoPrj
                         , "~/Content/vendor/jquery-easing/jquery.easing.js"
                         , "~/Content/js/sb-admin-2.js"));
 
+
+            bundles.Add(new ScriptBundle("~/bundles/indexjs").Include(
+                        "~/Content/vendor/jquery/jquery.min.js"
+                        , "~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"
+                        , "~/Content/vendor/jquery-easing/jquery.easing.min.js"
+                        , "~/Content/js/sb-admin-2.min.js"
+                        , "~/Content/vendor/chart.js/Chart.min.js"
+                        , "~/Content/js/demo/chart-area-demo.js"
+                        , "~/Content/js/demo/chart-pie-demo.js"));
+
+
             // 使用開發版本的 Modernizr 進行開發並學習。然後，當您
             // 準備好實際執行時，請使用 http://modernizr.com 上的建置工具，只選擇您需要的測試。
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
@@ -35,6 +46,10 @@ namespace MvcDemoPrj
             bundles.Add(new StyleBundle("~/content/logincss").Include(
                       "~/Content/vendor/fontawesome-free/css/all.css",
                       "~/Content/css/sb-admin-2.css"));
+            bundles.Add(new StyleBundle("~/content/indexcss").Include(
+                      "~/Content/vendor/fontawesome-free/css/all.css",
+                      "~/Content/vendor/fontawesome-free/css/all.min.css",
+                      "~/Content/css/sb-admin-2.min.css"));
         }
     }
 }
