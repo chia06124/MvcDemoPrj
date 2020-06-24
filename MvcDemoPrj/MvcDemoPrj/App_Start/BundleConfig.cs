@@ -14,12 +14,6 @@ namespace MvcDemoPrj
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/LoginJs").Include(
-                        "~/Content/vendor/jquery/jquery.min.js"
-                        , "~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"
-                        , "~/Content/vendor/jquery-easing/jquery.easing.min.js"
-                        , "~/Content/js/sb-admin-2.min.js"));
-
             // 使用開發版本的 Modernizr 進行開發並學習。然後，當您
             // 準備好實際執行時，請使用 http://modernizr.com 上的建置工具，只選擇您需要的測試。
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
@@ -32,9 +26,6 @@ namespace MvcDemoPrj
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
-            bundles.Add(new StyleBundle("~/Content/LoginCss").Include(
-                      "~/Content/vendor/fontawesome-free/css/all.min.css",
-                      "~/Content/css/sb-admin-2.min.css"));
         }
     }
 }
