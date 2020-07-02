@@ -259,7 +259,6 @@ D:\VS_tutorial\MvcDemoPrj\MvcDemoPrj\bin\zh-Hant\Microsoft.Owin.Security.Faceboo
 D:\VS_tutorial\MvcDemoPrj\MvcDemoPrj\bin\zh-Hant\Microsoft.Owin.Security.Google.resources.dll
 D:\VS_tutorial\MvcDemoPrj\MvcDemoPrj\bin\zh-Hant\Microsoft.Owin.Security.Twitter.resources.dll
 D:\VS_tutorial\MvcDemoPrj\MvcDemoPrj\bin\zh-Hant\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-D:\VS_tutorial\MvcDemoPrj\MvcDemoPrj\obj\Debug\MvcDemoPrj.csprojResolveAssemblyReference.cache
 D:\VS_tutorial\MvcDemoPrj\MvcDemoPrj\obj\Debug\MvcDemoPrj.dll
 D:\VS_tutorial\MvcDemoPrj\MvcDemoPrj\obj\Debug\MvcDemoPrj.pdb
 D:\MvcDemoPrj\MvcDemoPrj\MvcDemoPrj\bin\roslyn\csc.exe
@@ -352,3 +351,4 @@ D:\MvcDemoPrj\MvcDemoPrj\MvcDemoPrj\obj\Debug\MvcDemoPrj.csproj.CoreCompileInput
 D:\MvcDemoPrj\MvcDemoPrj\MvcDemoPrj\obj\Debug\MvcDemoPrj.csproj.CopyComplete
 D:\MvcDemoPrj\MvcDemoPrj\MvcDemoPrj\obj\Debug\MvcDemoPrj.dll
 D:\MvcDemoPrj\MvcDemoPrj\MvcDemoPrj\obj\Debug\MvcDemoPrj.pdb
+D:\VS_tutorial\MvcDemoPrj\MvcDemoPrj\obj\Debug\MvcDemoPrj.csprojResolveAssemblyReference.cache

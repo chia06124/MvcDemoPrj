@@ -26,7 +26,7 @@ namespace MvcDemoPrj
                         , "~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"
                         , "~/Content/vendor/jquery-easing/jquery.easing.min.js"
                         , "~/Content/js/sb-admin-2.min.js"
-                        , "~/Content/vendor/chart.js/Chart.min.js"
+                        , "~/Content/vendor/chart.js/Chart.js"
                         , "~/Content/js/demo/chart-area-demo.js"
                         , "~/Content/js/demo/chart-pie-demo.js"));
 

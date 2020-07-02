@@ -3,18 +3,67 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MvcDemoPrj.Models;
+using System.Collections;
+using MvcDemoPrj.Models.ViewModel;
 
 namespace MvcDemoPrj.Controllers
 {
     public class HomeController : Controller
     {
+        
         public ActionResult Login()
         {
             return View();
         }
         public ActionResult Index()
         {
-            return View();
+            using (var db = new Model1())
+            {
+                //var query = from b in db.SA_User
+                //            select b;
+
+                //var query = (from b in db.SA_User select b).ToList();
+
+                var query = (from b in db.SI_ResearcherVisit
+                             join Suser in db.SA_User on b.CreateUserId equals Suser.UserId
+                             select new viewModel1 { DataDate = b.DataDate, CompanyId = b.CompanyId, CompanyName = b.CompanyName, ReportType = b.ReportType, EmpName = b.EmpName, CreateDate = b.CreateDate, UserName = Suser.UserName }).ToList();
+
+                //var query = from b in db.SI_ResearcherVisit
+                //            select b;
+
+                //viewModel1 vm = new viewModel1();
+                //vm.temp = query;
+
+
+                return View(query);
+            }
+
+            //return View();
+        }
+
+
+        public ActionResult ListView()
+        {
+
+            using (var db = new Model1())
+            {
+                //var query = from b in db.SI_ResearcherVisit 
+                //            join Suser in db.SA_User on b.CreateUserId equals Suser.UserId
+                //            select new { b.DataDate,b.CompanyId,b.CompanyName,b.ReportType,Suser.UserName, b.CreateDate};
+
+                var query = from b in db.SI_ResearcherVisit
+                            select b;
+
+                foreach (var item in query)
+                {
+
+                    System.Diagnostics.Debug.Write(item.CompanyName);
+
+                }
+                return View(query.ToList());
+            }
+            
         }
 
         public ActionResult About()
