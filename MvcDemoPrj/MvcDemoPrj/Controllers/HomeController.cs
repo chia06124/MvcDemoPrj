@@ -27,7 +27,9 @@ namespace MvcDemoPrj.Controllers
 
                 var query = (from b in db.SI_ResearcherVisit
                              join Suser in db.SA_User on b.CreateUserId equals Suser.UserId
-                             select new viewModel1 { DataDate = b.DataDate, CompanyId = b.CompanyId, CompanyName = b.CompanyName, ReportType = b.ReportType, EmpName = b.EmpName, CreateDate = b.CreateDate, UserName = Suser.UserName }).ToList();
+                             join codemap in db.sysCodeMap on b.ReportType equals codemap.Item_Code
+                             where codemap.Class_Name == "ReportType"
+                             select new viewModel1 { DataDate = b.DataDate, CompanyId = b.CompanyId, CompanyName = b.CompanyName, Item_Name = codemap.Item_Name, EmpName = b.EmpName, CreateDate = b.CreateDate, UserName = Suser.UserName }).ToList();
 
                 //var query = from b in db.SI_ResearcherVisit
                 //            select b;

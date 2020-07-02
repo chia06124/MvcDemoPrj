@@ -188,26 +188,26 @@
                     <table class="table table-bordered" id="dataTable" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">
                                     @*<th>@Html.DisplayNameFor(model => model.temp.First().UserName)</th>*@
                                     @Html.DisplayNameFor(model => model.DataDate)
                                 </th>
-                                <th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">
                                     @Html.DisplayNameFor(model => model.CompanyId)
                                 </th>
-                                <th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">
                                     @Html.DisplayNameFor(model => model.CompanyName)
                                 </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.ReportType)
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">
+                                    @Html.DisplayNameFor(model => model.Item_Name)
                                 </th>
-                                <th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">
                                     @Html.DisplayNameFor(model => model.EmpName)
                                 </th>
-                                <th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">
                                     @Html.DisplayNameFor(model => model.CreateDate)
                                 </th>
-                                <th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">
                                     @Html.DisplayNameFor(model => model.UserName)
                                 </th>
 </tr>
@@ -223,13 +223,13 @@
                                         @Html.DisplayFor(modelItem => item.DataDate)
                                     </td>
                                     <td>
-                                        @Html.DisplayNameFor(model => model.CompanyId)
+                                        @Html.DisplayFor(modelItem => item.CompanyId)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.CompanyName)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.ReportType)
+                                        @Html.DisplayFor(modelItem => item.Item_Name)
                                     </td>
 
                                     <td>

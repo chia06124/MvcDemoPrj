@@ -30,9 +30,9 @@ namespace MvcDemoPrj.Models.ViewModel
         public string CompanyName { get; set; }
 
         [Required]
-        [StringLength(1)]
+        [StringLength(50)]
         [DisplayName("報告類別")]
-        public string ReportType { get; set; }
+        public string Item_Name { get; set; }
 
         [Required]
         [StringLength(20)]
