@@ -33,6 +33,10 @@ namespace MvcDemoPrj
                         , "~/Content/vendor/datatables/dataTables.bootstrap4.min.js"
                         , "~/Content/js/demo/datatables-demo.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/datepickerjs").Include(
+                        "~/Scripts/moment.js"
+                        , "~/Scripts/bootstrap-datetimepicker.js"));
+
 
             // 使用開發版本的 Modernizr 進行開發並學習。然後，當您
             // 準備好實際執行時，請使用 http://modernizr.com 上的建置工具，只選擇您需要的測試。
@@ -54,6 +58,8 @@ namespace MvcDemoPrj
                       "~/Content/vendor/fontawesome-free/css/all.min.css",
                       "~/Content/css/sb-admin-2.min.css",
                       "~/Content/vendor/datatables/dataTables.bootstrap4.min.css"));
+            bundles.Add(new StyleBundle("~/content/datepickercss").Include(
+                      "~/Content/bootstrap-datepicker.css"));
         }
     }
 }
