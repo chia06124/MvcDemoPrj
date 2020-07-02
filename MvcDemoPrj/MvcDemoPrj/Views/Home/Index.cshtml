@@ -1,4 +1,4 @@
-﻿@*@model IEnumerable<MvcDemoPrj.Models.SA_User>*@
+﻿
 @model IEnumerable<MvcDemoPrj.Models.ViewModel.viewModel1>
 <div id="content">
     <!-- Topbar -->
@@ -185,34 +185,43 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" cellspacing="0">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">
+                                <th>
                                     @*<th>@Html.DisplayNameFor(model => model.temp.First().UserName)</th>*@
                                     @Html.DisplayNameFor(model => model.DataDate)
                                 </th>
-                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">
+                                <th>
                                     @Html.DisplayNameFor(model => model.CompanyId)
                                 </th>
-                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">
+                                <th>
                                     @Html.DisplayNameFor(model => model.CompanyName)
                                 </th>
-                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">
+                                <th>
                                     @Html.DisplayNameFor(model => model.Item_Name)
                                 </th>
-                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">
+                                <th>
                                     @Html.DisplayNameFor(model => model.EmpName)
                                 </th>
-                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">
+                                <th>
                                     @Html.DisplayNameFor(model => model.CreateDate)
                                 </th>
-                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 102px;">
+                                <th>
                                     @Html.DisplayNameFor(model => model.UserName)
                                 </th>
-</tr>
+                            </tr>
                         </thead>
-
+                        @*<tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Office</th>
+                                <th>Age</th>
+                                <th>Start date</th>
+                                <th>Salary</th>
+                            </tr>
+                        </tfoot>*@
                         <tbody>
                             @*@foreach (var item in Model.temp)*@
 
@@ -252,3 +261,5 @@
     </div>
     <!-- /.container-fluid -->
 </div>
+
+
