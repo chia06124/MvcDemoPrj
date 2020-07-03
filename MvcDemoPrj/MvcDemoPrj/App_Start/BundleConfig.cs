@@ -35,7 +35,8 @@ namespace MvcDemoPrj
 
             bundles.Add(new ScriptBundle("~/bundles/datepickerjs").Include(
                         "~/Scripts/moment.js"
-                        , "~/Scripts/bootstrap-datetimepicker.js"));
+                        , "~/Scripts/bootstrap-datetimepicker.js"
+                        ,"~/Scripts/bootstrap-datepicker.js"));
 
 
             // 使用開發版本的 Modernizr 進行開發並學習。然後，當您
