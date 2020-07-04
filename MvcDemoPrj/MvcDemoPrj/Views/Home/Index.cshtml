@@ -1,9 +1,9 @@
 ﻿
 @model IEnumerable<MvcDemoPrj.Models.ViewModel.viewModel1>
-@{
+@*@{
     
     var EmpList = ViewBag.EmpList;
-}
+}*@
 <div id="content">
 
     <!-- Topbar -->
@@ -72,14 +72,16 @@
                         <div class="col-sm-6">
                             <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Last Name">
                         </div>
-                        
-                        <select id="city" name="city">
-                            <option value="">全部</option>
-                            @for (int i = 0; i < EmpList.Count; i++)
-                            {
-                                <option value="@EmpList[i].UserIdTemp">@EmpList[i].UserNameTemp</option>
-                            }
-                        </select>
+                        @Html.DropDownList("tempEmp", "请选择")
+                        @*@Html.DropDownList("UserIdTemp", ViewBag.EmpList as SelectList)*@
+
+                        @*<select id="city" name="city">
+            <option value="">全部</option>
+            @for (int i = 0; i < EmpList.Count; i++)
+            {
+                <option value="@EmpList[i].UserIdTemp">@EmpList[i].UserNameTemp</option>
+            }
+        </select>*@
                     </div>
                 </form>
             </div>

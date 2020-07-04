@@ -17,17 +17,6 @@ namespace MvcDemoPrj.Controllers
             return View();
         }
 
-        public ActionResult getEmpName()
-        {
-            using (var db = new Model1())
-            {
-                IEnumerable<viewModel1> EmpNameList = from s in db.SA_User select new viewModel1 { UserId=s.UserId, UserName=s.UserName };
-                SelectList selectlist = new SelectList(EmpNameList, "UserId", "UserName");
-                ViewBag.EmpNameList = selectlist;
-                return View();
-            }
-        }
-
         public ActionResult Index()
         {
             using (var db = new Model1())
@@ -41,12 +30,22 @@ namespace MvcDemoPrj.Controllers
                              join codemap in db.sysCodeMap on b.ReportType equals codemap.Item_Code
                              where codemap.Class_Name == "ReportType"
                              select new viewModel1 { DataDate = b.DataDate, CompanyId = b.CompanyId, CompanyName = b.CompanyName, Item_Name = codemap.Item_Name, EmpName = b.EmpName, CreateDate = b.CreateDate, UserName = Suser.UserName }).ToList();
-                //var query = (from b in db.SA_User select b).ToList();
-                var EmpList = (from b in db.SA_User select new EmpViewModel { UserIdTemp = b.UserId, UserNameTemp = b.UserName }).ToList();
-                ViewBag.EmpList = EmpList;
+                
+                //ViewData["AreId"] = (from a in db.SA_User
+                //                    select new SelectListItem
+                //                    {
+                //                        Text = a.UserName,
+                //                        Value = a.UserId.ToString()
+                //                    }).ToList();
+
+                var tempEmp = (from a in db.SA_User
+                               select a).ToList();
+                ViewBag.tempEmp = new SelectList(items: tempEmp, dataTextField: "UserName", dataValueField: "UserId");
+
                 return View(query);
             }
         }
+   
 
         public ActionResult MyAction()
         {
