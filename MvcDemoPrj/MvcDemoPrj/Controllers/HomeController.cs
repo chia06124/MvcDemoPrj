@@ -11,39 +11,55 @@ namespace MvcDemoPrj.Controllers
 {
     public class HomeController : Controller
     {
-        
+
         public ActionResult Login()
         {
             return View();
         }
+
+        public ActionResult getEmpName()
+        {
+            using (var db = new Model1())
+            {
+                IEnumerable<viewModel1> EmpNameList = from s in db.SA_User select new viewModel1 { UserId=s.UserId, UserName=s.UserName };
+                SelectList selectlist = new SelectList(EmpNameList, "UserId", "UserName");
+                ViewBag.EmpNameList = selectlist;
+                return View();
+            }
+        }
+
         public ActionResult Index()
         {
             using (var db = new Model1())
             {
-                //var query = from b in db.SA_User
-                //            select b;
+                
 
-                //var query = (from b in db.SA_User select b).ToList();
+                
 
                 var query = (from b in db.SI_ResearcherVisit
                              join Suser in db.SA_User on b.CreateUserId equals Suser.UserId
                              join codemap in db.sysCodeMap on b.ReportType equals codemap.Item_Code
                              where codemap.Class_Name == "ReportType"
                              select new viewModel1 { DataDate = b.DataDate, CompanyId = b.CompanyId, CompanyName = b.CompanyName, Item_Name = codemap.Item_Name, EmpName = b.EmpName, CreateDate = b.CreateDate, UserName = Suser.UserName }).ToList();
-
-                //var query = from b in db.SI_ResearcherVisit
-                //            select b;
-
-                //viewModel1 vm = new viewModel1();
-                //vm.temp = query;
-
-
+                //var query = (from b in db.SA_User select b).ToList();
+                var EmpList = (from b in db.SA_User select new EmpViewModel { UserIdTemp = b.UserId, UserNameTemp = b.UserName }).ToList();
+                ViewBag.EmpList = EmpList;
                 return View(query);
             }
-
-            //return View();
         }
 
+        public ActionResult MyAction()
+        {
+            using (var db = new Model1())
+            {
+                //var cityList = (from b in db.SA_User select b).ToList();
+                var cityList = (from b in db.SA_User select new  EmpViewModel{ UserIdTemp = b.UserId, UserNameTemp = b.UserName }).ToList();
+               
+                ViewBag.CityList = cityList;
+            }
+                
+            return View();
+        }
 
         public ActionResult ListView()
         {
@@ -65,7 +81,7 @@ namespace MvcDemoPrj.Controllers
                 }
                 return View(query.ToList());
             }
-            
+
         }
 
         public ActionResult About()

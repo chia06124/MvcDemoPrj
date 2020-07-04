@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Home Page";
+    Layout = null;
+
+    var cityList = ViewBag.CityList;
+}
+
+
+<h2>MyAction</h2>
+
+<label for="Address">地址</label>
+<select id="city" name="city">
+    <option value="">全部</option>
+    @for (int i = 0; i < cityList.Count; i++)
+    {
+        <option value="@cityList[i].UserIdD">@cityList[i].UserNameD</option>
+    }
+</select>
