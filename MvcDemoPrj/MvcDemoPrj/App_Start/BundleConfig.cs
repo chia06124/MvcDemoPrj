@@ -34,6 +34,10 @@ namespace MvcDemoPrj
                         , "~/Scripts/bootstrap-datetimepicker.js"
                         ,"~/Scripts/bootstrap-datepicker.js"));
 
+
+            bundles.Add(new ScriptBundle("~/bundles/selectjs").Include(
+                       "~/Scripts/bootstrap-select.js"));
+
             // 使用開發版本的 Modernizr 進行開發並學習。然後，當您
             // 準備好實際執行時，請使用 http://modernizr.com 上的建置工具，只選擇您需要的測試。
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
@@ -52,10 +56,14 @@ namespace MvcDemoPrj
             bundles.Add(new StyleBundle("~/content/indexcss").Include(
                       "~/Content/vendor/fontawesome-free/css/all.css",
                       "~/Content/css/sb-admin-2.css",
-                      "~/Content/vendor/datatables/dataTables.bootstrap4.css"));
+                      "~/Content/vendor/datatables/dataTables.bootstrap4.css",
+                      "~/Content/bootstrap.css"));
             bundles.Add(new StyleBundle("~/content/datepickercss").Include(
                       "~/Content/bootstrap-datepicker.css"));
-            
+
+            bundles.Add(new StyleBundle("~/content/selectcss").Include(
+                      "~/Content/bootstrap-select.css"));
+
         }
     }
 }

@@ -346,9 +346,9 @@ D:\MvcDemoPrj\MvcDemoPrj\MvcDemoPrj\bin\zh-Hant\Microsoft.Owin.Security.Facebook
 D:\MvcDemoPrj\MvcDemoPrj\MvcDemoPrj\bin\zh-Hant\Microsoft.Owin.Security.Google.resources.dll
 D:\MvcDemoPrj\MvcDemoPrj\MvcDemoPrj\bin\zh-Hant\Microsoft.Owin.Security.Twitter.resources.dll
 D:\MvcDemoPrj\MvcDemoPrj\MvcDemoPrj\bin\zh-Hant\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-D:\MvcDemoPrj\MvcDemoPrj\MvcDemoPrj\obj\Debug\MvcDemoPrj.csprojAssemblyReference.cache
 D:\MvcDemoPrj\MvcDemoPrj\MvcDemoPrj\obj\Debug\MvcDemoPrj.csproj.CoreCompileInputs.cache
 D:\MvcDemoPrj\MvcDemoPrj\MvcDemoPrj\obj\Debug\MvcDemoPrj.csproj.CopyComplete
 D:\MvcDemoPrj\MvcDemoPrj\MvcDemoPrj\obj\Debug\MvcDemoPrj.dll
 D:\MvcDemoPrj\MvcDemoPrj\MvcDemoPrj\obj\Debug\MvcDemoPrj.pdb
 D:\VS_tutorial\MvcDemoPrj\MvcDemoPrj\obj\Debug\MvcDemoPrj.csprojResolveAssemblyReference.cache
+D:\MvcDemoPrj\MvcDemoPrj\MvcDemoPrj\obj\Debug\MvcDemoPrj.csprojAssemblyReference.cache

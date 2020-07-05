@@ -11,9 +11,14 @@ namespace MvcDemoPrj.Models.ViewModel
     {
         //public string a  { get; set; }
 
-        //public IEnumerable<SA_User> temp { get; set; }
+        public IEnumerable<SA_User> temp { get; set; }
         //public IEnumerable<SI_ResearcherVisit> visit { get; set; }
-       
+        [Required]
+        [StringLength(20)]
+        [DisplayName("研究員編號")]
+        public string UserId { get; set; }
+
+
         [Required]
         [StringLength(20)]
         [DisplayName("拜訪日期")]

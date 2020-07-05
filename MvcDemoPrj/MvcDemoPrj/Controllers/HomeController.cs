@@ -21,42 +21,33 @@ namespace MvcDemoPrj.Controllers
         {
             using (var db = new Model1())
             {
-                
-
-                
-
                 var query = (from b in db.SI_ResearcherVisit
                              join Suser in db.SA_User on b.CreateUserId equals Suser.UserId
                              join codemap in db.sysCodeMap on b.ReportType equals codemap.Item_Code
                              where codemap.Class_Name == "ReportType"
                              select new viewModel1 { DataDate = b.DataDate, CompanyId = b.CompanyId, CompanyName = b.CompanyName, Item_Name = codemap.Item_Name, EmpName = b.EmpName, CreateDate = b.CreateDate, UserName = Suser.UserName }).ToList();
-                
-                //ViewData["AreId"] = (from a in db.SA_User
-                //                    select new SelectListItem
-                //                    {
-                //                        Text = a.UserName,
-                //                        Value = a.UserId.ToString()
-                //                    }).ToList();
 
-                var tempEmp = (from a in db.SA_User
-                               select a).ToList();
-                ViewBag.tempEmp = new SelectList(items: tempEmp, dataTextField: "UserName", dataValueField: "UserId");
+                var EmpList = (from b in db.SA_User select new EmpViewModel { UserIdTemp = b.UserId, UserNameTemp = b.UserName }).ToList();
+                ViewBag.EmpList = EmpList;
+                //var tempEmp = (from a in db.SA_User
+                //               select a).ToList();
+                //ViewBag.tempEmp = new SelectList(items: tempEmp, dataTextField: "UserName", dataValueField: "UserId");
 
                 return View(query);
             }
         }
-   
+
 
         public ActionResult MyAction()
         {
             using (var db = new Model1())
             {
                 //var cityList = (from b in db.SA_User select b).ToList();
-                var cityList = (from b in db.SA_User select new  EmpViewModel{ UserIdTemp = b.UserId, UserNameTemp = b.UserName }).ToList();
-               
+                var cityList = (from b in db.SA_User select new EmpViewModel { UserIdTemp = b.UserId, UserNameTemp = b.UserName }).ToList();
+
                 ViewBag.CityList = cityList;
             }
-                
+
             return View();
         }
 

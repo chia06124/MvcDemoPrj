@@ -1,9 +1,11 @@
 ﻿
 @model IEnumerable<MvcDemoPrj.Models.ViewModel.viewModel1>
-@*@{
-    
-    var EmpList = ViewBag.EmpList;
-}*@
+@{
+
+    var EmpNameList = ViewBag.EmpList;
+}
+
+
 <div id="content">
 
     <!-- Topbar -->
@@ -66,22 +68,34 @@
 
                 <form class="user">
                     <div class="form-group row">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="First Name">
+                        <div class="col-sm-4 input-group ">
+                            <span class="input-group-addon">起始日期</span>
+                            @*<input type="text" class="form-control" placeholder="your name">*@
+                            <input id="WHC_PayDate" name="WHC_PayDate" type="text" placeholder="起始日期" data-date-format="yyyy-mm-dd" class="form-control" />
+
                         </div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Last Name">
+                        <div class="col-sm-4 input-group ">
+                            <span class="input-group-addon">截止日期</span>
+                            @*<input type="text" class="form-control" placeholder="your name">*@
+                            <input id="WHC_PayDate2" name="WHC_PayDate" type="text" placeholder="截止日期" data-date-format="yyyy-mm-dd" class="form-control" />
                         </div>
-                        @Html.DropDownList("tempEmp", "请选择")
-                        @*@Html.DropDownList("UserIdTemp", ViewBag.EmpList as SelectList)*@
+                        <select class="col-sm-4 selectpicker" data-live-search="true" id="city" name="city">
+                            <option value="">全部</option>
+                            @for (int i = 0; i < EmpNameList.Count; i++)
+                            {
+                                <option value="@EmpNameList[i].UserIdTemp">@EmpNameList[i].UserNameTemp</option>
+                            }
+                        </select>
+
+                        @*@Html.DropDownList("tempEmp", "请选择")*@
 
                         @*<select id="city" name="city">
-            <option value="">全部</option>
-            @for (int i = 0; i < EmpList.Count; i++)
-            {
-                <option value="@EmpList[i].UserIdTemp">@EmpList[i].UserNameTemp</option>
-            }
-        </select>*@
+                                <option value="">全部</option>
+                                @for (int i = 0; i < EmpList.Count; i++)
+                                {
+                                    <option value="@EmpList[i].UserIdTemp">@EmpList[i].UserNameTemp</option>
+                                }
+                            </select>*@
                     </div>
                 </form>
             </div>
@@ -168,13 +182,13 @@
                     </table>
                 </div>
             </div>
-            <div class="input-group input-daterange" style="width:200px">
-                <input id="WHC_PayDate" name="WHC_PayDate" type="text" placeholder="付款日期(起)" data-date-format="yyyy-mm-dd" class="form-control" />
+            @*<div class="input-group input-daterange" style="width:200px">
+                    <input id="WHC_PayDate" name="WHC_PayDate" type="text" placeholder="付款日期(起)" data-date-format="yyyy-mm-dd" class="form-control" />
 
-                <div class="input-group-addon">~</div>
-                <input id="WHC_PayDate2" name="WHC_PayDate" type="text" placeholder="付款日期(止)" data-date-format="yyyy-mm-dd" class="form-control" />
+                    <div class="input-group-addon">~</div>
+                    <input id="WHC_PayDate2" name="WHC_PayDate" type="text" placeholder="付款日期(止)" data-date-format="yyyy-mm-dd" class="form-control" />
 
-            </div>
+                </div>*@
 
 
         </div>
