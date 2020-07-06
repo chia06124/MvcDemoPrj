@@ -12,6 +12,12 @@ namespace MvcDemoPrj.Controllers
     public class HomeController : Controller
     {
 
+        public ActionResult FUCK()
+        {
+            return View();
+        }
+
+        
         public ActionResult Login()
         {
             return View();
@@ -36,6 +42,8 @@ namespace MvcDemoPrj.Controllers
                 return View(query);
             }
         }
+
+     
 
 
         public ActionResult MyAction()

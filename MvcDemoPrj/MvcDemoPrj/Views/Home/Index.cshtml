@@ -18,14 +18,14 @@
 
         <!-- Topbar Search -->
         <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            公司訪談資料
+            績效查詢
         </form>
 
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown no-arrow d-sm-none">
                 <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    公司訪談資料
+                    績效查詢
                 </a>
             </li>
 
@@ -63,46 +63,46 @@
     <!-- End of Topbar -->
     <!-- Begin Page Content -->
     <div class="container-fluid">
-        <div>
-            <div class="alert alert-primary" role="alert" style="width:98%">
 
-                <form class="user">
-                    <div class="form-group row">
-                        <div class="col-sm-4 input-group ">
-                            <span class="input-group-addon">起始日期</span>
-                            @*<input type="text" class="form-control" placeholder="your name">*@
-                            <input id="WHC_PayDate" name="WHC_PayDate" type="text" placeholder="起始日期" data-date-format="yyyy-mm-dd" class="form-control" />
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 form-inline">
 
-                        </div>
-                        <div class="col-sm-4 input-group ">
-                            <span class="input-group-addon">截止日期</span>
-                            @*<input type="text" class="form-control" placeholder="your name">*@
-                            <input id="WHC_PayDate2" name="WHC_PayDate" type="text" placeholder="截止日期" data-date-format="yyyy-mm-dd" class="form-control" />
-                        </div>
-                        <select class="col-sm-4 selectpicker" data-live-search="true" id="city" name="city">
+                @Html.ActionLink("查詢", "Index", "Home", new { }, new { @class = "btn btn-primary btn-sm m-1 col-sm-1" })
+                @*<a href="#" class="btn btn-primary btn-sm m-1 col-sm-1" style="margin-right: 80%;">
+                    <span class="text">查詢</span>
+                </a>*@
+                @*<a href="#" class="btn btn-primary  btn-sm m-1 col-sm-1" style="margin-right:  10px;">
+                    <span class="text">新增</span>
+                </a>*@
+            </div>
+            <div class="card-body">
+                <div class="form-inline">
+                    <div class="col-sm-4 input-group form-inline">
+                        <span>起始日期　</span>
+                        <input id="WHC_PayDate" name="WHC_PayDate" type="text" placeholder="請選擇" data-date-format="yyyy-mm-dd" class="form-control" />
+
+                    </div>
+                    <div class="col-sm-4 input-group form-inline">
+                        <span>截止日期　</span>
+                        @*<input type="text" class="form-control" placeholder="your name">*@
+                        <input id="WHC_PayDate2" name="WHC_PayDate" type="text" placeholder="請選擇" data-date-format="yyyy-mm-dd" class="form-control" />
+                    </div>
+
+                    <div class="col-sm-4 input-group form-inline">
+                        <span>研究員　</span>
+                        <select class="selectpicker" data-live-search="true" id="city" name="city" >
                             <option value="">全部</option>
                             @for (int i = 0; i < EmpNameList.Count; i++)
                             {
                                 <option value="@EmpNameList[i].UserIdTemp">@EmpNameList[i].UserNameTemp</option>
                             }
                         </select>
-
-                        @*@Html.DropDownList("tempEmp", "请选择")*@
-
-                        @*<select id="city" name="city">
-                                <option value="">全部</option>
-                                @for (int i = 0; i < EmpList.Count; i++)
-                                {
-                                    <option value="@EmpList[i].UserIdTemp">@EmpList[i].UserNameTemp</option>
-                                }
-                            </select>*@
                     </div>
-                </form>
+                </div>
+
+
             </div>
         </div>
-        <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-        <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
 
         <div class="card shadow mb-4">
             <div class="card-header py-3">

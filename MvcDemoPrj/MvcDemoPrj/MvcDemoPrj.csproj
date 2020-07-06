@@ -2235,6 +2235,7 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\ListView.cshtml" />
     <Content Include="Views\Home\MyAction.cshtml" />
+    <Content Include="Views\Home\FUCK.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

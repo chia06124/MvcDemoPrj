@@ -53,11 +53,11 @@ namespace MvcDemoPrj
             bundles.Add(new StyleBundle("~/content/logincss").Include(
                       "~/Content/vendor/fontawesome-free/css/all.css",
                       "~/Content/css/sb-admin-2.css"));
+
             bundles.Add(new StyleBundle("~/content/indexcss").Include(
                       "~/Content/vendor/fontawesome-free/css/all.css",
                       "~/Content/css/sb-admin-2.css",
-                      "~/Content/vendor/datatables/dataTables.bootstrap4.css",
-                      "~/Content/bootstrap.css"));
+                      "~/Content/vendor/datatables/dataTables.bootstrap4.css"));
             bundles.Add(new StyleBundle("~/content/datepickercss").Include(
                       "~/Content/bootstrap-datepicker.css"));
 
