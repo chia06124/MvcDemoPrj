@@ -23,16 +23,25 @@ namespace MvcDemoPrj.Controllers
             return View();
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string startDate,string EndDate, string EmpId)
         {
             using (var db = new Model1())
             {
+                
                 var query = (from b in db.SI_ResearcherVisit
                              join Suser in db.SA_User on b.CreateUserId equals Suser.UserId
                              join codemap in db.sysCodeMap on b.ReportType equals codemap.Item_Code
                              where codemap.Class_Name == "ReportType"
                              select new viewModel1 { DataDate = b.DataDate, CompanyId = b.CompanyId, CompanyName = b.CompanyName, Item_Name = codemap.Item_Name, EmpName = b.EmpName, CreateDate = b.CreateDate, UserName = Suser.UserName }).ToList();
+                if (EmpId != null)
+                {
 
+                    query.Where(x => x.CreateUserID == EmpId);
+                }
+                else
+                {
+                    query = query.ToList();
+                }
                 var EmpList = (from b in db.SA_User select new EmpViewModel { UserIdTemp = b.UserId, UserNameTemp = b.UserName }).ToList();
                 ViewBag.EmpList = EmpList;
                 //var tempEmp = (from a in db.SA_User

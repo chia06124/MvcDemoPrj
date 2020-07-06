@@ -10,7 +10,7 @@ namespace MvcDemoPrj.Models.ViewModel
     public class viewModel1
     {
         //public string a  { get; set; }
-
+        
         public IEnumerable<SA_User> temp { get; set; }
         //public IEnumerable<SI_ResearcherVisit> visit { get; set; }
         [Required]
@@ -50,5 +50,9 @@ namespace MvcDemoPrj.Models.ViewModel
         [Required]
         [StringLength(50)]
         public string UserName { get; set; }
+        [DisplayName("研究員編號")]
+        [Required]
+        [StringLength(50)]
+        public string CreateUserID { get; set; }
     }
 }
