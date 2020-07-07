@@ -32,15 +32,13 @@ namespace MvcDemoPrj.Controllers
                              join Suser in db.SA_User on b.CreateUserId equals Suser.UserId
                              join codemap in db.sysCodeMap on b.ReportType equals codemap.Item_Code
                              where codemap.Class_Name == "ReportType"
-                             select new viewModel1 { DataDate = b.DataDate, CompanyId = b.CompanyId, CompanyName = b.CompanyName, Item_Name = codemap.Item_Name, EmpName = b.EmpName, CreateDate = b.CreateDate, UserName = Suser.UserName }).ToList();
+                             select new viewModel1 { DataDate = b.DataDate, CompanyId = b.CompanyId, CompanyName = b.CompanyName, Item_Name = codemap.Item_Name, EmpName = b.EmpName, CreateDate = b.CreateDate, UserName = Suser.UserName, CreateUserID= b.CreateUserId }).ToList();
+                
+
                 if (EmpId != null)
                 {
 
-                    query.Where(x => x.CreateUserID == EmpId);
-                }
-                else
-                {
-                    query = query.ToList();
+                    query= query.Where(x => x.CreateUserID == EmpId).ToList();
                 }
                 var EmpList = (from b in db.SA_User select new EmpViewModel { UserIdTemp = b.UserId, UserNameTemp = b.UserName }).ToList();
                 ViewBag.EmpList = EmpList;
