@@ -27,18 +27,23 @@ namespace MvcDemoPrj.Controllers
         {
             using (var db = new Model1())
             {
-                
+                var today = DateTime.Today;
+
                 var query = (from b in db.SI_ResearcherVisit
                              join Suser in db.SA_User on b.CreateUserId equals Suser.UserId
                              join codemap in db.sysCodeMap on b.ReportType equals codemap.Item_Code
                              where codemap.Class_Name == "ReportType"
                              select new viewModel1 { DataDate = b.DataDate, CompanyId = b.CompanyId, CompanyName = b.CompanyName, Item_Name = codemap.Item_Name, EmpName = b.EmpName, CreateDate = b.CreateDate, UserName = Suser.UserName, CreateUserID= b.CreateUserId }).ToList();
                 
-
-                if (EmpId != null)
+                if (!string.IsNullOrEmpty(EmpId))
                 {
 
                     query= query.Where(x => x.CreateUserID == EmpId).ToList();
+                }
+
+                if (!string.IsNullOrEmpty(startDate) && !string.IsNullOrEmpty(EndDate))
+                {
+                    query = query.Where(x => x.DataDate.CompareTo(startDate) >= 0 && x.DataDate.CompareTo(EndDate) <= 0).ToList();
                 }
                 var EmpList = (from b in db.SA_User select new EmpViewModel { UserIdTemp = b.UserId, UserNameTemp = b.UserName }).ToList();
                 ViewBag.EmpList = EmpList;
