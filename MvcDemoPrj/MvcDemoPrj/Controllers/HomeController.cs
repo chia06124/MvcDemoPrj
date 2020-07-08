@@ -17,13 +17,13 @@ namespace MvcDemoPrj.Controllers
             return View();
         }
 
-        
+
         public ActionResult Login()
         {
             return View();
         }
 
-        public ActionResult Index(string startDate,string EndDate, string EmpId)
+        public ActionResult Index(string startDate, string EndDate, string EmpId)
         {
             using (var db = new Model1())
             {
@@ -33,12 +33,33 @@ namespace MvcDemoPrj.Controllers
                              join Suser in db.SA_User on b.CreateUserId equals Suser.UserId
                              join codemap in db.sysCodeMap on b.ReportType equals codemap.Item_Code
                              where codemap.Class_Name == "ReportType"
-                             select new viewModel1 { DataDate = b.DataDate, CompanyId = b.CompanyId, CompanyName = b.CompanyName, Item_Name = codemap.Item_Name, EmpName = b.EmpName, CreateDate = b.CreateDate, UserName = Suser.UserName, CreateUserID= b.CreateUserId }).ToList();
-                
+                             select new 
+                             {
+                                 DataDate = b.DataDate,
+                                 CompanyId = b.CompanyId,
+                                 CompanyName = b.CompanyName,
+                                 Item_Name = codemap.Item_Name,
+                                 EmpName = b.EmpName,
+                                 CreateDate = b.CreateDate,
+                                 UserName = Suser.UserName,
+                                 CreateUserID = b.CreateUserId
+                             }).ToList()
+                             .Select(x => new viewModel1
+                             {
+                                 DataDate = x.DataDate,
+                                 CompanyId = x.CompanyId,
+                                 CompanyName = x.CompanyName,
+                                 Item_Name = x.Item_Name,
+                                 EmpName = x.EmpName,
+                                 CreateDate = x.CreateDate.ToString("yyyy/MM/dd"),
+                                 UserName = x.UserName,
+                                 CreateUserID = x.CreateUserID
+                             }).ToList();
+
                 if (!string.IsNullOrEmpty(EmpId))
                 {
 
-                    query= query.Where(x => x.CreateUserID == EmpId).ToList();
+                    query = query.Where(x => x.CreateUserID == EmpId).ToList();
                 }
 
                 if (!string.IsNullOrEmpty(startDate) && !string.IsNullOrEmpty(EndDate))
@@ -55,7 +76,7 @@ namespace MvcDemoPrj.Controllers
             }
         }
 
-     
+
 
 
         public ActionResult MyAction()

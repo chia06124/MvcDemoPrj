@@ -44,7 +44,7 @@ namespace MvcDemoPrj.Models.ViewModel
         [DisplayName("研究員")]
         public string EmpName { get; set; }
         [DisplayName("修改日期")]
-        public DateTime CreateDate { get; set; }
+        public string CreateDate { get; set; }
 
         [DisplayName("員工姓名")]
         [Required]
