@@ -76,8 +76,37 @@ namespace MvcDemoPrj.Controllers
             }
         }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
 
-
+        [HttpPost]
+        public ActionResult Create(SI_ResearcherVisit visit)
+        {
+            using (var db = new Model1())
+            {
+                try
+                {
+                    DateTime myDate = DateTime.ParseExact("2009-05-08 14:40:52,531", "yyyy-MM-dd HH:mm:ss,fff",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+                    visit.Seq = 997;
+                    visit.DataDate = "2020/07/08";
+                    visit.CompanyId = "2884";
+                    visit.CompanyName = "玉山金";
+                    visit.ReportType = "1";
+                    visit.EmpName = "涂大力";
+                    visit.CreateDate = myDate;
+                    visit.CreateUserId = "01520";
+                    db.SI_ResearcherVisit.Add(visit);
+                    db.SaveChanges();
+                }catch(Exception ex)
+                {
+                    throw;
+                }
+            }
+            return View();
+        }
 
         public ActionResult MyAction()
         {
