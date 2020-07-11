@@ -82,25 +82,29 @@ namespace MvcDemoPrj.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(SI_ResearcherVisit visit)
+        public ActionResult Create(SI_ResearcherVisit visit, List<PostCreateViewModel> PostCreateViewModel)
         {
             using (var db = new Model1())
             {
                 try
                 {
-                    DateTime myDate = DateTime.ParseExact("2009-05-08 14:40:52,531", "yyyy-MM-dd HH:mm:ss,fff",
-                                       System.Globalization.CultureInfo.InvariantCulture);
-                    visit.Seq = 997;
-                    visit.DataDate = "2020/07/08";
-                    visit.CompanyId = "2884";
-                    visit.CompanyName = "玉山金";
-                    visit.ReportType = "1";
-                    visit.EmpName = "涂大力";
-                    visit.CreateDate = myDate;
-                    visit.CreateUserId = "01520";
+                    
+                    var num = db.SI_ResearcherVisit.Select(p => p.Seq).Max()+1;
+
+                    //DateTime myDate = DateTime.ParseExact("2009-05-08 14:40:52,531", "yyyy-MM-dd HH:mm:ss,fff",
+                    //                   System.Globalization.CultureInfo.InvariantCulture);
+                    visit.Seq = num;
+                    visit.DataDate = PostCreateViewModel[0].DataDate;
+                    visit.CompanyId = PostCreateViewModel[0].CompanyId;
+                    visit.CompanyName = PostCreateViewModel[0].CompanyName;
+                    visit.ReportType = PostCreateViewModel[0].ReportType;
+                    visit.EmpName = PostCreateViewModel[0].EmpName;
+                    visit.CreateDate = PostCreateViewModel[0].CreateDate;
+                    visit.CreateUserId = PostCreateViewModel[0].CreateUserId;
                     db.SI_ResearcherVisit.Add(visit);
                     db.SaveChanges();
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     throw;
                 }
