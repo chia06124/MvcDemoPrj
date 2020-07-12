@@ -78,6 +78,18 @@ namespace MvcDemoPrj.Controllers
 
         public ActionResult Create()
         {
+            using (var db = new Model1())
+            {
+                try
+                {
+                    var ReportList = (from b in db.sysCodeMap where b.Class_Name == "ReportType"  select new ReportTypeViewModel { Item_Code = b.Item_Code, Item_Name = b.Item_Name }).ToList();
+                    ViewBag.Report = ReportList;
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
             return View();
         }
 
@@ -88,11 +100,8 @@ namespace MvcDemoPrj.Controllers
             {
                 try
                 {
-                    
-                    var num = db.SI_ResearcherVisit.Select(p => p.Seq).Max()+1;
 
-                    //DateTime myDate = DateTime.ParseExact("2009-05-08 14:40:52,531", "yyyy-MM-dd HH:mm:ss,fff",
-                    //                   System.Globalization.CultureInfo.InvariantCulture);
+                    var num = db.SI_ResearcherVisit.Select(p => p.Seq).Max()+1;
                     visit.Seq = num;
                     visit.DataDate = PostCreateViewModel[0].DataDate;
                     visit.CompanyId = PostCreateViewModel[0].CompanyId;
