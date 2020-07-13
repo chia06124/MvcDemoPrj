@@ -44,5 +44,7 @@
         [StringLength(5)]
         [DisplayName("建立者")]
         public string CreateUserId { get; set; }
+
+        public virtual SI_StocksReport StocksReport { get; set; }
     }
 }
