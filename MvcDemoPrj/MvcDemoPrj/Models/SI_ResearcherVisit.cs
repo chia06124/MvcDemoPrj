@@ -37,12 +37,12 @@
         [DisplayName("研究員姓名")]
         public string EmpName { get; set; }
 
-        [DisplayName("建立日期")]
+        [DisplayName("異動日期")]
         public DateTime CreateDate { get; set; }
 
         [Required]
         [StringLength(5)]
-        [DisplayName("建立者")]
+        [DisplayName("研究員")]
         public string CreateUserId { get; set; }
 
         public virtual SI_StocksReport StocksReport { get; set; }

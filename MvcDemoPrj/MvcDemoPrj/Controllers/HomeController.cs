@@ -84,6 +84,7 @@ namespace MvcDemoPrj.Controllers
                 {
                     var ReportList = (from b in db.sysCodeMap where b.Class_Name == "ReportType"  select new ReportTypeViewModel { Item_Code = b.Item_Code, Item_Name = b.Item_Name }).ToList();
                     ViewBag.Report = ReportList;
+                    ViewBag.CreateDate = DateTime.Now.ToString("yyyy/MM/dd");
                 }
                 catch (Exception ex)
                 {

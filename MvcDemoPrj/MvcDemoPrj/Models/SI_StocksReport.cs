@@ -1,70 +1,67 @@
-namespace MvcDemoPrj.Models
+ï»¿namespace MvcDemoPrj.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
     using System.ComponentModel;
     public partial class SI_StocksReport
     {
         [Key]
         public decimal Seq { get; set; }
 
-        [DisplayName("ªÑ¥»")]
+        [DisplayName("è‚¡æœ¬")]
         public decimal CapitalStock { get; set; }
 
         [Required]
         [StringLength(8)]
-        [DisplayName("ªÑ²¼¥N¸¹")]
+        [DisplayName("è‚¡ç¥¨ä»£è™Ÿ")]
         public string CompanyId { get; set; }
 
         [Required]
         [StringLength(10)]
-        [DisplayName("ªÑ²¼¦WºÙ")]
+        [DisplayName("è‚¡ç¥¨åç¨±")]
         public string CompanyName { get; set; }
 
         [Required]
         [StringLength(1000)]
-        [DisplayName("±ÀÂË²z¥Ñ")]
+        [DisplayName("æ¨è–¦ç†ç”±")]
         public string Reason { get; set; }
-        [DisplayName("¦¬½L»ù")]
+        [DisplayName("æ”¶ç›¤åƒ¹")]
         public decimal ClosePrice { get; set; }
-        [DisplayName("¥Ø«ePER(­¿)")]
+        [DisplayName("ç›®å‰PER(å€)")]
         public decimal PER { get; set; }
-        [DisplayName("¥Ø«ePBR(­¿)")]
+        [DisplayName("ç›®å‰PBR(å€)")]
         public decimal PBR { get; set; }
-        [DisplayName("µ|«áEPS(¤¸)¤µ¦~")]
+        [DisplayName("ç¨…å¾ŒEPS(å…ƒ)ä»Šå¹´")]
         public decimal EPS_ThisYear { get; set; }
-        [DisplayName("µ|«áEPS(¤¸)©ú¦~")]
+        [DisplayName("ç¨…å¾ŒEPS(å…ƒ)æ˜å¹´")]
         public decimal EPS_NextYear { get; set; }
-        [DisplayName("¥Ø¼Ğ»ù")]
+        [DisplayName("ç›®æ¨™åƒ¹")]
         public decimal Targetprice { get; set; }
 
         [Required]
         [StringLength(1)]
-        [DisplayName("­ÓªÑ³ø§iÃş§O")]
+        [DisplayName("å€‹è‚¡å ±å‘Šé¡åˆ¥")]
         public string ReportType_BS { get; set; }
 
         [Required]
         [StringLength(1)]
-        [DisplayName("§PÂ_¶R¶i²Ä¤@µ§»P½æ¥Xµ²ºâ¼Ğ°O")]
+        [DisplayName("åˆ¤æ–·è²·é€²ç¬¬ä¸€ç­†èˆ‡è³£å‡ºçµç®—æ¨™è¨˜")]
         public string Flag { get; set; }
-        [DisplayName("¶R¶i»ù®æ")]
+        [DisplayName("è²·é€²åƒ¹æ ¼")]
         public decimal Buy_Price { get; set; }
-        [DisplayName("½æ¥X»ù®æ")]
+        [DisplayName("è³£å‡ºåƒ¹æ ¼")]
         public decimal Sell_Price { get; set; }
-        [DisplayName("«Ø¥ß¤é´Á")]
+        [DisplayName("å»ºç«‹æ—¥æœŸ")]
         public DateTime CreateDate { get; set; }
 
         [Required]
         [StringLength(5)]
-        [DisplayName("«Ø¥ßªÌ")]
+        [DisplayName("å»ºç«‹è€…")]
         public string CreateUser { get; set; }
 
         [Required]
         [StringLength(1)]
-        [DisplayName("¥b¦~Âà¼Ğ°O")]
+        [DisplayName("åŠå¹´è½‰æ¨™è¨˜")]
         public string Next_Flag { get; set; }
     }
 }
