@@ -4,7 +4,7 @@
 @{
 
     var ReportList = ViewBag.Report;
-    var ReportType=ViewBag.ReportType;
+    var ReportType_BS = ViewBag.ReportType_BS;
 
 }
 @Html.AntiForgeryToken()
@@ -171,17 +171,17 @@
                             @Html.LabelFor(model => model.StocksReport.ReportType_BS, htmlAttributes: new { @class = "control-label  " })
                         </div>
                         <div class="col-xs-12 col-sm-10">
-                            <select class="selectpicker form-control" data-live-search="true" id="ReportType" name="ReportType">
+                            <select class="selectpicker form-control" data-live-search="true" id="ReportType_BS" name="ReportType_BS">
                                 <option value="">全部</option>
-                                @for (int i = 0; i < ReportType.Count; i++)
+                                @for (int i = 0; i < ReportType_BS.Count; i++)
                                 {
-                                    <option value="@ReportType[i].Item_Code">@ReportType[i].Item_Name</option>
+                                    <option value="@ReportType_BS[i].Item_Code">@ReportType_BS[i].Item_Name</option>
                                 }
                             </select>
                         </div>
                     </div>
                     <p />
-                    <div class="row">
+                    <div id="Buy_Price" class="row">
                         <div class="col-xs-12 col-sm-2">
                             @Html.LabelFor(model => model.StocksReport.Buy_Price, htmlAttributes: new { @class = "control-label  " })
                         </div>
@@ -191,7 +191,7 @@
                         </div>
                     </div>
                     <p />
-                    <div class="row">
+                    <div  id="Sell_Price" class="row">
                         <div class="col-xs-12 col-sm-2">
                             @Html.LabelFor(model => model.StocksReport.Sell_Price, htmlAttributes: new { @class = "control-label  " })
                         </div>
@@ -201,7 +201,17 @@
                         </div>
                     </div>
                     <p />
-                    <div class="row">
+                    <div id="Targetprice" class="row">
+                        <div class="col-xs-12 col-sm-2">
+                            @Html.LabelFor(model => model.StocksReport.Targetprice, htmlAttributes: new { @class = "control-label  " })
+                        </div>
+                        <div class="col-xs-12 col-sm-10">
+                            @Html.EditorFor(model => model.StocksReport.Targetprice, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.StocksReport.Targetprice, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <p />
+                    <div id="Reason" class="row">
                         <div class="col-xs-12 col-sm-2">
                             @Html.LabelFor(model => model.StocksReport.Reason, htmlAttributes: new { @class = "control-label  " })
                         </div>
@@ -210,8 +220,17 @@
                             @Html.ValidationMessageFor(model => model.StocksReport.Reason, "", new { @class = "text-danger" })
                         </div>
                     </div>
+                    <div id="ReasonMemo" class="row">
+                        <div class="col-xs-12 col-sm-2">
+                            @Html.LabelFor(model => model.StocksReport.Reason, htmlAttributes: new { @class = "control-label  " })
+                        </div>
+                        <div class="col-xs-12 col-sm-10">
+                            @Html.EditorFor(model => model.StocksReport.Reason, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.StocksReport.Reason, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                     <p />
-                    <div class="row">
+                    <div id="PER" class="row">
                         <div class="col-xs-12 col-sm-2">
                             @Html.LabelFor(model => model.StocksReport.PER, htmlAttributes: new { @class = "control-label  " })
                         </div>
@@ -221,7 +240,17 @@
                         </div>
                     </div>
                     <p />
-                    <div class="row">
+                    <div id="PBR" class="row">
+                        <div class="col-xs-12 col-sm-2">
+                            @Html.LabelFor(model => model.StocksReport.PBR, htmlAttributes: new { @class = "control-label  " })
+                        </div>
+                        <div class="col-xs-12 col-sm-10">
+                            @Html.EditorFor(model => model.StocksReport.PBR, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.StocksReport.PBR, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <p />
+                    <div id="EPS_ThisYear" class="row">
                         <div class="col-xs-12 col-sm-2">
                             @Html.LabelFor(model => model.StocksReport.EPS_ThisYear, htmlAttributes: new { @class = "control-label  " })
                         </div>
@@ -231,7 +260,7 @@
                         </div>
                     </div>
                     <p />
-                    <div class="row">
+                    <div id="EPS_NextYear" class="row">
                         <div class="col-xs-12 col-sm-2">
                             @Html.LabelFor(model => model.StocksReport.EPS_NextYear, htmlAttributes: new { @class = "control-label  " })
                         </div>
@@ -241,27 +270,9 @@
                         </div>
                     </div>
                     <p />
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-2">
-                            @Html.LabelFor(model => model.StocksReport.PBR, htmlAttributes: new { @class = "control-label  " })
-                        </div>
-                        <div class="col-xs-12 col-sm-10">
-                            @Html.EditorFor(model => model.StocksReport.PBR, new { htmlAttributes = new { @class = "form-control"} })
-                            @Html.ValidationMessageFor(model => model.StocksReport.PBR, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <p />
+                   
 
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-2">
-                            @Html.LabelFor(model => model.StocksReport.Targetprice, htmlAttributes: new { @class = "control-label  " })
-                        </div>
-                        <div class="col-xs-12 col-sm-10">
-                            @Html.EditorFor(model => model.StocksReport.Targetprice, new { htmlAttributes = new { @class = "form-control"} })
-                            @Html.ValidationMessageFor(model => model.StocksReport.Targetprice, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <p />
+                    
 
                     @*<div class="row">
                             <div class="col-xs-12 col-sm-2">
@@ -284,7 +295,7 @@
                 </div>
 
                 <p />
-                <div class="row">
+                <div id="CompanyId" class="row">
                     <div class="col-xs-12 col-sm-2">
                         @Html.LabelFor(model => model.CompanyId, htmlAttributes: new { @class = "control-label  " })
                     </div>
@@ -294,7 +305,7 @@
                     </div>
                 </div>
                 <p />
-                <div class="row">
+                <div id="CreateDate" class="row">
                     <div class="col-xs-12 col-sm-2">
                         @Html.LabelFor(model => model.CreateDate, htmlAttributes: new { @class = "control-label " })
                     </div>

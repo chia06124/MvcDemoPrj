@@ -87,8 +87,8 @@ namespace MvcDemoPrj.Controllers
                     var ReportList = (from b in db.sysCodeMap where b.Class_Name == "ReportType"  select new ReportTypeViewModel { Item_Code = b.Item_Code, Item_Name = b.Item_Name }).ToList();
                     ViewBag.Report = ReportList;
                     //個股報告類別
-                    var ReportTypeList = (from b in db.sysCodeMap where b.Class_Name == "ReportType_BSR" select new ReportTypeViewModel { Item_Code = b.Item_Code, Item_Name = b.Item_Name }).ToList();
-                    ViewBag.ReportType = ReportTypeList;
+                    var ReportType_BSList = (from b in db.sysCodeMap where b.Class_Name == "ReportType_BSR" select new ReportTypeViewModel { Item_Code = b.Item_Code, Item_Name = b.Item_Name }).ToList();
+                    ViewBag.ReportType_BS = ReportType_BSList;
 
                     ViewBag.CreateDate = DateTime.Now.ToString("yyyy/MM/dd");
                 }
