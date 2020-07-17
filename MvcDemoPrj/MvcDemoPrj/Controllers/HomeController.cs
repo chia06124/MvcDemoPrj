@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using MvcDemoPrj.Models;
 using System.Collections;
 using MvcDemoPrj.Models.ViewModel;
+using MvcDemoPrj.DAL;
 
 namespace MvcDemoPrj.Controllers
 {
@@ -25,7 +26,7 @@ namespace MvcDemoPrj.Controllers
 
         public ActionResult Index(string startDate, string EndDate, string EmpId)
         {
-            using (var db = new Model1())
+            using (var db = new ModelContext())
             {
                 var today = DateTime.Today;
 
@@ -78,12 +79,17 @@ namespace MvcDemoPrj.Controllers
 
         public ActionResult Create()
         {
-            using (var db = new Model1())
+            using (var db = new ModelContext())
             {
                 try
                 {
+                    //報告類別
                     var ReportList = (from b in db.sysCodeMap where b.Class_Name == "ReportType"  select new ReportTypeViewModel { Item_Code = b.Item_Code, Item_Name = b.Item_Name }).ToList();
                     ViewBag.Report = ReportList;
+                    //個股報告類別
+                    var ReportTypeList = (from b in db.sysCodeMap where b.Class_Name == "ReportType_BSR" select new ReportTypeViewModel { Item_Code = b.Item_Code, Item_Name = b.Item_Name }).ToList();
+                    ViewBag.ReportType = ReportTypeList;
+
                     ViewBag.CreateDate = DateTime.Now.ToString("yyyy/MM/dd");
                 }
                 catch (Exception ex)
@@ -97,7 +103,7 @@ namespace MvcDemoPrj.Controllers
         [HttpPost]
         public ActionResult Create(SI_ResearcherVisit visit, List<PostCreateViewModel> PostCreateViewModel)
         {
-            using (var db = new Model1())
+            using (var db = new ModelContext())
             {
                 try
                 {
@@ -124,7 +130,7 @@ namespace MvcDemoPrj.Controllers
 
         public ActionResult MyAction()
         {
-            using (var db = new Model1())
+            using (var db = new ModelContext())
             {
                 //var cityList = (from b in db.SA_User select b).ToList();
                 var cityList = (from b in db.SA_User select new EmpViewModel { UserIdTemp = b.UserId, UserNameTemp = b.UserName }).ToList();
@@ -138,7 +144,7 @@ namespace MvcDemoPrj.Controllers
         public ActionResult ListView()
         {
 
-            using (var db = new Model1())
+            using (var db = new ModelContext())
             {
                 //var query = from b in db.SI_ResearcherVisit 
                 //            join Suser in db.SA_User on b.CreateUserId equals Suser.UserId
