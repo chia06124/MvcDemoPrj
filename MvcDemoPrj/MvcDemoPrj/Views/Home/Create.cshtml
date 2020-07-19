@@ -216,7 +216,7 @@
                             @Html.LabelFor(model => model.StocksReport.Reason, htmlAttributes: new { @class = "control-label  " })
                         </div>
                         <div class="col-xs-12 col-sm-10">
-                            @Html.EditorFor(model => model.StocksReport.Reason, new { htmlAttributes = new { @class = "form-control",id= "StocksReport_Reason_temp" } })
+                            @Html.EditorFor(model => model.StocksReport.Reason, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.StocksReport.Reason, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -327,7 +327,7 @@
     });
 
     $('#ReportType_BS').on('change', function () {
-        alert(this.value);
+        //alert(this.value);
         switch (this.value) {
             case 'B':
                 $("#Buy_Price").show();
@@ -367,7 +367,8 @@
         }
 
         $('#ReportTypeMemo_BS').on('change', function () {
-            alert(this.innerText);
+            alert(this.value);
+            $('#StocksReport_Reason').val($("#ReportTypeMemo_BS :selected").text());
             //$('#StocksReport_Reason').text = this.innerText;
             //$('#StocksReport_Reason_temp').text = this.innerText;
         });
