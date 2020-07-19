@@ -5,7 +5,7 @@
 
     var ReportList = ViewBag.Report;
     var ReportType_BS = ViewBag.ReportType_BS;
-
+    var ReportTypeMemo = ViewBag.ReportTypeMemoList;
 }
 @Html.AntiForgeryToken()
 
@@ -216,17 +216,23 @@
                             @Html.LabelFor(model => model.StocksReport.Reason, htmlAttributes: new { @class = "control-label  " })
                         </div>
                         <div class="col-xs-12 col-sm-10">
-                            @Html.EditorFor(model => model.StocksReport.Reason, new { htmlAttributes = new { @class = "form-control"} })
+                            @Html.EditorFor(model => model.StocksReport.Reason, new { htmlAttributes = new { @class = "form-control",id= "StocksReport_Reason_temp" } })
                             @Html.ValidationMessageFor(model => model.StocksReport.Reason, "", new { @class = "text-danger" })
                         </div>
                     </div>
+                    <p/>
                     <div id="ReasonMemo" class="row">
                         <div class="col-xs-12 col-sm-2">
-                            @Html.LabelFor(model => model.StocksReport.Reason, htmlAttributes: new { @class = "control-label  " })
+                            @*@Html.LabelFor(model => model.StocksReport.Reason, htmlAttributes: new { @class = "control-label  " })*@
                         </div>
                         <div class="col-xs-12 col-sm-10">
-                            @Html.EditorFor(model => model.StocksReport.Reason, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.StocksReport.Reason, "", new { @class = "text-danger" })
+                            <select class="selectpicker form-control" data-live-search="true" id="ReportTypeMemo_BS" name="ReportTypeMemo_BS">
+                                <option value="">全部</option>
+                                @for (int i = 0; i < ReportTypeMemo.Count; i++)
+                                {
+                                    <option value="@ReportTypeMemo[i].Item_Code">@ReportTypeMemo[i].Item_Name</option>
+                                }
+                            </select>
                         </div>
                     </div>
                     <p />
@@ -293,17 +299,6 @@
                             </div>
                         </div>*@
                 </div>
-
-                <p />
-                <div id="CompanyId" class="row">
-                    <div class="col-xs-12 col-sm-2">
-                        @Html.LabelFor(model => model.CompanyId, htmlAttributes: new { @class = "control-label  " })
-                    </div>
-                    <div class="col-xs-12 col-sm-10">
-                        @Html.EditorFor(model => model.CompanyId, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.CompanyId, "", new { @class = "text-danger" })
-                    </div>
-                </div>
                 <p />
                 <div id="CreateDate" class="row">
                     <div class="col-xs-12 col-sm-2">
@@ -323,12 +318,75 @@
 <script type="text/javascript">
 
     $('#ReportType').on('change', function () {
-        alert(this.value);
+        
         if (this.value == 2 || this.value==3) {
             $("#StockReport").show();
         } else {
             $("#StockReport").hide();
         }
+    });
+
+    $('#ReportType_BS').on('change', function () {
+        alert(this.value);
+        switch (this.value) {
+            case 'B':
+                $("#Buy_Price").show();
+                $("#Targetprice").show();
+                $("#Reason").show();
+                $("#EPS_ThisYear").show();
+                $("#EPS_NextYear").show();
+                $("#PER").show();
+                $("#PBR").show();
+
+                $("#Sell_Price").hide();
+                $('#ReasonMemo').hide();
+                break;
+            case 'R':
+                $("#EPS_ThisYear").show();
+                $("#EPS_NextYear").show();
+                $("#PER").show();
+                $("#PBR").show();
+
+                $("#Sell_Price").hide();
+                $("#Reason").hide();
+                $('#ReasonMemo').hide();
+                $("#Buy_Price").hide();
+                $("#Targetprice").hide();
+                break;
+            default:
+                $("#Sell_Price").show();
+                $("#Reason").show();
+                $('#ReasonMemo').show();
+
+                $("#Buy_Price").hide();
+                $("#Targetprice").hide();
+                $("#EPS_ThisYear").hide();
+                $("#EPS_NextYear").hide();
+                $("#PER").hide();
+                $("#PBR").hide();
+        }
+
+        $('#ReportTypeMemo_BS').on('change', function () {
+            alert(this.innerText);
+            //$('#StocksReport_Reason').text = this.innerText;
+            //$('#StocksReport_Reason_temp').text = this.innerText;
+        });
+
+
+        //if (this.value == 1) {
+        //    $("#Buy_Price").show();
+        //    $("#Targetprice").show();
+        //    $("#Reason").show();
+        //    $("#EPS_ThisYear").show();
+        //    $("#EPS_NextYear").show();
+        //    $("#PER").show();
+        //    $("#PBR").show();
+        //    $("#PBR").show();
+        //    $("#Sell_Price").hide();
+        //} else {
+        //    $("#StockReport").hide();
+        //}
+
     });
 
     $('#Send').click(function () {

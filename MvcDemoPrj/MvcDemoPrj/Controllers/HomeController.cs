@@ -89,6 +89,9 @@ namespace MvcDemoPrj.Controllers
                     //個股報告類別
                     var ReportType_BSList = (from b in db.sysCodeMap where b.Class_Name == "ReportType_BSR" select new ReportTypeViewModel { Item_Code = b.Item_Code, Item_Name = b.Item_Name }).ToList();
                     ViewBag.ReportType_BS = ReportType_BSList;
+                    //推薦理由
+                    var ReportTypeMemoList = (from b in db.sysCodeMap where b.Class_Name == "Reason" select new ReportTypeViewModel { Item_Code = b.Item_Code, Item_Name = b.Item_Name }).ToList();
+                    ViewBag.ReportTypeMemoList = ReportTypeMemoList;
 
                     ViewBag.CreateDate = DateTime.Now.ToString("yyyy/MM/dd");
                 }

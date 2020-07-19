@@ -31,9 +31,9 @@
         public decimal PER { get; set; }
         [DisplayName("目前PBR(倍)")]
         public decimal PBR { get; set; }
-        [DisplayName("稅後EPS(元)今年")]
+        [DisplayName("今年稅後EPS")]
         public decimal EPS_ThisYear { get; set; }
-        [DisplayName("稅後EPS(元)明年")]
+        [DisplayName("明年稅後EPS")]
         public decimal EPS_NextYear { get; set; }
         [DisplayName("目標價")]
         public decimal Targetprice { get; set; }
