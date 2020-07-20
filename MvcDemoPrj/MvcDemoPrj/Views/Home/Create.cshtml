@@ -75,17 +75,17 @@
                         </div>
                     </div>*@
                 <p />
-                <div class="row">
+                <div  class="row">
                     <div class="col-xs-12 col-sm-2">
                         @Html.LabelFor(model => model.DataDate, htmlAttributes: new { @class = "control-label " })
                     </div>
                     <div class="col-xs-12 col-sm-10">
-                        @Html.EditorFor(model => model.DataDate, new { htmlAttributes = new { @class = "form-control", id = "DataDate", placeholder = "請選擇" } })
+                        @Html.EditorFor(model => model.DataDate, new { htmlAttributes = new { @class = "form-control",  placeholder = "請選擇" } })
                         @Html.ValidationMessageFor(model => model.DataDate, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <p />
-                <div class="row">
+                <div id="CompanyId" class="row">
                     <div class="col-xs-12 col-sm-2">
                         @Html.LabelFor(model => model.CompanyId, htmlAttributes: new { @class = "control-label " })
                     </div>
@@ -95,7 +95,7 @@
                     </div>
                 </div>
                 <p />
-                <div class="row">
+                <div id="CompanyName" class="row">
                     <div class="col-xs-12 col-sm-2">
                         @Html.LabelFor(model => model.CompanyName, htmlAttributes: new { @class = "control-label " })
                     </div>
@@ -105,7 +105,7 @@
                     </div>
                 </div>
                 <p />
-                <div class="row">
+                <div  class="row">
                     <div class="col-xs-12 col-sm-2">
                         @Html.LabelFor(model => model.ReportType, htmlAttributes: new { @class = "control-label " })
                     </div>
@@ -299,6 +299,16 @@
                             </div>
                         </div>*@
                 </div>
+                <p/>
+                <div id="CreateUser" class="row">
+                    <div class="col-xs-12 col-sm-2">
+                        @Html.LabelFor(model => model.StocksReport.CreateUser, htmlAttributes: new { @class = "control-label  " })
+                    </div>
+                    <div class="col-xs-12 col-sm-10">
+                        @Html.EditorFor(model => model.StocksReport.CreateUser, new { htmlAttributes = new { @class = "form-control", id = "EmpNameY" } })
+                        @Html.ValidationMessageFor(model => model.StocksReport.CreateUser, "", new { @class = "text-danger" })
+                    </div>
+                </div>
                 <p />
                 <div id="CreateDate" class="row">
                     <div class="col-xs-12 col-sm-2">
@@ -319,10 +329,38 @@
 
     $('#ReportType').on('change', function () {
         
-        if (this.value == 2 || this.value==3) {
-            $("#StockReport").show();
-        } else {
-            $("#StockReport").hide();
+        //if (this.value == 2 || this.value==3) {
+        //    $("#StockReport").show();
+        //} else {
+        //    $("#StockReport").hide();
+        //}
+        alert(this.value)
+
+        switch (this.value) {
+            case "1":
+                $("#StockReport").hide();
+                $("#CompanyId").show();
+                $("#CompanyName").show();
+                break;
+            case "2":
+                $("#StockReport").show();
+                $("#CompanyId").show();
+                $("#CompanyName").show();
+                break;
+            case "3":
+                $("#StockReport").show();
+                $("#CompanyId").show();
+                $("#CompanyName").show();
+                break;
+            case "4":
+                $("#StockReport").hide();
+                $("#CompanyId").hide();
+                $("#CompanyName").hide();
+                break;
+            default:
+                $("#StockReport").hide();
+                $("#CompanyId").show();
+                $("#CompanyName").show();
         }
     });
 
@@ -367,26 +405,8 @@
         }
 
         $('#ReportTypeMemo_BS').on('change', function () {
-            alert(this.value);
             $('#StocksReport_Reason').val($("#ReportTypeMemo_BS :selected").text());
-            //$('#StocksReport_Reason').text = this.innerText;
-            //$('#StocksReport_Reason_temp').text = this.innerText;
         });
-
-
-        //if (this.value == 1) {
-        //    $("#Buy_Price").show();
-        //    $("#Targetprice").show();
-        //    $("#Reason").show();
-        //    $("#EPS_ThisYear").show();
-        //    $("#EPS_NextYear").show();
-        //    $("#PER").show();
-        //    $("#PBR").show();
-        //    $("#PBR").show();
-        //    $("#Sell_Price").hide();
-        //} else {
-        //    $("#StockReport").hide();
-        //}
 
     });
 
