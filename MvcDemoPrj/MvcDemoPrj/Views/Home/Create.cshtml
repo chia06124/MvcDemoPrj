@@ -90,7 +90,7 @@
                         @Html.LabelFor(model => model.CompanyId, htmlAttributes: new { @class = "control-label " })
                     </div>
                     <div class="col-xs-12 col-sm-10">
-                        @Html.EditorFor(model => model.CompanyId, new { htmlAttributes = new { @class = "form-control", id = "CompanyId" } })
+                        @Html.EditorFor(model => model.CompanyId, new { htmlAttributes = new { @class = "form-control"} })
                         @Html.ValidationMessageFor(model => model.CompanyId, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                         @Html.LabelFor(model => model.CompanyName, htmlAttributes: new { @class = "control-label " })
                     </div>
                     <div class="col-xs-12 col-sm-10">
-                        @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control", id = "CompanyName" } })
+                        @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control"} })
                         @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -305,7 +305,7 @@
                         @Html.LabelFor(model => model.StocksReport.CreateUser, htmlAttributes: new { @class = "control-label  " })
                     </div>
                     <div class="col-xs-12 col-sm-10">
-                        @Html.EditorFor(model => model.StocksReport.CreateUser, new { htmlAttributes = new { @class = "form-control", id = "EmpNameY" } })
+                        @Html.EditorFor(model => model.StocksReport.CreateUser, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.StocksReport.CreateUser, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -416,7 +416,7 @@
             {
                 DataDate: $('#DataDate').val(), CompanyId: $('#CompanyId').val()
                 , CompanyName: $('#CompanyName').val(), ReportType: $('#ReportType').val()
-                , EmpName: $('#EmpName').val(), CreateDate: $('#CreateDate').val(), CreateUserId: $('#CreateUserId').val()
+                , EmpName: $('#StocksReport_CreateUser').val(), CreateDate: $('#CreateDate').val()
             }
         ];
         $.ajax({ //Do an ajax post to the controller

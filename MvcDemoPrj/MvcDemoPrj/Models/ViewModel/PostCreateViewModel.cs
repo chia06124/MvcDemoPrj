@@ -22,6 +22,6 @@ namespace MvcDemoPrj.Models.ViewModel
        
         public DateTime CreateDate { get; set; }
 
-        public string CreateUserId { get; set; }
+        //public string CreateUserId { get; set; }
     }
 }

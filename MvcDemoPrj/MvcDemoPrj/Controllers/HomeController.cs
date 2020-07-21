@@ -119,7 +119,7 @@ namespace MvcDemoPrj.Controllers
                     visit.ReportType = PostCreateViewModel[0].ReportType;
                     visit.EmpName = PostCreateViewModel[0].EmpName;
                     visit.CreateDate = PostCreateViewModel[0].CreateDate;
-                    visit.CreateUserId = PostCreateViewModel[0].CreateUserId;
+                    //visit.CreateUserId = PostCreateViewModel[0].CreateUserId;
                     db.SI_ResearcherVisit.Add(visit);
                     db.SaveChanges();
                 }
