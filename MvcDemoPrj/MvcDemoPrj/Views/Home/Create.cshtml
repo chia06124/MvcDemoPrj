@@ -1,6 +1,6 @@
-﻿@model MvcDemoPrj.Models.SI_ResearcherVisit
+﻿@*@model MvcDemoPrj.Models.SI_ResearcherVisit*@
 @*@model MvcDemoPrj.Models.ViewModel.CreateViewModel*@
-
+@model MvcDemoPrj.Models.ViewModel.CreateNewViewModel
 @{
 
     var ReportList = ViewBag.Report;
@@ -85,7 +85,7 @@
                     </div>
                 </div>
                 <p />
-                <div id="CompanyId" class="row">
+                <div id="DIVCompanyId" class="row">
                     <div class="col-xs-12 col-sm-2">
                         @Html.LabelFor(model => model.CompanyId, htmlAttributes: new { @class = "control-label " })
                     </div>
@@ -95,7 +95,7 @@
                     </div>
                 </div>
                 <p />
-                <div id="CompanyName" class="row">
+                <div id="DIVCompanyName" class="row">
                     <div class="col-xs-12 col-sm-2">
                         @Html.LabelFor(model => model.CompanyName, htmlAttributes: new { @class = "control-label " })
                     </div>
@@ -124,51 +124,51 @@
                 <p />
 
                 @*下拉選單連動*@
-                <div id="StockReport" style="display:none">
+                <div id="DIVStockReport" style="display:none">
 
-                    <div class="row">
+                    @*<div class="row">
                         <div class="col-xs-12 col-sm-2">
-                            @Html.LabelFor(model => model.StocksReport.CompanyId, htmlAttributes: new { @class = "control-label" })
+                            @Html.LabelFor(model => model.CompanyId, htmlAttributes: new { @class = "control-label" })
                         </div>
                         <div class="col-xs-12 col-sm-10">
-                            @Html.EditorFor(model => model.StocksReport.CompanyId, new { htmlAttributes = new { @class = "form-control"} })
-                            @Html.ValidationMessageFor(model => model.StocksReport.CompanyId, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.CompanyId, new { htmlAttributes = new { @class = "form-control"} })
+                            @Html.ValidationMessageFor(model => model.CompanyId, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <p />
                     <div class="row">
                         <div class="col-xs-12 col-sm-2">
-                            @Html.LabelFor(model => model.StocksReport.CompanyName, htmlAttributes: new { @class = "control-label  " })
+                            @Html.LabelFor(model => model.CompanyName, htmlAttributes: new { @class = "control-label  " })
                         </div>
                         <div class="col-xs-12 col-sm-10">
-                            @Html.EditorFor(model => model.StocksReport.CompanyName, new { htmlAttributes = new { @class = "form-control"} })
-                            @Html.ValidationMessageFor(model => model.StocksReport.CompanyName, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control"} })
+                            @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+                    <p />
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-2">
+                            @Html.LabelFor(model => model.CapitalStock, htmlAttributes: new { @class = "control-label  " })
+                        </div>
+                        <div class="col-xs-12 col-sm-10">
+                            @Html.EditorFor(model => model.CapitalStock, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CapitalStock, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <p />
                     <div class="row">
                         <div class="col-xs-12 col-sm-2">
-                            @Html.LabelFor(model => model.StocksReport.CapitalStock, htmlAttributes: new { @class = "control-label  " })
+                            @Html.LabelFor(model => model.ClosePrice, htmlAttributes: new { @class = "control-label  " })
                         </div>
                         <div class="col-xs-12 col-sm-10">
-                            @Html.EditorFor(model => model.StocksReport.CapitalStock, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.StocksReport.CapitalStock, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.ClosePrice, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ClosePrice, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <p />
                     <div class="row">
                         <div class="col-xs-12 col-sm-2">
-                            @Html.LabelFor(model => model.StocksReport.ClosePrice, htmlAttributes: new { @class = "control-label  " })
-                        </div>
-                        <div class="col-xs-12 col-sm-10">
-                            @Html.EditorFor(model => model.StocksReport.ClosePrice, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.StocksReport.ClosePrice, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <p />
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-2">
-                            @Html.LabelFor(model => model.StocksReport.ReportType_BS, htmlAttributes: new { @class = "control-label  " })
+                            @Html.LabelFor(model => model.ReportType_BS, htmlAttributes: new { @class = "control-label  " })
                         </div>
                         <div class="col-xs-12 col-sm-10">
                             <select class="selectpicker form-control" data-live-search="true" id="ReportType_BS" name="ReportType_BS">
@@ -181,49 +181,49 @@
                         </div>
                     </div>
                     <p />
-                    <div id="Buy_Price" class="row">
+                    <div id="DIVBuy_Price" class="row">
                         <div class="col-xs-12 col-sm-2">
-                            @Html.LabelFor(model => model.StocksReport.Buy_Price, htmlAttributes: new { @class = "control-label  " })
+                            @Html.LabelFor(model => model.Buy_Price, htmlAttributes: new { @class = "control-label  " })
                         </div>
                         <div class="col-xs-12 col-sm-10">
-                            @Html.EditorFor(model => model.StocksReport.Buy_Price, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.StocksReport.Buy_Price, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Buy_Price, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Buy_Price, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <p />
-                    <div  id="Sell_Price" class="row">
+                    <div  id="DIVSell_Price" class="row">
                         <div class="col-xs-12 col-sm-2">
-                            @Html.LabelFor(model => model.StocksReport.Sell_Price, htmlAttributes: new { @class = "control-label  " })
+                            @Html.LabelFor(model => model.Sell_Price, htmlAttributes: new { @class = "control-label  " })
                         </div>
                         <div class="col-xs-12 col-sm-10">
-                            @Html.EditorFor(model => model.StocksReport.Sell_Price, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.StocksReport.Sell_Price, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Sell_Price, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Sell_Price, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <p />
-                    <div id="Targetprice" class="row">
+                    <div id="DIVTargetprice" class="row">
                         <div class="col-xs-12 col-sm-2">
-                            @Html.LabelFor(model => model.StocksReport.Targetprice, htmlAttributes: new { @class = "control-label  " })
+                            @Html.LabelFor(model => model.Targetprice, htmlAttributes: new { @class = "control-label  " })
                         </div>
                         <div class="col-xs-12 col-sm-10">
-                            @Html.EditorFor(model => model.StocksReport.Targetprice, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.StocksReport.Targetprice, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Targetprice, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Targetprice, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <p />
-                    <div id="Reason" class="row">
+                    <div id="DIVReason" class="row">
                         <div class="col-xs-12 col-sm-2">
-                            @Html.LabelFor(model => model.StocksReport.Reason, htmlAttributes: new { @class = "control-label  " })
+                            @Html.LabelFor(model => model.Reason, htmlAttributes: new { @class = "control-label  " })
                         </div>
                         <div class="col-xs-12 col-sm-10">
-                            @Html.EditorFor(model => model.StocksReport.Reason, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.StocksReport.Reason, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Reason, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Reason, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <p/>
-                    <div id="ReasonMemo" class="row">
+                    <div id="DIVReasonMemo" class="row">
                         <div class="col-xs-12 col-sm-2">
-                            @*@Html.LabelFor(model => model.StocksReport.Reason, htmlAttributes: new { @class = "control-label  " })*@
+                            @Html.LabelFor(model => model.Reason, htmlAttributes: new { @class = "control-label  " })
                         </div>
                         <div class="col-xs-12 col-sm-10">
                             <select class="selectpicker form-control" data-live-search="true" id="ReportTypeMemo_BS" name="ReportTypeMemo_BS">
@@ -236,43 +236,43 @@
                         </div>
                     </div>
                     <p />
-                    <div id="PER" class="row">
+                    <div id="DIVPER" class="row">
                         <div class="col-xs-12 col-sm-2">
-                            @Html.LabelFor(model => model.StocksReport.PER, htmlAttributes: new { @class = "control-label  " })
+                            @Html.LabelFor(model => model.PER, htmlAttributes: new { @class = "control-label  " })
                         </div>
                         <div class="col-xs-12 col-sm-10">
-                            @Html.EditorFor(model => model.StocksReport.PER, new { htmlAttributes = new { @class = "form-control"} })
-                            @Html.ValidationMessageFor(model => model.StocksReport.PER, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.PER, new { htmlAttributes = new { @class = "form-control"} })
+                            @Html.ValidationMessageFor(model => model.PER, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <p />
-                    <div id="PBR" class="row">
+                    <div id="DIVPBR" class="row">
                         <div class="col-xs-12 col-sm-2">
-                            @Html.LabelFor(model => model.StocksReport.PBR, htmlAttributes: new { @class = "control-label  " })
+                            @Html.LabelFor(model => model.PBR, htmlAttributes: new { @class = "control-label  " })
                         </div>
                         <div class="col-xs-12 col-sm-10">
-                            @Html.EditorFor(model => model.StocksReport.PBR, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.StocksReport.PBR, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.PBR, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PBR, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <p />
-                    <div id="EPS_ThisYear" class="row">
+                    <div id="DIVEPS_ThisYear" class="row">
                         <div class="col-xs-12 col-sm-2">
-                            @Html.LabelFor(model => model.StocksReport.EPS_ThisYear, htmlAttributes: new { @class = "control-label  " })
+                            @Html.LabelFor(model => model.EPS_ThisYear, htmlAttributes: new { @class = "control-label  " })
                         </div>
                         <div class="col-xs-12 col-sm-10">
-                            @Html.EditorFor(model => model.StocksReport.EPS_ThisYear, new { htmlAttributes = new { @class = "form-control"} })
-                            @Html.ValidationMessageFor(model => model.StocksReport.EPS_ThisYear, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.EPS_ThisYear, new { htmlAttributes = new { @class = "form-control"} })
+                            @Html.ValidationMessageFor(model => model.EPS_ThisYear, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <p />
-                    <div id="EPS_NextYear" class="row">
+                    <div id="DIVEPS_NextYear" class="row">
                         <div class="col-xs-12 col-sm-2">
-                            @Html.LabelFor(model => model.StocksReport.EPS_NextYear, htmlAttributes: new { @class = "control-label  " })
+                            @Html.LabelFor(model => model.EPS_NextYear, htmlAttributes: new { @class = "control-label  " })
                         </div>
                         <div class="col-xs-12 col-sm-10">
-                            @Html.EditorFor(model => model.StocksReport.EPS_NextYear, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.StocksReport.EPS_NextYear, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.EPS_NextYear, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.EPS_NextYear, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <p />
@@ -300,17 +300,17 @@
                         </div>*@
                 </div>
                 <p/>
-                <div id="CreateUser" class="row">
+                <div id="DIVCreateUser" class="row">
                     <div class="col-xs-12 col-sm-2">
-                        @Html.LabelFor(model => model.StocksReport.CreateUser, htmlAttributes: new { @class = "control-label  " })
+                        @Html.LabelFor(model => model.CreateUser, htmlAttributes: new { @class = "control-label  " })
                     </div>
                     <div class="col-xs-12 col-sm-10">
-                        @Html.EditorFor(model => model.StocksReport.CreateUser, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.StocksReport.CreateUser, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.CreateUser, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CreateUser, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <p />
-                <div id="CreateDate" class="row">
+                <div id="DIVCreateDate" class="row">
                     <div class="col-xs-12 col-sm-2">
                         @Html.LabelFor(model => model.CreateDate, htmlAttributes: new { @class = "control-label " })
                     </div>
@@ -334,33 +334,32 @@
         //} else {
         //    $("#StockReport").hide();
         //}
-        alert(this.value)
 
         switch (this.value) {
             case "1":
-                $("#StockReport").hide();
-                $("#CompanyId").show();
-                $("#CompanyName").show();
+                $("#DIVStockReport").hide();
+                $("#DIVCompanyId").show();
+                $("#DIVCompanyName").show();
                 break;
             case "2":
-                $("#StockReport").show();
-                $("#CompanyId").show();
-                $("#CompanyName").show();
+                $("#DIVStockReport").show();
+                $("#DIVCompanyId").show();
+                $("#DIVCompanyName").show();
                 break;
             case "3":
-                $("#StockReport").show();
-                $("#CompanyId").show();
-                $("#CompanyName").show();
+                $("#DIVStockReport").show();
+                $("#DIVCompanyId").show();
+                $("#DIVCompanyName").show();
                 break;
             case "4":
-                $("#StockReport").hide();
-                $("#CompanyId").hide();
-                $("#CompanyName").hide();
+                $("#DIVStockReport").show();
+                $("#DIVCompanyId").show();
+                $("#DIVCompanyName").show();
                 break;
             default:
-                $("#StockReport").hide();
-                $("#CompanyId").show();
-                $("#CompanyName").show();
+                $("#DIVStockReport").show();
+                $("#DIVCompanyId").show();
+                $("#DIVCompanyName").show();
         }
     });
 
@@ -368,40 +367,41 @@
         //alert(this.value);
         switch (this.value) {
             case 'B':
-                $("#Buy_Price").show();
-                $("#Targetprice").show();
-                $("#Reason").show();
-                $("#EPS_ThisYear").show();
-                $("#EPS_NextYear").show();
-                $("#PER").show();
-                $("#PBR").show();
+                $("#DIVBuy_Price").show();
+                $("#DIVTargetprice").show();
+                $("#DIVReason").show();
+                $("#DIVEPS_ThisYear").show();
+                $("#DIVEPS_NextYear").show();
+                $("#DIVPER").show();
+                $("#DIVPBR").show();
 
-                $("#Sell_Price").hide();
-                $('#ReasonMemo').hide();
+                $("#DIVSell_Price").hide();
+                $('#DIVReasonMemo').hide();
                 break;
             case 'R':
-                $("#EPS_ThisYear").show();
-                $("#EPS_NextYear").show();
-                $("#PER").show();
-                $("#PBR").show();
+                $("#DIVEPS_ThisYear").show();
+                $("#DIVEPS_NextYear").show();
+                $("#DIVPER").show();
+                $("#DIVPBR").show();
 
-                $("#Sell_Price").hide();
-                $("#Reason").hide();
-                $('#ReasonMemo').hide();
-                $("#Buy_Price").hide();
-                $("#Targetprice").hide();
+                $("#DIVSell_Price").hide();
+                $('#DIVReasonMemo').hide();
+                $("#DIVBuy_Price").hide();
+                $("#DIVTargetprice").hide();
+                $("#DIVReason").hide();
+                
                 break;
             default:
-                $("#Sell_Price").show();
-                $("#Reason").show();
-                $('#ReasonMemo').show();
+                $("#DIVSell_Price").show();
+                $('#DIVReasonMemo').show();
 
-                $("#Buy_Price").hide();
-                $("#Targetprice").hide();
-                $("#EPS_ThisYear").hide();
-                $("#EPS_NextYear").hide();
-                $("#PER").hide();
-                $("#PBR").hide();
+                $("#DIVBuy_Price").hide();
+                $("#DIVTargetprice").hide();
+                $("#DIVReason").hide();
+                $("#DIVEPS_ThisYear").hide();
+                $("#DIVEPS_NextYear").hide();
+                $("#DIVPER").hide();
+                $("#DIVPBR").hide();
         }
 
         $('#ReportTypeMemo_BS').on('change', function () {
@@ -411,14 +411,33 @@
     });
 
     $('#Send').click(function () {
-        var property1 = $('#mm').val();
-        var PostCreate = [
+        var PostCreate;
+        //if ($('#ReportType').val() == '2') {
+            //alert($('#ReportType').val())
+            PostCreate = [
             {
                 DataDate: $('#DataDate').val(), CompanyId: $('#CompanyId').val()
                 , CompanyName: $('#CompanyName').val(), ReportType: $('#ReportType').val()
-                , EmpName: $('#StocksReport_CreateUser').val(), CreateDate: $('#CreateDate').val()
+                , EmpName: $('#CreateUser').val(), CreateDate: $('#CreateDate').val()
+                , CapitalStock: $('#CapitalStock').val(), ClosePrice: $('#ClosePrice').val()
+                , ReportType_BS: $('#ReportType_BS').val(), Buy_Price: $('#Buy_Price').val()
+                , Sell_Price: $('#Sell_Price').val(), Targetprice: $('#Targetprice').val()
+                , Reason: $('#Reason').val(), ReportTypeMemo_BS: $('#ReportTypeMemo_BS').val()
+                , PER: $('PER').val(), PBR: $('PBR').val()
+                , EPS_ThisYear: $('EPS_ThisYear').val(), EPS_NextYear: $('#EPS_NextYear')
             }
-        ];
+            ];
+        //} else {
+        //    PostCreate = [
+        //    {
+        //        DataDate: $('#DataDate').val(), CompanyId: $('#CompanyId').val()
+        //        , CompanyName: $('#CompanyName').val(), ReportType: $('#ReportType').val()
+        //        , EmpName: $('#CreateUser').val(), CreateDate: $('#CreateDate').val()
+        //    }
+        //    ];
+        //}
+        var property1 = $('#mm').val();
+        
         $.ajax({ //Do an ajax post to the controller
             type: 'POST',
             url: 'Create',
