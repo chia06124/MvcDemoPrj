@@ -175,17 +175,27 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAL\Model2.cs" />
     <Compile Include="DAL\ModelContext.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="DAL\Model1.cs" />
+    <Compile Include="DAL\NewModel.cs" />
     <Compile Include="Models\SA_User.cs" />
     <Compile Include="Models\SI_ResearcherVisit.cs" />
     <Compile Include="Models\SI_StocksReport.cs" />
     <Compile Include="Models\sysCodeMap.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007191517250_InitialCreate.cs" />
+    <Compile Include="Migrations\202007191517250_InitialCreate.Designer.cs">
+      <DependentUpon>202007191517250_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007261525093_InitialCreate1.cs" />
+    <Compile Include="Migrations\202007261525093_InitialCreate1.Designer.cs">
+      <DependentUpon>202007261525093_InitialCreate1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="DAL\Model1.cs" />
     <Compile Include="Models\ViewModel\CreateNewViewModel.cs" />
     <Compile Include="Models\ViewModel\CreateViewModel.cs" />
     <Compile Include="Models\ViewModel\EmpViewModel.cs" />
@@ -2254,6 +2264,14 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202007191517250_InitialCreate.resx">
+      <DependentUpon>202007191517250_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007261525093_InitialCreate1.resx">
+      <DependentUpon>202007261525093_InitialCreate1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

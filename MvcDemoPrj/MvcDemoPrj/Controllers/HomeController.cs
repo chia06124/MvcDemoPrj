@@ -26,7 +26,7 @@ namespace MvcDemoPrj.Controllers
 
         public ActionResult Index(string startDate, string EndDate, string EmpId)
         {
-            using (var db = new ModelContext())
+            using (var db = new NewModel())
             {
                 var today = DateTime.Today;
 
@@ -79,7 +79,7 @@ namespace MvcDemoPrj.Controllers
 
         public ActionResult Create()
         {
-            using (var db = new ModelContext())
+            using (var db = new NewModel())
             {
                 try
                 {
@@ -107,7 +107,7 @@ namespace MvcDemoPrj.Controllers
         //[ValidateAntiForgeryToken] //防止跨網站偽造請求攻擊
         public ActionResult Create( CreateNewViewModel CreateNewViewModel)
         {
-            using (var db = new ModelContext())
+            using (var db = new NewModel())
             {
                 try
                 {
@@ -120,7 +120,7 @@ namespace MvcDemoPrj.Controllers
                     visit.CompanyName = CreateNewViewModel.CompanyName;
                     visit.ReportType = CreateNewViewModel.ReportType;
                     visit.EmpName = CreateNewViewModel.EmpName;
-                    visit.CreateDate = CreateNewViewModel.CreateDate;
+                    visit.CreateDate = DateTime.Now;
                     visit.CreateUserId = "01520";
                     db.SI_ResearcherVisit.Add(visit);
                     db.SaveChanges();
@@ -137,7 +137,7 @@ namespace MvcDemoPrj.Controllers
 
         public ActionResult MyAction()
         {
-            using (var db = new ModelContext())
+            using (var db = new NewModel())
             {
                 //var cityList = (from b in db.SA_User select b).ToList();
                 var cityList = (from b in db.SA_User select new EmpViewModel { UserIdTemp = b.UserId, UserNameTemp = b.UserName }).ToList();
@@ -151,7 +151,7 @@ namespace MvcDemoPrj.Controllers
         public ActionResult ListView()
         {
 
-            using (var db = new ModelContext())
+            using (var db = new NewModel())
             {
                 //var query = from b in db.SI_ResearcherVisit 
                 //            join Suser in db.SA_User on b.CreateUserId equals Suser.UserId

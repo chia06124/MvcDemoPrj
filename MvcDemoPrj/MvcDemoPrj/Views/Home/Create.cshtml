@@ -9,8 +9,6 @@
 @Html.AntiForgeryToken() @**防止CSRF跨網站請求偽造攻擊*@
 @using (Html.BeginForm("Create", "Home", FormMethod.Post, new { app = @Model }))
 {
-
-
     <div id="content">
 
         <!-- 顯示登入角色-->
