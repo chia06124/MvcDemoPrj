@@ -27,7 +27,9 @@ namespace MvcDemoPrj
                         , "~/Content/js/sb-admin-2.js"
                         , "~/Content/vendor/datatables/jquery.dataTables.js"
                         , "~/Content/vendor/datatables/dataTables.bootstrap4.js"
-                        , "~/Content/js/demo/datatables-demo.js"));
+                        , "~/Content/js/demo/datatables-demo.js"
+                        , "~/Scripts/jquery.validate.min.js"
+                        , "~/Scripts/jquery.validate.unobtrusive.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/datepickerjs").Include(
                         "~/Scripts/moment.js"

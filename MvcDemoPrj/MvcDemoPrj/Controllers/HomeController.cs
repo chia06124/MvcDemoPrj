@@ -104,31 +104,35 @@ namespace MvcDemoPrj.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(SI_ResearcherVisit visit, List<PostCreateViewModel> PostCreateViewModel)
+        //[ValidateAntiForgeryToken] //防止跨網站偽造請求攻擊
+        public ActionResult Create( CreateNewViewModel CreateNewViewModel)
         {
             using (var db = new ModelContext())
             {
                 try
                 {
-
-                    var num = db.SI_ResearcherVisit.Select(p => p.Seq).Max()+1;
+                    //if (ModelState.IsValid) { 
+                    SI_ResearcherVisit visit = new SI_ResearcherVisit();
+                    var num = db.SI_ResearcherVisit.Select(p => p.Seq).Max() + 1;
                     visit.Seq = num;
-                    visit.DataDate = PostCreateViewModel[0].DataDate;
-                    visit.CompanyId = PostCreateViewModel[0].CompanyId;
-                    visit.CompanyName = PostCreateViewModel[0].CompanyName;
-                    visit.ReportType = PostCreateViewModel[0].ReportType;
-                    visit.EmpName = PostCreateViewModel[0].EmpName;
-                    visit.CreateDate = PostCreateViewModel[0].CreateDate;
-                    //visit.CreateUserId = PostCreateViewModel[0].CreateUserId;
+                    visit.DataDate = CreateNewViewModel.DataDate;
+                    visit.CompanyId = CreateNewViewModel.CompanyId;
+                    visit.CompanyName = CreateNewViewModel.CompanyName;
+                    visit.ReportType = CreateNewViewModel.ReportType;
+                    visit.EmpName = CreateNewViewModel.EmpName;
+                    visit.CreateDate = CreateNewViewModel.CreateDate;
+                    visit.CreateUserId = "01520";
                     db.SI_ResearcherVisit.Add(visit);
                     db.SaveChanges();
+                //}
                 }
                 catch (Exception ex)
                 {
                     throw;
                 }
             }
-            return View();
+            return RedirectToAction("Create");
+            
         }
 
         public ActionResult MyAction()

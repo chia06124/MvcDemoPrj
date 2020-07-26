@@ -186,6 +186,7 @@
     <Compile Include="Models\SI_ResearcherVisit.cs" />
     <Compile Include="Models\SI_StocksReport.cs" />
     <Compile Include="Models\sysCodeMap.cs" />
+    <Compile Include="Models\ViewModel\CreateNewViewModel.cs" />
     <Compile Include="Models\ViewModel\CreateViewModel.cs" />
     <Compile Include="Models\ViewModel\EmpViewModel.cs" />
     <Compile Include="Models\ViewModel\PostCreateViewModel.cs" />
