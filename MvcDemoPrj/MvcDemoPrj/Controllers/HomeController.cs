@@ -124,10 +124,12 @@ namespace MvcDemoPrj.Controllers
                     visit.CreateUserId = "01520";
                     db.SI_ResearcherVisit.Add(visit);
                     db.SaveChanges();
+                    TempData["SuccessYN"] = "新增成功";
                 //}
                 }
                 catch (Exception ex)
                 {
+                    TempData["SuccessYN"] = "新增失敗";
                     throw;
                 }
             }

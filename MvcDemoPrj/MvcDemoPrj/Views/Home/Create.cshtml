@@ -5,6 +5,7 @@
     var ReportList = ViewBag.Report;
     var ReportType_BS = ViewBag.ReportType_BS;
     var ReportTypeMemo = ViewBag.ReportTypeMemoList;
+    var SuccessMsg = TempData["SuccessYN"];
 }
 @Html.AntiForgeryToken() @**防止CSRF跨網站請求偽造攻擊*@
 @using (Html.BeginForm("Create", "Home", FormMethod.Post, new { app = @Model }))
@@ -453,6 +454,10 @@
     });
 
     $(function () {
+        var SuccessMsg = '@SuccessMsg';
+        if (SuccessMsg) {
+            alert(SuccessMsg);
+        }
         $('#DataDate').each(function () {
             $(this).datepicker({
                 language: 'zh-CN', //語言
