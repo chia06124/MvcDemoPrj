@@ -47,7 +47,7 @@ namespace MvcDemoPrj.Models.ViewModel
         [DisplayName("研究員")]
         public string CreateUserId { get; set; }
 
-        
+        [Required]
         [DisplayName("股本")]
         public decimal CapitalStock { get; set; }
 
@@ -56,6 +56,7 @@ namespace MvcDemoPrj.Models.ViewModel
         [StringLength(1000)]
         [DisplayName("推薦理由")]
         public string Reason { get; set; }
+        [Required]
         [DisplayName("收盤價")]
         public decimal ClosePrice { get; set; }
         [DisplayName("目前PER(倍)")]
@@ -74,7 +75,7 @@ namespace MvcDemoPrj.Models.ViewModel
         [DisplayName("個股報告類別")]
         public string ReportType_BS { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(1)]
         [DisplayName("判斷買進第一筆與賣出結算標記")]
         public string Flag { get; set; }
@@ -84,12 +85,12 @@ namespace MvcDemoPrj.Models.ViewModel
         public decimal Sell_Price { get; set; }
        
 
-        [Required]
+        //[Required]
         [StringLength(5)]
         [DisplayName("建立者")]
         public string CreateUser { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(1)]
         [DisplayName("半年轉標記")]
         public string Next_Flag { get; set; }

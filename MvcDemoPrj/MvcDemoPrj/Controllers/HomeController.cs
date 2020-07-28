@@ -124,9 +124,37 @@ namespace MvcDemoPrj.Controllers
                     visit.CreateUserId = "01520";
                     db.SI_ResearcherVisit.Add(visit);
                     db.SaveChanges();
+
+                    //StockReport
+                    SI_StocksReport Stocks = new SI_StocksReport();
+                    if (CreateNewViewModel.ReportType.Equals("2") || CreateNewViewModel.ReportType.Equals("3"))
+                    {
+                        Stocks.Seq = num;
+                        Stocks.CompanyId = CreateNewViewModel.CompanyId;
+                        Stocks.CompanyName=CreateNewViewModel.CompanyName;
+                        Stocks.CapitalStock = CreateNewViewModel.CapitalStock;
+                        Stocks.ClosePrice = CreateNewViewModel.ClosePrice;
+                        Stocks.Buy_Price = CreateNewViewModel.Buy_Price;
+                        Stocks.ClosePrice = CreateNewViewModel.ClosePrice;
+                        Stocks.Targetprice = CreateNewViewModel.Targetprice;
+                        Stocks.Reason = CreateNewViewModel.Reason;
+                        Stocks.PER = CreateNewViewModel.PER;
+                        Stocks.PBR = CreateNewViewModel.PBR;
+                        Stocks.EPS_ThisYear = CreateNewViewModel.EPS_ThisYear;
+                        Stocks.EPS_NextYear = CreateNewViewModel.EPS_NextYear;
+                        Stocks.ReportType_BS = CreateNewViewModel.ReportType_BS;
+                        Stocks.Flag = "Y";
+                        Stocks.Next_Flag = "E";
+                        Stocks.CreateUser = "01520";
+                        Stocks.CreateDate= DateTime.Now;
+                        db.SI_StocksReport.Add(Stocks);
+                        db.SaveChanges();
+                    }
+
+
                     TempData["SuccessYN"] = "新增成功";
-                //}
                 }
+                //}
                 catch (Exception ex)
                 {
                     TempData["SuccessYN"] = "新增失敗";
