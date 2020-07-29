@@ -42,7 +42,7 @@ namespace MvcDemoPrj.Models.ViewModel
         [DisplayName("異動日期")]
         public DateTime CreateDate { get; set; }
 
-        [Required]
+       
         [StringLength(5)]
         [DisplayName("研究員")]
         public string CreateUserId { get; set; }

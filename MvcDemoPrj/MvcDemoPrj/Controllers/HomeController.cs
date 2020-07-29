@@ -111,7 +111,7 @@ namespace MvcDemoPrj.Controllers
             {
                 try
                 {
-                    //if (ModelState.IsValid) { 
+                    if (ModelState.IsValid) { 
                     SI_ResearcherVisit visit = new SI_ResearcherVisit();
                     var num = db.SI_ResearcherVisit.Select(p => p.Seq).Max() + 1;
                     visit.Seq = num;
@@ -154,7 +154,7 @@ namespace MvcDemoPrj.Controllers
 
                     TempData["SuccessYN"] = "新增成功";
                 }
-                //}
+                }
                 catch (Exception ex)
                 {
                     TempData["SuccessYN"] = "新增失敗";
