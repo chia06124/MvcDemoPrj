@@ -10,18 +10,18 @@ namespace MvcDemoPrj.Models
     {
         [Key]
         public decimal Seq { get; set; }
-
+        //[Required]
         public decimal CapitalStock { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(8)]
         public string CompanyId { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(10)]
         public string CompanyName { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(1000)]
         public string Reason { get; set; }
 
@@ -37,11 +37,11 @@ namespace MvcDemoPrj.Models
 
         public decimal Targetprice { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(1)]
         public string ReportType_BS { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(1)]
         public string Flag { get; set; }
 
@@ -51,11 +51,11 @@ namespace MvcDemoPrj.Models
 
         public DateTime CreateDate { get; set; }
 
-        [Required]
+       // [Required]
         [StringLength(5)]
         public string CreateUser { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(1)]
         public string Next_Flag { get; set; }
     }

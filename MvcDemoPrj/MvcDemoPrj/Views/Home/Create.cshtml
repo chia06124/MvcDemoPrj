@@ -7,9 +7,11 @@
     var ReportTypeMemo = ViewBag.ReportTypeMemoList;
     var SuccessMsg = TempData["SuccessYN"];
 }
-@Html.AntiForgeryToken() @**防止CSRF跨網站請求偽造攻擊*@
+
+
 @using (Html.BeginForm("Create", "Home", FormMethod.Post, new { app = @Model }))
 {
+    @Html.AntiForgeryToken()
     <div id="content">
 
         <!-- 顯示登入角色-->
@@ -60,8 +62,8 @@
             <div class="card shadow mb-4">
                 <div class="card-header py-3 form-inline">
                     @*<button class="btn btn-primary btn-sm m-1 col-sm-1" id="Send" type="button">送出</button>*@
-                    <input type="submit" value="送出" class="btn btn-primary btn-sm m-1 col-sm-1"/>
-                    
+                    <input type="submit" value="送出" class="btn btn-primary btn-sm m-1 col-sm-1" />
+
                 </div>
                 <div class="card-body">
 
@@ -107,23 +109,24 @@
                     <p />
                     <div class="row">
                         <div class="col-xs-12 col-sm-2">
-                            @Html.LabelFor(model => model.ReportType, htmlAttributes: new { @class = "control-label " })
+                            @*@Html.DropDownListFor(model => model.ReportType, Model.MyList, new { @class = "form-control" })*@
+                            @Html.LabelFor(model => model.ReportType, htmlAttributes: new { @class = "control-label  " })
                         </div>
                         <div class="col-xs-12 col-sm-10">
+                            @*@Html.DropDownList(model => model.ReportType, Model.MyList, new { @class = "form-control" })*@
                             <select class="selectpicker form-control" data-live-search="true" id="ReportType" name="ReportType">
                                 @for (int i = 0; i < ReportList.Count; i++)
                                 {
                                     <option value="@ReportList[i].Item_Code">@ReportList[i].Item_Name</option>
                                 }
                             </select>
-                            @*@Html.EditorFor(model => model.ReportType, new { htmlAttributes = new { @class = "form-control", id = "ReportType" } })*@
-                                @Html.ValidationMessageFor(model => model.ReportType, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.ReportType, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <p />
                     <div style="display:none">
                         @Html.HiddenFor(m => m.CreateUserId)
-                        </div>
+                    </div>
 
                     @*下拉選單連動*@
                     <div id="DIVStockReport" style="display:none">
@@ -243,7 +246,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-10">
                                 @Html.EditorFor(model => model.PER, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.PER, "", new { @class = "text-danger" })
+                                @*@Html.ValidationMessageFor(model => model.PER, "", new { @class = "text-danger" })*@
                             </div>
                         </div>
                         <p />
@@ -253,7 +256,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-10">
                                 @Html.EditorFor(model => model.PBR, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.PBR, "", new { @class = "text-danger" })
+                                @*@Html.ValidationMessageFor(model => model.PBR, "", new { @class = "text-danger" })*@
                             </div>
                         </div>
                         <p />
@@ -263,7 +266,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-10">
                                 @Html.EditorFor(model => model.EPS_ThisYear, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.EPS_ThisYear, "", new { @class = "text-danger" })
+                                @*@Html.ValidationMessageFor(model => model.EPS_ThisYear, "", new { @class = "text-danger" })*@
                             </div>
                         </div>
                         <p />
@@ -273,7 +276,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-10">
                                 @Html.EditorFor(model => model.EPS_NextYear, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.EPS_NextYear, "", new { @class = "text-danger" })
+                                @*@Html.ValidationMessageFor(model => model.EPS_NextYear, "", new { @class = "text-danger" })*@
                             </div>
                         </div>
                         <p />

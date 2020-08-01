@@ -20,16 +20,16 @@ namespace MvcDemoPrj
                         , "~/Content/vendor/jquery-easing/jquery.easing.js"
                         , "~/Content/js/sb-admin-2.js"));
 
-             bundles.Add(new ScriptBundle("~/bundles/indexjs").Include(
-                        "~/Content/vendor/jquery/jquery.js"
-                        , "~/Content/vendor/bootstrap/js/bootstrap.bundle.js"
-                        , "~/Content/vendor/jquery-easing/jquery.easing.js"
-                        , "~/Content/js/sb-admin-2.js"
-                        , "~/Content/vendor/datatables/jquery.dataTables.js"
-                        , "~/Content/vendor/datatables/dataTables.bootstrap4.js"
-                        , "~/Content/js/demo/datatables-demo.js"
-                        , "~/Scripts/jquery.validate.min.js"
-                        , "~/Scripts/jquery.validate.unobtrusive.min.js"));
+            bundles.Add(new ScriptBundle("~/bundles/indexjs").Include(
+                       "~/Content/vendor/jquery/jquery.js"
+                       , "~/Content/vendor/bootstrap/js/bootstrap.bundle.js"
+                       , "~/Content/vendor/jquery-easing/jquery.easing.js"
+                       , "~/Content/js/sb-admin-2.js"
+                       , "~/Content/vendor/datatables/jquery.dataTables.js"
+                       , "~/Content/vendor/datatables/dataTables.bootstrap4.js"
+                       , "~/Content/js/demo/datatables-demo.js"));
+                       //, "~/Scripts/jquery.validate.min.js"
+                       //, "~/Scripts/jquery.validate.unobtrusive.min.js"
 
             bundles.Add(new ScriptBundle("~/bundles/datepickerjs").Include(
                         "~/Scripts/moment.js"

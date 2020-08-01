@@ -34,7 +34,7 @@ namespace MvcDemoPrj.Controllers
                              join Suser in db.SA_User on b.CreateUserId equals Suser.UserId
                              join codemap in db.sysCodeMap on b.ReportType equals codemap.Item_Code
                              where codemap.Class_Name == "ReportType"
-                             select new 
+                             select new
                              {
                                  DataDate = b.DataDate,
                                  CompanyId = b.CompanyId,
@@ -77,14 +77,14 @@ namespace MvcDemoPrj.Controllers
             }
         }
 
-        public ActionResult Create()
+        public void CreateSelectList()
         {
             using (var db = new NewModel())
             {
                 try
                 {
                     //報告類別
-                    var ReportList = (from b in db.sysCodeMap where b.Class_Name == "ReportType"  select new ReportTypeViewModel { Item_Code = b.Item_Code, Item_Name = b.Item_Name }).ToList();
+                    var ReportList = (from b in db.sysCodeMap where b.Class_Name == "ReportType" select new ReportTypeViewModel { Item_Code = b.Item_Code, Item_Name = b.Item_Name }).ToList();
                     ViewBag.Report = ReportList;
                     //個股報告類別
                     var ReportType_BSList = (from b in db.sysCodeMap where b.Class_Name == "ReportType_BSR" select new ReportTypeViewModel { Item_Code = b.Item_Code, Item_Name = b.Item_Name }).ToList();
@@ -100,69 +100,97 @@ namespace MvcDemoPrj.Controllers
                     throw;
                 }
             }
+        }
+
+        public ActionResult Create()
+        {
+            CreateSelectList();
             return View();
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken] //防止跨網站偽造請求攻擊
-        public ActionResult Create( CreateNewViewModel CreateNewViewModel)
+        [ValidateAntiForgeryToken] //防止跨網站偽造請求攻擊
+        public ActionResult Create(CreateNewViewModel CreateNewViewModel)
         {
             using (var db = new NewModel())
             {
+                SI_ResearcherVisit visit = new SI_ResearcherVisit();
+                var num = db.SI_ResearcherVisit.Select(p => p.Seq).Max() + 1;
                 try
                 {
-                    if (ModelState.IsValid) { 
-                    SI_ResearcherVisit visit = new SI_ResearcherVisit();
-                    var num = db.SI_ResearcherVisit.Select(p => p.Seq).Max() + 1;
-                    visit.Seq = num;
-                    visit.DataDate = CreateNewViewModel.DataDate;
-                    visit.CompanyId = CreateNewViewModel.CompanyId;
-                    visit.CompanyName = CreateNewViewModel.CompanyName;
-                    visit.ReportType = CreateNewViewModel.ReportType;
-                    visit.EmpName = CreateNewViewModel.EmpName;
-                    visit.CreateDate = DateTime.Now;
-                    visit.CreateUserId = "01520";
-                    db.SI_ResearcherVisit.Add(visit);
-                    db.SaveChanges();
-
-                    //StockReport
-                    SI_StocksReport Stocks = new SI_StocksReport();
                     if (CreateNewViewModel.ReportType.Equals("2") || CreateNewViewModel.ReportType.Equals("3"))
                     {
-                        Stocks.Seq = num;
-                        Stocks.CompanyId = CreateNewViewModel.CompanyId;
-                        Stocks.CompanyName=CreateNewViewModel.CompanyName;
-                        Stocks.CapitalStock = CreateNewViewModel.CapitalStock;
-                        Stocks.ClosePrice = CreateNewViewModel.ClosePrice;
-                        Stocks.Buy_Price = CreateNewViewModel.Buy_Price;
-                        Stocks.ClosePrice = CreateNewViewModel.ClosePrice;
-                        Stocks.Targetprice = CreateNewViewModel.Targetprice;
-                        Stocks.Reason = CreateNewViewModel.Reason;
-                        Stocks.PER = CreateNewViewModel.PER;
-                        Stocks.PBR = CreateNewViewModel.PBR;
-                        Stocks.EPS_ThisYear = CreateNewViewModel.EPS_ThisYear;
-                        Stocks.EPS_NextYear = CreateNewViewModel.EPS_NextYear;
-                        Stocks.ReportType_BS = CreateNewViewModel.ReportType_BS;
-                        Stocks.Flag = "Y";
-                        Stocks.Next_Flag = "E";
-                        Stocks.CreateUser = "01520";
-                        Stocks.CreateDate= DateTime.Now;
-                        db.SI_StocksReport.Add(Stocks);
-                        db.SaveChanges();
+                        SI_StocksReport Stocks = new SI_StocksReport();
+                        //System.Diagnostics.Debug.Write(CreateNewViewModel.PBR);
+                        //ModelState.Remove("PER");
+                        //ModelState.Remove("PBR");
+                        if (ModelState.IsValid)
+                        {
+                            visit.Seq = num;
+                            visit.DataDate = CreateNewViewModel.DataDate;
+                            visit.CompanyId = CreateNewViewModel.CompanyId;
+                            visit.CompanyName = CreateNewViewModel.CompanyName;
+                            visit.ReportType = CreateNewViewModel.ReportType;
+                            visit.EmpName = CreateNewViewModel.EmpName;
+                            visit.CreateDate = DateTime.Now;
+                            visit.CreateUserId = "01520";
+                            db.SI_ResearcherVisit.Add(visit);
+                            db.SaveChanges();
+
+
+                            Stocks.Seq = num;
+                            Stocks.CompanyId = CreateNewViewModel.CompanyId;
+                            Stocks.CompanyName = CreateNewViewModel.CompanyName;
+                            Stocks.CapitalStock = CreateNewViewModel.CapitalStock;
+                            Stocks.ClosePrice = CreateNewViewModel.ClosePrice;
+                            Stocks.Buy_Price = CreateNewViewModel.Buy_Price;
+                            Stocks.ClosePrice = CreateNewViewModel.ClosePrice;
+                            Stocks.Targetprice = CreateNewViewModel.Targetprice;
+                            Stocks.Reason = CreateNewViewModel.Reason;
+                            Stocks.PER = CreateNewViewModel.PER;
+                            Stocks.PBR =CreateNewViewModel.PBR;
+                            Stocks.EPS_ThisYear = CreateNewViewModel.EPS_ThisYear;
+                            Stocks.EPS_NextYear =CreateNewViewModel.EPS_NextYear;
+                            Stocks.ReportType_BS = CreateNewViewModel.ReportType_BS;
+                            Stocks.Flag = "Y";
+                            Stocks.Next_Flag = "E";
+                            Stocks.CreateUser = "01520";
+                            Stocks.CreateDate = DateTime.Now;
+                            db.SI_StocksReport.Add(Stocks);
+                            db.SaveChanges();
+                            TempData["SuccessYN"] = "新增成功";
+                            return RedirectToAction("Create");
+                        }
+
                     }
-
-
-                    TempData["SuccessYN"] = "新增成功";
-                }
+                    else
+                    {
+                        //if (ModelState.IsValid)
+                        //{
+                            visit.Seq = num;
+                            visit.DataDate = CreateNewViewModel.DataDate;
+                            visit.CompanyId = CreateNewViewModel.CompanyId;
+                            visit.CompanyName = CreateNewViewModel.CompanyName;
+                            visit.ReportType = CreateNewViewModel.ReportType;
+                            visit.EmpName = CreateNewViewModel.EmpName;
+                            visit.CreateDate = DateTime.Now;
+                            visit.CreateUserId = "01520";
+                            db.SI_ResearcherVisit.Add(visit);
+                            db.SaveChanges();
+                            TempData["SuccessYN"] = "新增成功";
+                            return RedirectToAction("Create");
+                        //}
+                    }
+                    
                 }
                 catch (Exception ex)
                 {
-                    TempData["SuccessYN"] = "新增失敗";
                     throw;
                 }
+                CreateSelectList();
+                TempData["SuccessYN"] = "新增失敗";
+                return View(CreateNewViewModel);
             }
-            return RedirectToAction("Create");
-            
         }
 
         public ActionResult MyAction()

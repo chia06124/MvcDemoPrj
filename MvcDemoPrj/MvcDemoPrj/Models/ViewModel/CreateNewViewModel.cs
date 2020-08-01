@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Spatial;
 using System.ComponentModel;
+using System.Web.Mvc;
 
 namespace MvcDemoPrj.Models.ViewModel
 {
@@ -59,14 +60,19 @@ namespace MvcDemoPrj.Models.ViewModel
         [Required]
         [DisplayName("收盤價")]
         public decimal ClosePrice { get; set; }
+
         [DisplayName("目前PER(倍)")]
         public decimal PER { get; set; }
+
         [DisplayName("目前PBR(倍)")]
         public decimal PBR { get; set; }
+
         [DisplayName("今年稅後EPS")]
         public decimal EPS_ThisYear { get; set; }
+
         [DisplayName("明年稅後EPS")]
         public decimal EPS_NextYear { get; set; }
+        [Required]
         [DisplayName("目標價")]
         public decimal Targetprice { get; set; }
 
@@ -79,8 +85,10 @@ namespace MvcDemoPrj.Models.ViewModel
         [StringLength(1)]
         [DisplayName("判斷買進第一筆與賣出結算標記")]
         public string Flag { get; set; }
+        [Required]
         [DisplayName("買進價格")]
         public decimal Buy_Price { get; set; }
+        [Required]
         [DisplayName("賣出價格")]
         public decimal Sell_Price { get; set; }
        
@@ -94,5 +102,7 @@ namespace MvcDemoPrj.Models.ViewModel
         [StringLength(1)]
         [DisplayName("半年轉標記")]
         public string Next_Flag { get; set; }
+
+
     }
 }
