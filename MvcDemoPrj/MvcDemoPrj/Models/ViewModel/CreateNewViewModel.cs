@@ -62,16 +62,16 @@ namespace MvcDemoPrj.Models.ViewModel
         public decimal ClosePrice { get; set; }
 
         [DisplayName("目前PER(倍)")]
-        public decimal PER { get; set; }
+        public decimal? PER { get; set; }
 
         [DisplayName("目前PBR(倍)")]
-        public decimal PBR { get; set; }
+        public decimal? PBR { get; set; }
 
         [DisplayName("今年稅後EPS")]
-        public decimal EPS_ThisYear { get; set; }
+        public decimal? EPS_ThisYear { get; set; }
 
         [DisplayName("明年稅後EPS")]
-        public decimal EPS_NextYear { get; set; }
+        public decimal? EPS_NextYear { get; set; }
         [Required]
         [DisplayName("目標價")]
         public decimal Targetprice { get; set; }

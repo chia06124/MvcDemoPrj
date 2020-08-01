@@ -176,6 +176,7 @@
     <Compile Include="DAL\Model2.cs" />
     <Compile Include="DAL\ModelContext.cs" />
     <Compile Include="DAL\NewModel.cs" />
+    <Compile Include="DAL\FirstModel.cs" />
     <Compile Include="Models\SA_User.cs" />
     <Compile Include="Models\SI_ResearcherVisit.cs" />
     <Compile Include="Models\SI_StocksReport.cs" />

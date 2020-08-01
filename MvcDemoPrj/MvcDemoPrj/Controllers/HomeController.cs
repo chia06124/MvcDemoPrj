@@ -26,7 +26,7 @@ namespace MvcDemoPrj.Controllers
 
         public ActionResult Index(string startDate, string EndDate, string EmpId)
         {
-            using (var db = new NewModel())
+            using (var db = new FirstModel())
             {
                 var today = DateTime.Today;
 
@@ -79,7 +79,7 @@ namespace MvcDemoPrj.Controllers
 
         public void CreateSelectList()
         {
-            using (var db = new NewModel())
+            using (var db = new FirstModel())
             {
                 try
                 {
@@ -112,7 +112,7 @@ namespace MvcDemoPrj.Controllers
         [ValidateAntiForgeryToken] //防止跨網站偽造請求攻擊
         public ActionResult Create(CreateNewViewModel CreateNewViewModel)
         {
-            using (var db = new NewModel())
+            using (var db = new FirstModel())
             {
                 SI_ResearcherVisit visit = new SI_ResearcherVisit();
                 var num = db.SI_ResearcherVisit.Select(p => p.Seq).Max() + 1;
@@ -121,7 +121,7 @@ namespace MvcDemoPrj.Controllers
                     if (CreateNewViewModel.ReportType.Equals("2") || CreateNewViewModel.ReportType.Equals("3"))
                     {
                         SI_StocksReport Stocks = new SI_StocksReport();
-                        //System.Diagnostics.Debug.Write(CreateNewViewModel.PBR);
+                        System.Diagnostics.Debug.Write(CreateNewViewModel.PBR);
                         //ModelState.Remove("PER");
                         //ModelState.Remove("PBR");
                         if (ModelState.IsValid)
@@ -147,10 +147,41 @@ namespace MvcDemoPrj.Controllers
                             Stocks.ClosePrice = CreateNewViewModel.ClosePrice;
                             Stocks.Targetprice = CreateNewViewModel.Targetprice;
                             Stocks.Reason = CreateNewViewModel.Reason;
-                            Stocks.PER = CreateNewViewModel.PER;
-                            Stocks.PBR =CreateNewViewModel.PBR;
-                            Stocks.EPS_ThisYear = CreateNewViewModel.EPS_ThisYear;
-                            Stocks.EPS_NextYear =CreateNewViewModel.EPS_NextYear;
+                            if (CreateNewViewModel.PER == null){
+                                Stocks.PER = 0;
+                            }
+                            else
+                            {
+                                Stocks.PER = CreateNewViewModel.PER;
+                            }
+
+                            if (CreateNewViewModel.PBR == null)
+                            {
+                                Stocks.PBR = 0;
+                            }
+                            else
+                            {
+                                Stocks.PBR = CreateNewViewModel.PBR;
+                            }
+
+                            if (CreateNewViewModel.EPS_ThisYear == null)
+                            {
+                                Stocks.EPS_ThisYear = 0;
+                            }
+                            else
+                            {
+                                Stocks.EPS_ThisYear = CreateNewViewModel.EPS_ThisYear;
+                            }
+
+                            if (CreateNewViewModel.EPS_NextYear == null)
+                            {
+                                Stocks.EPS_NextYear = 0;
+                            }
+                            else
+                            {
+                                Stocks.EPS_NextYear = CreateNewViewModel.EPS_NextYear;
+                            }
+                            
                             Stocks.ReportType_BS = CreateNewViewModel.ReportType_BS;
                             Stocks.Flag = "Y";
                             Stocks.Next_Flag = "E";
@@ -195,7 +226,7 @@ namespace MvcDemoPrj.Controllers
 
         public ActionResult MyAction()
         {
-            using (var db = new NewModel())
+            using (var db = new FirstModel())
             {
                 //var cityList = (from b in db.SA_User select b).ToList();
                 var cityList = (from b in db.SA_User select new EmpViewModel { UserIdTemp = b.UserId, UserNameTemp = b.UserName }).ToList();
@@ -209,7 +240,7 @@ namespace MvcDemoPrj.Controllers
         public ActionResult ListView()
         {
 
-            using (var db = new NewModel())
+            using (var db = new FirstModel())
             {
                 //var query = from b in db.SI_ResearcherVisit 
                 //            join Suser in db.SA_User on b.CreateUserId equals Suser.UserId

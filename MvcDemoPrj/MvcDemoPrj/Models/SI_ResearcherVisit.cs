@@ -33,7 +33,7 @@ namespace MvcDemoPrj.Models
 
         public DateTime CreateDate { get; set; }
 
-        //[Required]
+        [Required]
         [StringLength(5)]
         public string CreateUserId { get; set; }
     }
