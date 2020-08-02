@@ -124,6 +124,22 @@ namespace MvcDemoPrj.Controllers
                         System.Diagnostics.Debug.Write(CreateNewViewModel.PBR);
                         //ModelState.Remove("PER");
                         //ModelState.Remove("PBR");
+                        if (CreateNewViewModel.ReportType_BS.Equals("K") || CreateNewViewModel.ReportType_BS.Equals("S"))
+                        {
+                            ModelState.Remove("Buy_Price");
+                            ModelState.Remove("Targetprice");
+                            //CreateNewViewModel.Buy_Price = 0;
+                            //CreateNewViewModel.Targetprice = 0;
+                        }else if (CreateNewViewModel.ReportType_BS.Equals("R"))
+                        {
+                            ModelState.Remove("Buy_Price");
+                            ModelState.Remove("Sell_Price");
+                            ModelState.Remove("Targetprice");
+                            ModelState.Remove("Reason");
+                        }else if (CreateNewViewModel.ReportType_BS.Equals("B"))
+                        {
+                            ModelState.Remove("Sell_Price");
+                        }
                         if (ModelState.IsValid)
                         {
                             visit.Seq = num;
@@ -144,9 +160,9 @@ namespace MvcDemoPrj.Controllers
                             Stocks.CapitalStock = CreateNewViewModel.CapitalStock;
                             Stocks.ClosePrice = CreateNewViewModel.ClosePrice;
                             Stocks.Buy_Price = CreateNewViewModel.Buy_Price;
-                            Stocks.ClosePrice = CreateNewViewModel.ClosePrice;
+                            Stocks.Sell_Price = CreateNewViewModel.Sell_Price ;
                             Stocks.Targetprice = CreateNewViewModel.Targetprice;
-                            Stocks.Reason = CreateNewViewModel.Reason;
+                            
                             if (CreateNewViewModel.PER == null){
                                 Stocks.PER = 0;
                             }
@@ -181,6 +197,9 @@ namespace MvcDemoPrj.Controllers
                             {
                                 Stocks.EPS_NextYear = CreateNewViewModel.EPS_NextYear;
                             }
+
+                            
+                                Stocks.Reason = CreateNewViewModel.Reason;
                             
                             Stocks.ReportType_BS = CreateNewViewModel.ReportType_BS;
                             Stocks.Flag = "Y";

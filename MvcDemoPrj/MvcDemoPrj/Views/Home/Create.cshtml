@@ -226,7 +226,7 @@
                             </div>
                         </div>
                         <p />
-                        <div id="DIVReasonMemo" class="row">
+                        @*<div id="DIVReasonMemo" class="row">
                             <div class="col-xs-12 col-sm-2">
                                 @Html.LabelFor(model => model.Reason, htmlAttributes: new { @class = "control-label  " })
                             </div>
@@ -238,7 +238,7 @@
                                     }
                                 </select>
                             </div>
-                        </div>
+                        </div>*@
                         <p />
                         <div id="DIVPER" class="row">
                             <div class="col-xs-12 col-sm-2">
@@ -339,11 +339,7 @@
         //}
 
         switch (this.value) {
-            case "1":
-                $("#DIVStockReport").hide();
-                $("#DIVCompanyId").show();
-                $("#DIVCompanyName").show();
-                break;
+          
             case "2":
                 $("#DIVStockReport").show();
                 $("#DIVCompanyId").show();
@@ -354,15 +350,12 @@
                 $("#DIVCompanyId").show();
                 $("#DIVCompanyName").show();
                 break;
-            case "4":
-                $("#DIVStockReport").show();
+            
+            default:
+                $("#DIVStockReport").hide();
                 $("#DIVCompanyId").show();
                 $("#DIVCompanyName").show();
                 break;
-            default:
-                $("#DIVStockReport").show();
-                $("#DIVCompanyId").show();
-                $("#DIVCompanyName").show();
         }
     });
 
@@ -377,9 +370,10 @@
                 $("#DIVEPS_NextYear").show();
                 $("#DIVPER").show();
                 $("#DIVPBR").show();
-
+                //$('#DIVReasonMemo').show();
                 $("#DIVSell_Price").hide();
-                $('#DIVReasonMemo').hide();
+
+                
                 break;
             case 'R':
                 $("#DIVEPS_ThisYear").show();
@@ -388,28 +382,28 @@
                 $("#DIVPBR").show();
 
                 $("#DIVSell_Price").hide();
-                $('#DIVReasonMemo').hide();
+                //$('#DIVReasonMemo').hide();
                 $("#DIVBuy_Price").hide();
                 $("#DIVTargetprice").hide();
-                $("#DIVReason").hide();
+                $("#DIVReason").show();
 
                 break;
             default:
                 $("#DIVSell_Price").show();
-                $('#DIVReasonMemo').show();
+                $('#DIVReason').show();
 
                 $("#DIVBuy_Price").hide();
                 $("#DIVTargetprice").hide();
-                $("#DIVReason").hide();
+                //$("#DIVReasonMemo").hide();
                 $("#DIVEPS_ThisYear").hide();
                 $("#DIVEPS_NextYear").hide();
                 $("#DIVPER").hide();
                 $("#DIVPBR").hide();
         }
 
-        $('#ReportTypeMemo_BS').on('change', function () {
-            $('#StocksReport_Reason').val($("#ReportTypeMemo_BS :selected").text());
-        });
+        //$('#ReportTypeMemo_BS').on('change', function () {
+        //    $('#Reason').val($("#ReportTypeMemo_BS :selected").text());
+        //});
 
     });
 
