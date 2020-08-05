@@ -1,0 +1,532 @@
+﻿@*@model MvcDemoPrj.Models.SI_ResearcherVisit*@
+@*@model MvcDemoPrj.Models.ViewModel.CreateViewModel*@
+@model MvcDemoPrj.Models.ViewModel.CreateNewViewModel
+@{
+    var ReportList = ViewBag.Report;
+    var ReportType_BS = ViewBag.ReportType_BS;
+    var ReportTypeMemo = ViewBag.ReportTypeMemoList;
+    var SuccessMsg = TempData["SuccessYN"];
+}
+
+
+@using (Html.BeginForm("Edit", "Home", FormMethod.Post, new { app = @Model }))
+{
+    @Html.AntiForgeryToken()
+    <div id="content">
+
+        <!-- 顯示登入角色-->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                <i class="fa fa-bars"></i>
+            </button>
+            <from class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                個人績效新增
+            </from>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown no-arrow d-sm-none">
+                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        個人績效新增
+                    </a>
+                </li>
+                <li class="nav-item dropdown no-arrow">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                        <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Profile
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Settings
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Activity Log
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <!-- 顯示登入角色-->
+
+        <div class="container-fluid">
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 form-inline">
+                    @*<button class="btn btn-primary btn-sm m-1 col-sm-1" id="Send" type="button">送出</button>*@
+                    <input type="submit" value="送出" class="btn btn-primary btn-sm m-1 col-sm-1" />
+
+                </div>
+                <div class="card-body">
+
+                    @*<div class="row">
+            <div class="col-xs-12 col-sm-2">
+                @Html.LabelFor(model => model.Seq, htmlAttributes: new { @class = "control-label " })
+            </div>
+            <div class="col-xs-12 col-sm-10">
+                @Html.EditorFor(model => model.Seq, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Seq, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+                    <p />
+                    <div class="row" hidden="hidden">
+                        <div class="col-xs-12 col-sm-2">
+                            @Html.HiddenFor(model => model.Seq)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-2">
+                            @Html.LabelFor(model => model.DataDate, htmlAttributes: new { @class = "control-label " })
+                        </div>
+                        <div class="col-xs-12 col-sm-10">
+                            @Html.EditorFor(model => model.DataDate, new { htmlAttributes = new { @class = "form-control", placeholder = "請選擇" } })
+                            @Html.ValidationMessageFor(model => model.DataDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <p />
+                    <div id="DIVCompanyId" class="row">
+                        <div class="col-xs-12 col-sm-2">
+                            @Html.LabelFor(model => model.CompanyId, htmlAttributes: new { @class = "control-label " })
+                        </div>
+                        <div class="col-xs-12 col-sm-10">
+                            @Html.EditorFor(model => model.CompanyId, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CompanyId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <p />
+                    <div id="DIVCompanyName" class="row">
+                        <div class="col-xs-12 col-sm-2">
+                            @Html.LabelFor(model => model.CompanyName, htmlAttributes: new { @class = "control-label " })
+                        </div>
+                        <div class="col-xs-12 col-sm-10">
+                            @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <p />
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-2">
+                            @*@Html.DropDownListFor(model => model.ReportType, Model.MyList, new { @class = "form-control" })*@
+                            @Html.LabelFor(model => model.ReportType, htmlAttributes: new { @class = "control-label  " })
+                        </div>
+                        <div class="col-xs-12 col-sm-10">
+                            @*@Html.DropDownList(model => model.ReportType, Model.MyList, new { @class = "form-control" })*@
+                            <select class="selectpicker form-control" data-live-search="true" id="ReportType" name="ReportType">
+                                @for (int i = 0; i < ReportList.Count; i++)
+                                {
+                                    <option value="@ReportList[i].Item_Code">@ReportList[i].Item_Name</option>
+                                }
+                            </select>
+                            @Html.ValidationMessageFor(model => model.ReportType, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <p />
+                    <div style="display:none">
+                        @Html.HiddenFor(m => m.CreateUserId)
+                    </div>
+
+                    @*下拉選單連動*@
+                    <div id="DIVStockReport" style="display:none">
+
+                        @*<div class="row">
+                <div class="col-xs-12 col-sm-2">
+                    @Html.LabelFor(model => model.CompanyId, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-xs-12 col-sm-10">
+                    @Html.EditorFor(model => model.CompanyId, new { htmlAttributes = new { @class = "form-control"} })
+                    @Html.ValidationMessageFor(model => model.CompanyId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <p />
+            <div class="row">
+                <div class="col-xs-12 col-sm-2">
+                    @Html.LabelFor(model => model.CompanyName, htmlAttributes: new { @class = "control-label  " })
+                </div>
+                <div class="col-xs-12 col-sm-10">
+                    @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control"} })
+                    @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+                        <p />
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-2">
+                                @Html.LabelFor(model => model.CapitalStock, htmlAttributes: new { @class = "control-label  " })
+                            </div>
+                            <div class="col-xs-12 col-sm-10">
+                                @Html.EditorFor(model => model.CapitalStock, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CapitalStock, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <p />
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-2">
+                                @Html.LabelFor(model => model.ClosePrice, htmlAttributes: new { @class = "control-label  " })
+                            </div>
+                            <div class="col-xs-12 col-sm-10">
+                                @Html.EditorFor(model => model.ClosePrice, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ClosePrice, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <p />
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-2">
+                                @Html.LabelFor(model => model.ReportType_BS, htmlAttributes: new { @class = "control-label  " })
+                            </div>
+                            <div class="col-xs-12 col-sm-10">
+                                <select class="selectpicker form-control" data-live-search="true" id="ReportType_BS" name="ReportType_BS">
+                                    @for (int i = 0; i < ReportType_BS.Count; i++)
+                                    {
+                                        <option value="@ReportType_BS[i].Item_Code">@ReportType_BS[i].Item_Name</option>
+                                    }
+                                </select>
+                                @Html.ValidationMessageFor(model => model.ReportType_BS, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <p />
+                        <div id="DIVBuy_Price" class="row">
+                            <div class="col-xs-12 col-sm-2">
+                                @Html.LabelFor(model => model.Buy_Price, htmlAttributes: new { @class = "control-label  " })
+                            </div>
+                            <div class="col-xs-12 col-sm-10">
+                                @Html.EditorFor(model => model.Buy_Price, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Buy_Price, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <p />
+                        <div id="DIVSell_Price" class="row">
+                            <div class="col-xs-12 col-sm-2">
+                                @Html.LabelFor(model => model.Sell_Price, htmlAttributes: new { @class = "control-label  " })
+                            </div>
+                            <div class="col-xs-12 col-sm-10">
+                                @Html.EditorFor(model => model.Sell_Price, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Sell_Price, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <p />
+                        <div id="DIVTargetprice" class="row">
+                            <div class="col-xs-12 col-sm-2">
+                                @Html.LabelFor(model => model.Targetprice, htmlAttributes: new { @class = "control-label  " })
+                            </div>
+                            <div class="col-xs-12 col-sm-10">
+                                @Html.EditorFor(model => model.Targetprice, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Targetprice, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <p />
+                        <div id="DIVReason" class="row">
+                            <div class="col-xs-12 col-sm-2">
+                                @Html.LabelFor(model => model.Reason, htmlAttributes: new { @class = "control-label  " })
+                            </div>
+                            <div class="col-xs-12 col-sm-10">
+                                @Html.EditorFor(model => model.Reason, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Reason, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <p />
+                        @*<div id="DIVReasonMemo" class="row">
+                <div class="col-xs-12 col-sm-2">
+                    @Html.LabelFor(model => model.Reason, htmlAttributes: new { @class = "control-label  " })
+                </div>
+                <div class="col-xs-12 col-sm-10">
+                    <select class="selectpicker form-control" data-live-search="true" id="ReportTypeMemo_BS" name="ReportTypeMemo_BS">
+                        @for (int i = 0; i < ReportTypeMemo.Count; i++)
+                        {
+                            <option value="@ReportTypeMemo[i].Item_Code">@ReportTypeMemo[i].Item_Name</option>
+                        }
+                    </select>
+                </div>
+            </div>*@
+                        <p />
+                        <div id="DIVPER" class="row">
+                            <div class="col-xs-12 col-sm-2">
+                                @Html.LabelFor(model => model.PER, htmlAttributes: new { @class = "control-label  " })
+                            </div>
+                            <div class="col-xs-12 col-sm-10">
+                                @Html.EditorFor(model => model.PER, new { htmlAttributes = new { @class = "form-control" } })
+                                @*@Html.ValidationMessageFor(model => model.PER, "", new { @class = "text-danger" })*@
+                            </div>
+                        </div>
+                        <p />
+                        <div id="DIVPBR" class="row">
+                            <div class="col-xs-12 col-sm-2">
+                                @Html.LabelFor(model => model.PBR, htmlAttributes: new { @class = "control-label  " })
+                            </div>
+                            <div class="col-xs-12 col-sm-10">
+                                @Html.EditorFor(model => model.PBR, new { htmlAttributes = new { @class = "form-control" } })
+                                @*@Html.ValidationMessageFor(model => model.PBR, "", new { @class = "text-danger" })*@
+                            </div>
+                        </div>
+                        <p />
+                        <div id="DIVEPS_ThisYear" class="row">
+                            <div class="col-xs-12 col-sm-2">
+                                @Html.LabelFor(model => model.EPS_ThisYear, htmlAttributes: new { @class = "control-label  " })
+                            </div>
+                            <div class="col-xs-12 col-sm-10">
+                                @Html.EditorFor(model => model.EPS_ThisYear, new { htmlAttributes = new { @class = "form-control" } })
+                                @*@Html.ValidationMessageFor(model => model.EPS_ThisYear, "", new { @class = "text-danger" })*@
+                            </div>
+                        </div>
+                        <p />
+                        <div id="DIVEPS_NextYear" class="row">
+                            <div class="col-xs-12 col-sm-2">
+                                @Html.LabelFor(model => model.EPS_NextYear, htmlAttributes: new { @class = "control-label  " })
+                            </div>
+                            <div class="col-xs-12 col-sm-10">
+                                @Html.EditorFor(model => model.EPS_NextYear, new { htmlAttributes = new { @class = "form-control" } })
+                                @*@Html.ValidationMessageFor(model => model.EPS_NextYear, "", new { @class = "text-danger" })*@
+                            </div>
+                        </div>
+                        <p />
+
+
+
+
+                        @*<div class="row">
+                <div class="col-xs-12 col-sm-2">
+                    @Html.LabelFor(model => model.StocksReport.CreateUser, htmlAttributes: new { @class = "control-label  " })
+                </div>
+                <div class="col-xs-12 col-sm-10">
+                    @Html.EditorFor(model => model.StocksReport.CreateUser, new { htmlAttributes = new { @class = "form-control", id = "EmpNameY" } })
+                    @Html.ValidationMessageFor(model => model.StocksReport.CreateUser, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-2">
+                    @Html.LabelFor(model => model.StocksReport.CreateUser, htmlAttributes: new { @class = "control-label  " })
+                </div>
+                <div class="col-xs-12 col-sm-10">
+                    @Html.EditorFor(model => model.StocksReport.CreateUser, new { htmlAttributes = new { @class = "form-control", id = "EmpNameY" } })
+                    @Html.ValidationMessageFor(model => model.StocksReport.CreateUser, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+                    </div>
+                    <p />
+                    <div id="DIVCreateUser" class="row">
+                        <div class="col-xs-12 col-sm-2">
+                            @Html.LabelFor(model => model.EmpName, htmlAttributes: new { @class = "control-label  " })
+                        </div>
+                        <div class="col-xs-12 col-sm-10">
+                            @Html.EditorFor(model => model.EmpName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.EmpName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <p />
+                    <div id="DIVCreateDate" class="row">
+                        <div class="col-xs-12 col-sm-2">
+                            @Html.LabelFor(model => model.CreateDate, htmlAttributes: new { @class = "control-label " })
+                        </div>
+                        <div class="col-xs-12 col-sm-10">
+                            @Html.EditorFor(model => model.CreateDate, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.CreateDate, disabled = "disabled" } })
+                            @Html.ValidationMessageFor(model => model.CreateDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+
+    $('#ReportType').on('change', function () {
+
+        //if (this.value == 2 || this.value==3) {
+        //    $("#StockReport").show();
+        //} else {
+        //    $("#StockReport").hide();
+        //}
+
+        switch (this.value) {
+
+            case "2":
+                $("#DIVStockReport").show();
+                $("#DIVCompanyId").show();
+                $("#DIVCompanyName").show();
+                break;
+            case "3":
+                $("#DIVStockReport").show();
+                $("#DIVCompanyId").show();
+                $("#DIVCompanyName").show();
+                break;
+
+            default:
+                $("#DIVStockReport").hide();
+                $("#DIVCompanyId").show();
+                $("#DIVCompanyName").show();
+                break;
+        }
+    });
+
+    $('#ReportType_BS').on('change', function () {
+        //alert(this.value);
+        switch (this.value) {
+            case 'B':
+                $("#DIVBuy_Price").show();
+                $("#DIVTargetprice").show();
+                $("#DIVReason").show();
+                $("#DIVEPS_ThisYear").show();
+                $("#DIVEPS_NextYear").show();
+                $("#DIVPER").show();
+                $("#DIVPBR").show();
+                //$('#DIVReasonMemo').show();
+                $("#DIVSell_Price").hide();
+
+
+                break;
+            case 'R':
+                $("#DIVEPS_ThisYear").show();
+                $("#DIVEPS_NextYear").show();
+                $("#DIVPER").show();
+                $("#DIVPBR").show();
+
+                $("#DIVSell_Price").hide();
+                //$('#DIVReasonMemo').hide();
+                $("#DIVBuy_Price").hide();
+                $("#DIVTargetprice").hide();
+                $("#DIVReason").show();
+
+                break;
+            default:
+                $("#DIVSell_Price").show();
+                $('#DIVReason').show();
+
+                $("#DIVBuy_Price").hide();
+                $("#DIVTargetprice").hide();
+                //$("#DIVReasonMemo").hide();
+                $("#DIVEPS_ThisYear").hide();
+                $("#DIVEPS_NextYear").hide();
+                $("#DIVPER").hide();
+                $("#DIVPBR").hide();
+        }
+
+        //$('#ReportTypeMemo_BS').on('change', function () {
+        //    $('#Reason').val($("#ReportTypeMemo_BS :selected").text());
+        //});
+
+    });
+
+    $('#Send').click(function () {
+        var PostCreate;
+        //if ($('#ReportType').val() == '2') {
+            //alert($('#ReportType').val())
+            PostCreate = [
+            {
+                DataDate: $('#DataDate').val(), CompanyId: $('#CompanyId').val()
+                , CompanyName: $('#CompanyName').val(), ReportType: $('#ReportType').val()
+                , EmpName: $('#CreateUser').val(), CreateDate: $('#CreateDate').val()
+                , CapitalStock: $('#CapitalStock').val(), ClosePrice: $('#ClosePrice').val()
+                , ReportType_BS: $('#ReportType_BS').val(), Buy_Price: $('#Buy_Price').val()
+                , Sell_Price: $('#Sell_Price').val(), Targetprice: $('#Targetprice').val()
+                , Reason: $('#Reason').val(), ReportTypeMemo_BS: $('#ReportTypeMemo_BS').val()
+                , PER: $('PER').val(), PBR: $('PBR').val()
+                , EPS_ThisYear: $('EPS_ThisYear').val(), EPS_NextYear: $('#EPS_NextYear')
+            }
+            ];
+        //} else {
+        //    PostCreate = [
+        //    {
+        //        DataDate: $('#DataDate').val(), CompanyId: $('#CompanyId').val()
+        //        , CompanyName: $('#CompanyName').val(), ReportType: $('#ReportType').val()
+        //        , EmpName: $('#CreateUser').val(), CreateDate: $('#CreateDate').val()
+        //    }
+        //    ];
+        //}
+        var property1 = $('#mm').val();
+
+        $.ajax({ //Do an ajax post to the controller
+            type: 'POST',
+            url: 'Create',
+            data: JSON.stringify({ 'CreateNewViewModel': PostCreate }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        });
+
+    });
+
+    $('#query').click(function () {
+        var url = '@Url.Action("Index", "Home")';
+        var WHC_PayDate = $('#WHC_PayDate').val();
+        var WHC_PayDate2 = $('#WHC_PayDate2').val();
+        var EmpId = $('#city').val();
+        window.location.href = url + '?startDate=' + WHC_PayDate + '&EndDate=' + WHC_PayDate2 + '&EmpId=' + EmpId;
+    });
+
+    $(function () {
+        var SuccessMsg = '@SuccessMsg';
+        if (SuccessMsg) {
+            alert(SuccessMsg);
+        }
+        $('#DataDate').each(function () {
+            $(this).datepicker({
+                language: 'zh-CN', //語言
+                autoclose: true, //選擇後自動關閉
+                clearBtn: true,//清除按鈕
+                format: "yyyy/mm/dd"//日期格式
+            });
+        });
+
+        $('#WHC_PayDate2').each(function () {
+            $(this).datepicker({
+                language: 'zh-CN', //語言
+                autoclose: true, //選擇後自動關閉
+                clearBtn: true,//清除按鈕
+                format: "yyyy/mm/dd"//日期格式
+            });
+        });
+
+
+        $("#sidebarToggle, #sidebarToggleTop").on('click', function (e) {
+            $("body").toggleClass("sidebar-toggled");
+            $(".sidebar").toggleClass("toggled");
+            if ($(".sidebar").hasClass("toggled")) {
+                $('.sidebar .collapse').collapse('hide');
+            };
+        });
+
+        // Close any open menu accordions when window is resized below 768px
+        $(window).resize(function () {
+            if ($(window).width() < 768) {
+                $('.sidebar .collapse').collapse('hide');
+            };
+        });
+
+        // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
+        $('body.fixed-nav .sidebar').on('mousewheel DOMMouseScroll wheel', function (e) {
+            if ($(window).width() > 768) {
+                var e0 = e.originalEvent,
+                    delta = e0.wheelDelta || -e0.detail;
+                this.scrollTop += (delta < 0 ? 1 : -1) * 30;
+                e.preventDefault();
+            }
+        });
+
+        // Scroll to top button appear
+        $(document).on('scroll', function () {
+            var scrollDistance = $(this).scrollTop();
+            if (scrollDistance > 100) {
+                $('.scroll-to-top').fadeIn();
+            } else {
+                $('.scroll-to-top').fadeOut();
+            }
+        });
+
+        // Smooth scrolling using jQuery easing
+        $(document).on('click', 'a.scroll-to-top', function (e) {
+            var $anchor = $(this);
+            $('html, body').stop().animate({
+                scrollTop: ($($anchor.attr('href')).offset().top)
+            }, 1000, 'easeInOutExpo');
+            e.preventDefault();
+        });
+
+    });
+
+</script>

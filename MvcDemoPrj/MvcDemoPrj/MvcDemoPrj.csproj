@@ -2254,6 +2254,7 @@
     <Content Include="Views\Home\MyAction.cshtml" />
     <Content Include="Views\Home\FUCK.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

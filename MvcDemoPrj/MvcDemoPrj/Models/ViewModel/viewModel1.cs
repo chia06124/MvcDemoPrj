@@ -12,6 +12,8 @@ namespace MvcDemoPrj.Models.ViewModel
         //public string a  { get; set; }
         
         public IEnumerable<SA_User> temp { get; set; }
+
+        public decimal Seq { get; set; }
         //public IEnumerable<SI_ResearcherVisit> visit { get; set; }
         [Required]
         [StringLength(20)]

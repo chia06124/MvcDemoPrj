@@ -13,6 +13,47 @@ namespace MvcDemoPrj.Controllers
     public class HomeController : Controller
     {
 
+        public ActionResult Edit(int? Seq)
+        {
+            using (var db = new FirstModel())
+            {
+                CreateNewViewModel CreateNewViewModel = new CreateNewViewModel();
+                SI_ResearcherVisit VisitTemp = db.SI_ResearcherVisit.Find (Seq);
+                CreateSelectList();
+                CreateNewViewModel.DataDate = VisitTemp.DataDate;
+                CreateNewViewModel.CompanyId = VisitTemp.CompanyId;
+                CreateNewViewModel.CompanyName = VisitTemp.CompanyName;
+                CreateNewViewModel.ReportType = VisitTemp.ReportType;
+                CreateNewViewModel.EmpName = VisitTemp.EmpName;
+                CreateNewViewModel.CreateDate = VisitTemp.CreateDate;
+                CreateNewViewModel.CreateUserId = VisitTemp.CreateUserId;
+                if (CreateNewViewModel.ReportType.Equals("2") || CreateNewViewModel.ReportType.Equals("3"))
+                {
+                    SI_StocksReport ReportTemp = db.SI_StocksReport.Find(Seq);
+                    CreateNewViewModel.CapitalStock = ReportTemp.CapitalStock;
+                    CreateNewViewModel.Reason = ReportTemp.Reason;
+                    CreateNewViewModel.ClosePrice = ReportTemp.ClosePrice;
+                    CreateNewViewModel.PER = ReportTemp.PER;
+                    CreateNewViewModel.PBR = ReportTemp.PBR;
+                    CreateNewViewModel.EPS_ThisYear = ReportTemp.EPS_ThisYear;
+                    CreateNewViewModel.EPS_NextYear = ReportTemp.EPS_NextYear;
+                    CreateNewViewModel.Targetprice = ReportTemp.Targetprice;
+                    CreateNewViewModel.ReportType_BS = ReportTemp.ReportType_BS;
+                    CreateNewViewModel.Flag = ReportTemp.Flag;
+                    CreateNewViewModel.Buy_Price = ReportTemp.Buy_Price;
+                    CreateNewViewModel.Sell_Price = ReportTemp.Sell_Price;
+                    CreateNewViewModel.CreateUser = ReportTemp.CreateUser;
+                    CreateNewViewModel.Next_Flag = ReportTemp.Next_Flag;
+                }
+                
+
+                return View(CreateNewViewModel);
+            }
+                
+           
+        }
+
+
         public ActionResult FUCK()
         {
             return View();
@@ -36,6 +77,7 @@ namespace MvcDemoPrj.Controllers
                              where codemap.Class_Name == "ReportType"
                              select new
                              {
+                                 Seq = b.Seq,
                                  DataDate = b.DataDate,
                                  CompanyId = b.CompanyId,
                                  CompanyName = b.CompanyName,
@@ -47,6 +89,7 @@ namespace MvcDemoPrj.Controllers
                              }).ToList()
                              .Select(x => new viewModel1
                              {
+                                 Seq =x.Seq,
                                  DataDate = x.DataDate,
                                  CompanyId = x.CompanyId,
                                  CompanyName = x.CompanyName,
