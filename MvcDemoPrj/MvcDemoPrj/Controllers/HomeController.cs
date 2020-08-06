@@ -7,6 +7,9 @@ using MvcDemoPrj.Models;
 using System.Collections;
 using MvcDemoPrj.Models.ViewModel;
 using MvcDemoPrj.DAL;
+using System.Net;
+using System.Data.Entity.Core.EntityClient;
+using System.Data.Entity;
 
 namespace MvcDemoPrj.Controllers
 {
@@ -15,10 +18,19 @@ namespace MvcDemoPrj.Controllers
 
         public ActionResult Edit(int? Seq)
         {
+            if (Seq == null)
+            {
+                //    return Content("查無此資料");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest); //400請求錯誤(伺服器無法理解此請求)
+            }
             using (var db = new FirstModel())
             {
                 CreateNewViewModel CreateNewViewModel = new CreateNewViewModel();
                 SI_ResearcherVisit VisitTemp = db.SI_ResearcherVisit.Find (Seq);
+                if (VisitTemp == null)
+                {
+                    return HttpNotFound(); //404查無此頁面
+                }
                 CreateSelectList();
                 CreateNewViewModel.DataDate = VisitTemp.DataDate;
                 CreateNewViewModel.CompanyId = VisitTemp.CompanyId;
@@ -45,14 +57,150 @@ namespace MvcDemoPrj.Controllers
                     CreateNewViewModel.CreateUser = ReportTemp.CreateUser;
                     CreateNewViewModel.Next_Flag = ReportTemp.Next_Flag;
                 }
-                
-
                 return View(CreateNewViewModel);
             }
                 
            
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken] //防止跨網站偽造請求攻擊
+        public ActionResult Edit(CreateNewViewModel CreateNewViewModel)
+        {
+            using (var db = new FirstModel())
+            {
+                SI_ResearcherVisit visit = db.SI_ResearcherVisit.Find(CreateNewViewModel.Seq );
+                try
+                {
+                    if (CreateNewViewModel.ReportType.Equals("2") || CreateNewViewModel.ReportType.Equals("3"))
+                    {
+                        SI_StocksReport Stocks = db.SI_StocksReport.Find(CreateNewViewModel.Seq);
+                        //ModelState.Remove("PER");
+                        //ModelState.Remove("PBR");
+                        if (CreateNewViewModel.ReportType_BS.Equals("K") || CreateNewViewModel.ReportType_BS.Equals("S"))
+                        {
+                            ModelState.Remove("Buy_Price");
+                            ModelState.Remove("Targetprice");
+                            //CreateNewViewModel.Buy_Price = 0;
+                            //CreateNewViewModel.Targetprice = 0;
+                        }
+                        else if (CreateNewViewModel.ReportType_BS.Equals("R"))
+                        {
+                            ModelState.Remove("Buy_Price");
+                            ModelState.Remove("Sell_Price");
+                            ModelState.Remove("Targetprice");
+                            ModelState.Remove("Reason");
+                        }
+                        else if (CreateNewViewModel.ReportType_BS.Equals("B"))
+                        {
+                            ModelState.Remove("Sell_Price");
+                        }
+                        if (ModelState.IsValid)
+                        {
+                            visit.Seq = CreateNewViewModel.Seq;
+                            visit.DataDate = CreateNewViewModel.DataDate;
+                            visit.CompanyId = CreateNewViewModel.CompanyId;
+                            visit.CompanyName = CreateNewViewModel.CompanyName;
+                            visit.ReportType = CreateNewViewModel.ReportType;
+                            visit.EmpName = CreateNewViewModel.EmpName;
+                            visit.CreateDate = DateTime.Now;
+                            visit.CreateUserId = "01520";
+                            db.Entry(visit).State = EntityState.Modified;
+                            //db.SI_ResearcherVisit.Add(visit);
+                            db.SaveChanges();
+
+
+                            Stocks.Seq = CreateNewViewModel.Seq;
+                            Stocks.CompanyId = CreateNewViewModel.CompanyId;
+                            Stocks.CompanyName = CreateNewViewModel.CompanyName;
+                            Stocks.CapitalStock = CreateNewViewModel.CapitalStock;
+                            Stocks.ClosePrice = CreateNewViewModel.ClosePrice;
+                            Stocks.Buy_Price = CreateNewViewModel.Buy_Price;
+                            Stocks.Sell_Price = CreateNewViewModel.Sell_Price;
+                            Stocks.Targetprice = CreateNewViewModel.Targetprice;
+
+                            if (CreateNewViewModel.PER == null)
+                            {
+                                Stocks.PER = 0;
+                            }
+                            else
+                            {
+                                Stocks.PER = CreateNewViewModel.PER;
+                            }
+
+                            if (CreateNewViewModel.PBR == null)
+                            {
+                                Stocks.PBR = 0;
+                            }
+                            else
+                            {
+                                Stocks.PBR = CreateNewViewModel.PBR;
+                            }
+
+                            if (CreateNewViewModel.EPS_ThisYear == null)
+                            {
+                                Stocks.EPS_ThisYear = 0;
+                            }
+                            else
+                            {
+                                Stocks.EPS_ThisYear = CreateNewViewModel.EPS_ThisYear;
+                            }
+
+                            if (CreateNewViewModel.EPS_NextYear == null)
+                            {
+                                Stocks.EPS_NextYear = 0;
+                            }
+                            else
+                            {
+                                Stocks.EPS_NextYear = CreateNewViewModel.EPS_NextYear;
+                            }
+
+
+                            Stocks.Reason = CreateNewViewModel.Reason;
+
+                            Stocks.ReportType_BS = CreateNewViewModel.ReportType_BS;
+                            Stocks.Flag = "Y";
+                            Stocks.Next_Flag = "E";
+                            Stocks.CreateUser = "01520";
+                            Stocks.CreateDate = DateTime.Now;
+                            db.Entry(Stocks).State = EntityState.Modified;
+                            //db.SI_StocksReport.Add(Stocks);
+                            db.SaveChanges();
+                            TempData["SuccessYN"] = "修改成功";
+                            return RedirectToAction("Create");
+                        }
+
+                    }
+                    else
+                    {
+                        //if (ModelState.IsValid)
+                        //{
+                        visit.Seq = CreateNewViewModel.Seq;
+                        visit.DataDate = CreateNewViewModel.DataDate;
+                        visit.CompanyId = CreateNewViewModel.CompanyId;
+                        visit.CompanyName = CreateNewViewModel.CompanyName;
+                        visit.ReportType = CreateNewViewModel.ReportType;
+                        visit.EmpName = CreateNewViewModel.EmpName;
+                        visit.CreateDate = DateTime.Now;
+                        visit.CreateUserId = "01520";
+                        db.Entry(visit).State = EntityState.Modified;
+                        //db.SI_ResearcherVisit.Add(visit);
+                        db.SaveChanges();
+                        TempData["SuccessYN"] = "修改成功";
+                        return RedirectToAction("Create");
+                        //}
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+                CreateSelectList();
+                TempData["SuccessYN"] = "修改失敗";
+                return View(CreateNewViewModel);
+            }
+        }
 
         public ActionResult FUCK()
         {
