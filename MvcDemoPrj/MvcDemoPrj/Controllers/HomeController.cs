@@ -10,11 +10,59 @@ using MvcDemoPrj.DAL;
 using System.Net;
 using System.Data.Entity.Core.EntityClient;
 using System.Data.Entity;
+using System.Web.UI.WebControls;
 
 namespace MvcDemoPrj.Controllers
 {
     public class HomeController : Controller
     {
+
+        public ActionResult Delete(int? Seq)
+        {
+            if (Seq == null)
+            {
+                //    return Content("查無此資料");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest); //400請求錯誤(伺服器無法理解此請求)
+            }
+            using (var db = new FirstModel())
+            {
+                CreateNewViewModel CreateNewViewModel = new CreateNewViewModel();
+                SI_ResearcherVisit VisitTemp = db.SI_ResearcherVisit.Find(Seq);
+                if (VisitTemp == null)
+                {
+                    return HttpNotFound(); //404查無此頁面
+                }
+                CreateSelectList();
+                CreateNewViewModel.DataDate = VisitTemp.DataDate;
+                CreateNewViewModel.CompanyId = VisitTemp.CompanyId;
+                CreateNewViewModel.CompanyName = VisitTemp.CompanyName;
+                CreateNewViewModel.ReportType = VisitTemp.ReportType;
+                CreateNewViewModel.EmpName = VisitTemp.EmpName;
+                CreateNewViewModel.CreateDate = VisitTemp.CreateDate;
+                CreateNewViewModel.CreateUserId = VisitTemp.CreateUserId;
+                if (CreateNewViewModel.ReportType.Equals("2") || CreateNewViewModel.ReportType.Equals("3"))
+                {
+                    SI_StocksReport ReportTemp = db.SI_StocksReport.Find(Seq);
+                    CreateNewViewModel.CapitalStock = ReportTemp.CapitalStock;
+                    CreateNewViewModel.Reason = ReportTemp.Reason;
+                    CreateNewViewModel.ClosePrice = ReportTemp.ClosePrice;
+                    CreateNewViewModel.PER = ReportTemp.PER;
+                    CreateNewViewModel.PBR = ReportTemp.PBR;
+                    CreateNewViewModel.EPS_ThisYear = ReportTemp.EPS_ThisYear;
+                    CreateNewViewModel.EPS_NextYear = ReportTemp.EPS_NextYear;
+                    CreateNewViewModel.Targetprice = ReportTemp.Targetprice;
+                    CreateNewViewModel.ReportType_BS = ReportTemp.ReportType_BS;
+                    CreateNewViewModel.Flag = ReportTemp.Flag;
+                    CreateNewViewModel.Buy_Price = ReportTemp.Buy_Price;
+                    CreateNewViewModel.Sell_Price = ReportTemp.Sell_Price;
+                    CreateNewViewModel.CreateUser = ReportTemp.CreateUser;
+                    CreateNewViewModel.Next_Flag = ReportTemp.Next_Flag;
+                }
+                return View(CreateNewViewModel);
+            }
+
+        }
+
 
         public ActionResult Edit(int? Seq)
         {
@@ -167,7 +215,7 @@ namespace MvcDemoPrj.Controllers
                             //db.SI_StocksReport.Add(Stocks);
                             db.SaveChanges();
                             TempData["SuccessYN"] = "修改成功";
-                            return RedirectToAction("Create");
+                            return RedirectToAction("Index");
                         }
 
                     }
@@ -187,7 +235,7 @@ namespace MvcDemoPrj.Controllers
                         //db.SI_ResearcherVisit.Add(visit);
                         db.SaveChanges();
                         TempData["SuccessYN"] = "修改成功";
-                        return RedirectToAction("Create");
+                        return RedirectToAction("Index");
                         //}
                     }
 
@@ -276,7 +324,16 @@ namespace MvcDemoPrj.Controllers
                 {
                     //報告類別
                     var ReportList = (from b in db.sysCodeMap where b.Class_Name == "ReportType" select new ReportTypeViewModel { Item_Code = b.Item_Code, Item_Name = b.Item_Name }).ToList();
-                    ViewBag.Report = ReportList;
+                    
+
+                    List<SelectListItem> items = new List<SelectListItem>();
+                    foreach(var temp in ReportList)
+                    {
+                        items.Add(new SelectListItem(){
+                            Text = temp.Item_Name.ToString(),Value = temp.Item_Code
+                        });
+                    }
+                    ViewBag.Report = items;
                     //個股報告類別
                     var ReportType_BSList = (from b in db.sysCodeMap where b.Class_Name == "ReportType_BSR" select new ReportTypeViewModel { Item_Code = b.Item_Code, Item_Name = b.Item_Name }).ToList();
                     ViewBag.ReportType_BS = ReportType_BSList;

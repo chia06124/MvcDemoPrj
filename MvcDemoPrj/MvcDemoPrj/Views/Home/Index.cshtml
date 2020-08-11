@@ -201,8 +201,8 @@
                                     </td>
                                     <td>
                                         @Html.ActionLink("修改", "Edit", new { Seq = item.Seq }, new { @class = "btn btn-primary btn-sm" })
+                                        @Html.ActionLink("刪除", "Delete", new { Seq = item.Seq }, new { @class = "btn btn-primary btn-sm" })
                                         @*<button class="btn btn-primary btn-sm" id="btnUpdate" type="button">修改</button>*@
-                                        <button class="btn btn-primary btn-sm" id="btnDelete" type="button">刪除</button>
                                     </td>
                                 </tr>
                             }

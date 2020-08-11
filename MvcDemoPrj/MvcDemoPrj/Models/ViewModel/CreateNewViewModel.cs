@@ -6,8 +6,10 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Spatial;
 using System.ComponentModel;
+using System.Linq;
 using System.Web.Mvc;
 
+using System.Data.Entity;
 namespace MvcDemoPrj.Models.ViewModel
 {
     public class CreateNewViewModel
