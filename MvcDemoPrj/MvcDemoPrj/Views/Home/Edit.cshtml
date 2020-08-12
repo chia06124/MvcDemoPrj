@@ -119,7 +119,7 @@
                             @Html.LabelFor(model => model.ReportType, htmlAttributes: new { @class = "control-label  " })
                         </div>
                         <div class="col-xs-12 col-sm-10">
-                            @Html.DropDownList("List", (IEnumerable<SelectListItem>)ViewBag.Report,  new { @class = "selectpicker form-control"})
+                            @Html.DropDownListFor(model => model.ReportType, (IEnumerable<SelectListItem>)ViewBag.Report,  new { @class = "selectpicker form-control",id= "ReportTypeId" })
                             @*<select class="selectpicker form-control" data-live-search="true" id="ReportType" name="ReportType">
                                     @for (int i = 0; i < ReportList.Count; i++)
                                     {
@@ -336,7 +336,7 @@
 }
 <script type="text/javascript">
 
-    $('#ReportType').on('change', function () {
+    $('#ReportTypeId').on('change', function () {
 
         //if (this.value == 2 || this.value==3) {
         //    $("#StockReport").show();
@@ -460,6 +460,27 @@
     });
 
     $(function () {
+
+        switch ($('#ReportTypeId').val()) {
+
+            case "2":
+                $("#DIVStockReport").show();
+                $("#DIVCompanyId").show();
+                $("#DIVCompanyName").show();
+                break;
+            case "3":
+                $("#DIVStockReport").show();
+                $("#DIVCompanyId").show();
+                $("#DIVCompanyName").show();
+                break;
+
+            default:
+                $("#DIVStockReport").hide();
+                $("#DIVCompanyId").show();
+                $("#DIVCompanyName").show();
+                break;
+        }
+
         var SuccessMsg = '@SuccessMsg';
         if (SuccessMsg) {
             alert(SuccessMsg);
