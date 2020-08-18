@@ -63,7 +63,7 @@
                 <div class="card-header py-3 form-inline">
                     @*<button class="btn btn-primary btn-sm m-1 col-sm-1" id="Send" type="button">送出</button>*@
                     <input type="submit" value="確認刪除" class="btn btn-primary btn-sm m-1 col-sm-1" />
-
+                    @Html.ActionLink("返回", "index", "Home", new { }, new { @class = "btn btn-primary btn-sm m-1 col-sm-1" })
                 </div>
                 <div class="card-body">
 
@@ -109,17 +109,10 @@
                     <p />
                     <div class="row">
                         <div class="col-xs-12 col-sm-2">
-                            @*@Html.DropDownListFor(model => model.ReportType, Model.MyList, new { @class = "form-control" })*@
                             @Html.LabelFor(model => model.ReportType, htmlAttributes: new { @class = "control-label  " })
                         </div>
                         <div class="col-xs-12 col-sm-10">
-                            @Html.DropDownList("temp", (IEnumerable<SelectListItem>)ViewBag.Report, new { @class = "selectpicker form-control" })
-                            @*<select class="selectpicker form-control" data-live-search="true" id="ReportType" name="ReportType">
-                                    @for (int i = 0; i < ReportList.Count; i++)
-                                    {
-                                        <option value="@ReportList[i].Item_Code">@ReportList[i].Item_Name</option>
-                                    }
-                                </select>*@
+                            @Html.DropDownListFor(model => model.ReportType, (IEnumerable<SelectListItem>)ViewBag.Report, new { @class = "selectpicker form-control", id = "ReportTypeId" })
                             @Html.ValidationMessageFor(model => model.ReportType, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -176,12 +169,7 @@
                                 @Html.LabelFor(model => model.ReportType_BS, htmlAttributes: new { @class = "control-label  " })
                             </div>
                             <div class="col-xs-12 col-sm-10">
-                                <select class="selectpicker form-control" data-live-search="true" id="ReportType_BS" name="ReportType_BS">
-                                    @for (int i = 0; i < ReportType_BS.Count; i++)
-                                    {
-                                        <option value="@ReportType_BS[i].Item_Code">@ReportType_BS[i].Item_Name</option>
-                                    }
-                                </select>
+                                @Html.DropDownListFor(model => model.ReportType_BS, (IEnumerable<SelectListItem>)ViewBag.ReportTypeTemp_BS, new { @class = "selectpicker form-control", id = "ReportTypeBS_Id" })
                                 @Html.ValidationMessageFor(model => model.ReportType_BS, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -330,7 +318,7 @@
 }
 <script type="text/javascript">
 
-    $('#ReportType').on('change', function () {
+    $('#ReportTypeId').on('change', function () {
 
         //if (this.value == 2 || this.value==3) {
         //    $("#StockReport").show();
@@ -359,7 +347,7 @@
         }
     });
 
-    $('#ReportType_BS').on('change', function () {
+    $('#ReportTypeBS_Id').on('change', function () {
         //alert(this.value);
         switch (this.value) {
             case 'B':
@@ -454,6 +442,67 @@
     });
 
     $(function () {
+        switch ($('#ReportTypeId').val()) {
+
+            case "2":
+                $("#DIVStockReport").show();
+                $("#DIVCompanyId").show();
+                $("#DIVCompanyName").show();
+                break;
+            case "3":
+                $("#DIVStockReport").show();
+                $("#DIVCompanyId").show();
+                $("#DIVCompanyName").show();
+                break;
+
+            default:
+                $("#DIVStockReport").hide();
+                $("#DIVCompanyId").show();
+                $("#DIVCompanyName").show();
+                break;
+        }
+
+        switch ($('#ReportTypeBS_Id').val()) {
+            case 'B':
+                $("#DIVBuy_Price").show();
+                $("#DIVTargetprice").show();
+                $("#DIVReason").show();
+                $("#DIVEPS_ThisYear").show();
+                $("#DIVEPS_NextYear").show();
+                $("#DIVPER").show();
+                $("#DIVPBR").show();
+                //$('#DIVReasonMemo').show();
+                $("#DIVSell_Price").hide();
+
+
+                break;
+            case 'R':
+                $("#DIVEPS_ThisYear").show();
+                $("#DIVEPS_NextYear").show();
+                $("#DIVPER").show();
+                $("#DIVPBR").show();
+
+                $("#DIVSell_Price").hide();
+                //$('#DIVReasonMemo').hide();
+                $("#DIVBuy_Price").hide();
+                $("#DIVTargetprice").hide();
+                $("#DIVReason").show();
+
+                break;
+            default:
+                $("#DIVSell_Price").show();
+                $('#DIVReason').show();
+
+                $("#DIVBuy_Price").hide();
+                $("#DIVTargetprice").hide();
+                //$("#DIVReasonMemo").hide();
+                $("#DIVEPS_ThisYear").hide();
+                $("#DIVEPS_NextYear").hide();
+                $("#DIVPER").hide();
+                $("#DIVPBR").hide();
+        }
+
+
         var SuccessMsg = '@SuccessMsg';
         if (SuccessMsg) {
             alert(SuccessMsg);

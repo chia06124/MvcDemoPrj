@@ -324,8 +324,6 @@ namespace MvcDemoPrj.Controllers
                 {
                     //報告類別
                     var ReportList = (from b in db.sysCodeMap where b.Class_Name == "ReportType" select new ReportTypeViewModel { Item_Code = b.Item_Code, Item_Name = b.Item_Name }).ToList();
-                    
-
                     List<SelectListItem> items = new List<SelectListItem>();
                     foreach(var temp in ReportList)
                     {
@@ -334,9 +332,20 @@ namespace MvcDemoPrj.Controllers
                         });
                     }
                     ViewBag.Report = items;
+
                     //個股報告類別
                     var ReportType_BSList = (from b in db.sysCodeMap where b.Class_Name == "ReportType_BSR" select new ReportTypeViewModel { Item_Code = b.Item_Code, Item_Name = b.Item_Name }).ToList();
-                    ViewBag.ReportType_BS = ReportType_BSList;
+                    List<SelectListItem> itemsReportType_BSList = new List<SelectListItem>();
+                    foreach (var temp in ReportType_BSList)
+                    {
+                        itemsReportType_BSList.Add(new SelectListItem()
+                        {
+                            Text = temp.Item_Name.ToString(),
+                            Value = temp.Item_Code
+                        });
+                    }
+                    ViewBag.ReportTypeTemp_BS = itemsReportType_BSList;
+
                     //推薦理由
                     var ReportTypeMemoList = (from b in db.sysCodeMap where b.Class_Name == "Reason" select new ReportTypeViewModel { Item_Code = b.Item_Code, Item_Name = b.Item_Name }).ToList();
                     ViewBag.ReportTypeMemoList = ReportTypeMemoList;
