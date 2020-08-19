@@ -63,7 +63,7 @@
                 <div class="card-header py-3 form-inline">
                     @*<button class="btn btn-primary btn-sm m-1 col-sm-1" id="Send" type="button">送出</button>*@
                     <input type="submit" value="送出" class="btn btn-primary btn-sm m-1 col-sm-1" />
-
+                    @Html.ActionLink("返回", "index", "Home", new { }, new { @class = "btn btn-primary btn-sm m-1 col-sm-1" })
                 </div>
                 <div class="card-body">
 
@@ -113,7 +113,7 @@
                             @Html.LabelFor(model => model.ReportType, htmlAttributes: new { @class = "control-label  " })
                         </div>
                         <div class="col-xs-12 col-sm-10">
-                            @Html.DropDownList(model => model.ReportType, (IEnumerable<SelectListItem>)ViewBag.Report, new { @class = "selectpicker form-control" } )
+                            @Html.DropDownListFor(model => model.ReportType, (IEnumerable<SelectListItem>)ViewBag.Report, new { @class = "selectpicker form-control", id = "ReportTypeId" } )
                             @*<select class="selectpicker form-control" data-live-search="true" id="ReportType" name="ReportType">
                                 @for (int i = 0; i < ReportList.Count; i++)
                                 {
@@ -176,12 +176,7 @@
                                 @Html.LabelFor(model => model.ReportType_BS, htmlAttributes: new { @class = "control-label  " })
                             </div>
                             <div class="col-xs-12 col-sm-10">
-                                <select class="selectpicker form-control" data-live-search="true" id="ReportType_BS" name="ReportType_BS">
-                                    @for (int i = 0; i < ReportType_BS.Count; i++)
-                                    {
-                                        <option value="@ReportType_BS[i].Item_Code">@ReportType_BS[i].Item_Name</option>
-                                    }
-                                </select>
+                                @Html.DropDownListFor(model => model.ReportType_BS, (IEnumerable<SelectListItem>)ViewBag.ReportTypeTemp_BS, new { @class = "selectpicker form-control", id = "ReportTypeBS_Id" })
                                 @Html.ValidationMessageFor(model => model.ReportType_BS, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -330,7 +325,7 @@
 }
 <script type="text/javascript">
 
-    $('#ReportType').on('change', function () {
+    $('#ReportTypeId').on('change', function () {
 
         //if (this.value == 2 || this.value==3) {
         //    $("#StockReport").show();
@@ -359,7 +354,7 @@
         }
     });
 
-    $('#ReportType_BS').on('change', function () {
+    $('#ReportTypeBS_Id').on('change', function () {
         //alert(this.value);
         switch (this.value) {
             case 'B':
