@@ -9,7 +9,7 @@
 }
 
 
-@using (Html.BeginForm("Create", "Home", FormMethod.Post, new { app = @Model }))
+@using (Html.BeginForm("Delete", "Home", FormMethod.Post, new { app = @Model }))
 {
     @Html.AntiForgeryToken()
     <div id="content">

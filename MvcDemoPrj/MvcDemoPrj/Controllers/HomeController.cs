@@ -16,6 +16,36 @@ namespace MvcDemoPrj.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpPost]
+        [ValidateAntiForgeryToken] //防止跨網站偽造請求攻擊
+        public ActionResult Delete(int Seq,string ReportType)
+        {
+            using (var db = new FirstModel())
+            {
+                SI_ResearcherVisit visit = db.SI_ResearcherVisit.Find(Seq);
+                db.SI_ResearcherVisit.Remove(visit);
+                db.SaveChanges();
+                try
+                {
+                    if (ReportType.Equals("2") ||ReportType.Equals("3"))
+                    {
+                        SI_StocksReport Stocks = db.SI_StocksReport.Find(Seq);
+                        db.SI_StocksReport.Remove(Stocks);
+                        db.SaveChanges();
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    TempData["SuccessYN"] = "刪除失敗";
+                    return View("Index");
+                    throw;
+                }
+                TempData["SuccessYN"] = "刪除成功";
+                return RedirectToAction("Index");
+            }
+        }
+
 
         public ActionResult Delete(int? Seq)
         {
