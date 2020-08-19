@@ -83,7 +83,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">個人工作績效</h6>
                         @Html.ActionLink("績效查詢", "Index", "Home", null, new { @class = "collapse-item" })
-                        <a class="collapse-item" href="register.html">績效輸入</a>
+                        @Html.ActionLink("績效輸入", "Create", "Home", null, new { @class = "collapse-item" })
                         @*<a class="collapse-item" href="forgot-password.html">Forgot Password</a>*@
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">研究員績效</h6>

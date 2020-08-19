@@ -148,6 +148,7 @@
                             <div class="col-xs-12 col-sm-2">
                                 @Html.LabelFor(model => model.CapitalStock, htmlAttributes: new { @class = "control-label  " })
                             </div>
+                            @* <div class="col-xs-12 col-sm-10" id="CapitalStock" >  *@ @**示範DisplayFor加入id搭配jquery*@
                             <div class="col-xs-12 col-sm-10">
                                 @Html.DisplayFor(model => model.CapitalStock, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.CapitalStock, "", new { @class = "text-danger" })
@@ -158,10 +159,10 @@
                             <div class="col-xs-12 col-sm-2">
                                 @Html.LabelFor(model => model.ClosePrice, htmlAttributes: new { @class = "control-label  " })
                             </div>
-                            <div class="col-xs-12 col-sm-10">
-                                @Html.DisplayFor(model => model.ClosePrice, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.ClosePrice, "", new { @class = "text-danger" })
-                            </div>
+                                <div class="col-xs-12 col-sm-10" >
+                                    @Html.DisplayFor(model => model.ClosePrice, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ClosePrice, "", new { @class = "text-danger" })
+                                </div>
                         </div>
                         <p />
                         <div class="row">
@@ -252,7 +253,7 @@
                             <div class="col-xs-12 col-sm-2">
                                 @Html.LabelFor(model => model.EPS_ThisYear, htmlAttributes: new { @class = "control-label  " })
                             </div>
-                            <div class="col-xs-12 col-sm-10">
+                            <div class="col-xs-12 col-sm-10" >
                                 @Html.DisplayFor(model => model.EPS_ThisYear, new { htmlAttributes = new { @class = "form-control" } })
                                 @*@Html.ValidationMessageFor(model => model.EPS_ThisYear, "", new { @class = "text-danger" })*@
                             </div>
@@ -262,16 +263,12 @@
                             <div class="col-xs-12 col-sm-2">
                                 @Html.LabelFor(model => model.EPS_NextYear, htmlAttributes: new { @class = "control-label  " })
                             </div>
-                            <div class="col-xs-12 col-sm-10">
+                            <div class="col-xs-12 col-sm-10" >
                                 @Html.DisplayFor(model => model.EPS_NextYear, new { htmlAttributes = new { @class = "form-control" } })
                                 @*@Html.ValidationMessageFor(model => model.EPS_NextYear, "", new { @class = "text-danger" })*@
                             </div>
                         </div>
                         <p />
-
-
-
-
                         @*<div class="row">
                                 <div class="col-xs-12 col-sm-2">
                                     @Html.LabelFor(model => model.StocksReport.CreateUser, htmlAttributes: new { @class = "control-label  " })
@@ -398,20 +395,20 @@
     $('#Send').click(function () {
         var PostCreate;
         //if ($('#ReportType').val() == '2') {
-            //alert($('#ReportType').val())
-            PostCreate = [
-            {
-                DataDate: $('#DataDate').val(), CompanyId: $('#CompanyId').val()
-                , CompanyName: $('#CompanyName').val(), ReportType: $('#ReportType').val()
-                , EmpName: $('#CreateUser').val(), CreateDate: $('#CreateDate').val()
-                , CapitalStock: $('#CapitalStock').val(), ClosePrice: $('#ClosePrice').val()
-                , ReportType_BS: $('#ReportType_BS').val(), Buy_Price: $('#Buy_Price').val()
-                , Sell_Price: $('#Sell_Price').val(), Targetprice: $('#Targetprice').val()
-                , Reason: $('#Reason').val(), ReportTypeMemo_BS: $('#ReportTypeMemo_BS').val()
-                , PER: $('PER').val(), PBR: $('PBR').val()
-                , EPS_ThisYear: $('EPS_ThisYear').val(), EPS_NextYear: $('#EPS_NextYear')
-            }
-            ];
+        //alert($('#ReportType').val())
+        PostCreate = [
+        {
+            DataDate: $('#DataDate').val(), CompanyId: $('#CompanyId').val()
+            , CompanyName: $('#CompanyName').val(), ReportType: $('#ReportType').val()
+            , EmpName: $('#CreateUser').val(), CreateDate: $('#CreateDate').val()
+            , CapitalStock: $('#CapitalStock').val(), ClosePrice: $('#ClosePrice').val()
+            , ReportType_BS: $('#ReportType_BS').val(), Buy_Price: $('#Buy_Price').val()
+            , Sell_Price: $('#Sell_Price').val(), Targetprice: $('#Targetprice').val()
+            , Reason: $('#Reason').val(), ReportTypeMemo_BS: $('#ReportTypeMemo_BS').val()
+            , PER: $('PER').val(), PBR: $('PBR').val()
+            , EPS_ThisYear: $('EPS_ThisYear').val(), EPS_NextYear: $('#EPS_NextYear')
+        }
+        ];
         //} else {
         //    PostCreate = [
         //    {
@@ -442,6 +439,37 @@
     });
 
     $(function () {
+        //if ($('#CapitalStock')[0].innerText.trim() == "0.00") {
+        //    $('#CapitalStock')[0].innerText = ""
+        //}
+        //if ($('#ClosePrice')[0].innerText.trim() == "0.00") {
+        //    $('#ClosePrice')[0].innerText = ""
+        //}
+        //if ($('#Buy_Price')[0].innerText.trim() == "0.00") {
+        //    $('#Buy_Price')[0].innerText = ""
+        //}
+        //if ($('#Sell_Price')[0].innerText.trim() == "0.00") {
+        //    $('#Sell_Price')[0].innerText = ""
+        //}
+        //if ($('#Targetprice')[0].innerText.trim() == "0.00") {
+        //    $('#Targetprice')[0].innerText = ""
+        //}
+        //if ($('#PER')[0].innerText.trim() == "0.00") {
+        //    $('#PER')[0].innerText = ""
+        //}
+        //if ($('#PBR')[0].innerText.trim() == "0.00") {
+        //    $('#PBR')[0].innerText = ""
+        //}
+        //if ($('#PBR')[0].innerText.trim() == "0.00") {
+        //    $('#PBR')[0].innerText = ""
+        //}
+        //if ($('#EPS_ThisYear')[0].innerText.trim() == "0.00") {
+        //    $('#EPS_ThisYear')[0].innerText = ""
+        //}
+        //if ($('#EPS_NextYear')[0].innerText.trim() == "0.00") {
+        //    $('#EPS_NextYear')[0].innerText = ""
+        //}
+
         switch ($('#ReportTypeId').val()) {
 
             case "2":
