@@ -150,18 +150,20 @@ namespace MvcDemoPrj.Controllers
                 SI_ResearcherVisit visit = db.SI_ResearcherVisit.Find(CreateNewViewModel.Seq );
                 try
                 {
+                    visit.Seq = CreateNewViewModel.Seq;
+                    visit.DataDate = CreateNewViewModel.DataDate;
+                    visit.CompanyId = CreateNewViewModel.CompanyId;
+                    visit.CompanyName = CreateNewViewModel.CompanyName;
+                    visit.ReportType = CreateNewViewModel.ReportType;
+                    visit.EmpName = CreateNewViewModel.EmpName;
+                    visit.CreateDate = DateTime.Now;
+                    visit.CreateUserId = "01520";
+                    db.Entry(visit).State = EntityState.Modified;
+                    db.SaveChanges();
+
                     if (CreateNewViewModel.ReportType.Equals("2") || CreateNewViewModel.ReportType.Equals("3"))
                     {
-                        visit.Seq = CreateNewViewModel.Seq;
-                        visit.DataDate = CreateNewViewModel.DataDate;
-                        visit.CompanyId = CreateNewViewModel.CompanyId;
-                        visit.CompanyName = CreateNewViewModel.CompanyName;
-                        visit.ReportType = CreateNewViewModel.ReportType;
-                        visit.EmpName = CreateNewViewModel.EmpName;
-                        visit.CreateDate = DateTime.Now;
-                        visit.CreateUserId = "01520";
-                        db.Entry(visit).State = EntityState.Modified;
-
+                        
                         SI_StocksReport Stocks = db.SI_StocksReport.Find(CreateNewViewModel.Seq);
                         if (Stocks == null)
                         {
@@ -342,37 +344,31 @@ namespace MvcDemoPrj.Controllers
                                 return RedirectToAction("Index");
                             }
                         }
-                        
+
 
                     }
                     else
                     {
-                        //if (ModelState.IsValid)
-                        //{
-                        visit.Seq = CreateNewViewModel.Seq;
-                        visit.DataDate = CreateNewViewModel.DataDate;
-                        visit.CompanyId = CreateNewViewModel.CompanyId;
-                        visit.CompanyName = CreateNewViewModel.CompanyName;
-                        visit.ReportType = CreateNewViewModel.ReportType;
-                        visit.EmpName = CreateNewViewModel.EmpName;
-                        visit.CreateDate = DateTime.Now;
-                        visit.CreateUserId = "01520";
-                        db.Entry(visit).State = EntityState.Modified;
-                        //db.SI_ResearcherVisit.Add(visit);
-                        db.SaveChanges();
-                        TempData["SuccessYN"] = "修改成功";
-                        return RedirectToAction("Index");
-                        //}
+                        SI_StocksReport Stocks = db.SI_StocksReport.Find(CreateNewViewModel.Seq);
+                        if (Stocks != null){
+                            db.SI_StocksReport.Remove(Stocks);
+                            db.SaveChanges();
+                        }
+                       
                     }
-
+                    TempData["SuccessYN"] = "修改成功";
+                    return RedirectToAction("Index");
                 }
                 catch (Exception ex)
                 {
+                    CreateSelectList();
+                    TempData["SuccessYN"] = "修改失敗";
+                    return View(CreateNewViewModel);
                     throw;
+                    
                 }
-                CreateSelectList();
-                TempData["SuccessYN"] = "修改失敗";
-                return View(CreateNewViewModel);
+                
+                
             }
 
         }
