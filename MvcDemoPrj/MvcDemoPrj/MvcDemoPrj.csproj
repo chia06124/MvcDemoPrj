@@ -177,6 +177,12 @@
     <Compile Include="DAL\ModelContext.cs" />
     <Compile Include="DAL\NewModel.cs" />
     <Compile Include="DAL\FirstModel.cs" />
+    <Compile Include="Models\Interface\ISI_ResearcherVisitRepository.cs" />
+    <Compile Include="Models\Interface\ISI_StocksReportRepository.cs" />
+    <Compile Include="Models\Interface\ISI_SysCodeMapRepository.cs" />
+    <Compile Include="Models\Repository\SI_ResearcherVisitRepository.cs" />
+    <Compile Include="Models\Repository\SI_StocksReportRepository.cs" />
+    <Compile Include="Models\Repository\SI_SysCodeMapRepository.cs" />
     <Compile Include="Models\SA_User.cs" />
     <Compile Include="Models\SI_ResearcherVisit.cs" />
     <Compile Include="Models\SI_StocksReport.cs" />
