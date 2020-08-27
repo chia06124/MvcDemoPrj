@@ -177,9 +177,11 @@
     <Compile Include="DAL\ModelContext.cs" />
     <Compile Include="DAL\NewModel.cs" />
     <Compile Include="DAL\FirstModel.cs" />
+    <Compile Include="Models\Interface\IRepository.cs" />
     <Compile Include="Models\Interface\ISI_ResearcherVisitRepository.cs" />
     <Compile Include="Models\Interface\ISI_StocksReportRepository.cs" />
     <Compile Include="Models\Interface\ISI_SysCodeMapRepository.cs" />
+    <Compile Include="Models\Repository\GenericRepository.cs" />
     <Compile Include="Models\Repository\SI_ResearcherVisitRepository.cs" />
     <Compile Include="Models\Repository\SI_StocksReportRepository.cs" />
     <Compile Include="Models\Repository\SI_SysCodeMapRepository.cs" />

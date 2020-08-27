@@ -20,11 +20,16 @@ namespace MvcDemoPrj.Controllers
         private SI_ResearcherVisitRepository VisitRepository;
         private SI_StocksReportRepository ReportRepository;
         private SI_SysCodeMapRepository SysCodeMapRepository;
+
+        private readonly IRepository<SI_ResearcherVisit> ResearcherVisiRepository;
+
         public HomeController()
         {
             this.VisitRepository = new SI_ResearcherVisitRepository();
             this.ReportRepository = new SI_StocksReportRepository();
             this.SysCodeMapRepository = new SI_SysCodeMapRepository();
+
+            this.ResearcherVisiRepository = new GenericRepository<SI_ResearcherVisit>();
         }
 
         [HttpPost]
@@ -563,7 +568,8 @@ namespace MvcDemoPrj.Controllers
                         visit.EmpName = CreateNewViewModel.EmpName;
                         visit.CreateDate = DateTime.Now;
                         visit.CreateUserId = "01520";
-                        this.VisitRepository.Create(visit);
+                        ResearcherVisiRepository.Create(visit);
+                        ///this.VisitRepository.Create(visit);
                         //db.SI_ResearcherVisit.Add(visit);
                         //db.SaveChanges();
 
