@@ -21,15 +21,16 @@ namespace MvcDemoPrj.Controllers
         private SI_StocksReportRepository ReportRepository;
         private SI_SysCodeMapRepository SysCodeMapRepository;
 
-        private readonly IRepository<SI_ResearcherVisit> ResearcherVisiRepository;
-
+        private readonly IRepository<SI_ResearcherVisit> ResearcherVisitRepository;
+        private readonly IRepository<SI_StocksReport> SIReportRepository;
         public HomeController()
         {
             this.VisitRepository = new SI_ResearcherVisitRepository();
             this.ReportRepository = new SI_StocksReportRepository();
             this.SysCodeMapRepository = new SI_SysCodeMapRepository();
 
-            this.ResearcherVisiRepository = new GenericRepository<SI_ResearcherVisit>();
+            this.ResearcherVisitRepository = new GenericRepository<SI_ResearcherVisit>();
+            this.SIReportRepository = new GenericRepository<SI_StocksReport>();
         }
 
         [HttpPost]
@@ -38,8 +39,8 @@ namespace MvcDemoPrj.Controllers
         {
             //using (var db = new FirstModel())
             //{
-            SI_ResearcherVisit visit = VisitRepository.Get(Seq);
-            VisitRepository.Delete(visit);
+            SI_ResearcherVisit visit = ResearcherVisitRepository.Get( Seq);
+            ResearcherVisitRepository.Delete(visit);
 
             //SI_ResearcherVisit visit = db.SI_ResearcherVisit.Find(Seq);
             //db.SI_ResearcherVisit.Remove(visit);
@@ -48,8 +49,8 @@ namespace MvcDemoPrj.Controllers
             {
                 if (ReportType.Equals("2") || ReportType.Equals("3"))
                 {
-                    SI_StocksReport Stocks = ReportRepository.Get(Seq);
-                    ReportRepository.Delete(Stocks);
+                    SI_StocksReport Stocks = SIReportRepository.Get(Seq);
+                    SIReportRepository.Delete(Stocks);
 
                     //SI_StocksReport Stocks = db.SI_StocksReport.Find(Seq);
                     //    db.SI_StocksReport.Remove(Stocks);
@@ -80,7 +81,7 @@ namespace MvcDemoPrj.Controllers
             //using (var db = new FirstModel())
             //{
                 CreateNewViewModel CreateNewViewModel = new CreateNewViewModel();
-                SI_ResearcherVisit VisitTemp = VisitRepository.Get(Seq);
+                SI_ResearcherVisit VisitTemp = ResearcherVisitRepository.Get(Seq);
                 //SI_ResearcherVisit VisitTemp = db.SI_ResearcherVisit.Find(Seq);
                 if (VisitTemp == null)
                 {
@@ -97,7 +98,7 @@ namespace MvcDemoPrj.Controllers
                 if (CreateNewViewModel.ReportType.Equals("2") || CreateNewViewModel.ReportType.Equals("3"))
                 {
                     //SI_StocksReport ReportTemp = db.SI_StocksReport.Find(Seq);
-                    SI_StocksReport ReportTemp = ReportRepository.Get(Seq);
+                    SI_StocksReport ReportTemp = SIReportRepository.Get(Seq);
                     CreateNewViewModel.CapitalStock = ReportTemp.CapitalStock;
                     CreateNewViewModel.Reason = ReportTemp.Reason;
                     CreateNewViewModel.ClosePrice = ReportTemp.ClosePrice;
@@ -130,7 +131,7 @@ namespace MvcDemoPrj.Controllers
             //using (var db = new FirstModel())
             //{
                 CreateNewViewModel CreateNewViewModel = new CreateNewViewModel();
-                SI_ResearcherVisit VisitTemp = VisitRepository.Get(Seq);
+                SI_ResearcherVisit VisitTemp = ResearcherVisitRepository.Get(Seq);
                 //SI_ResearcherVisit VisitTemp = db.SI_ResearcherVisit.Find(Seq);
                 if (VisitTemp == null)
                 {
@@ -147,7 +148,7 @@ namespace MvcDemoPrj.Controllers
                 if (CreateNewViewModel.ReportType.Equals("2") || CreateNewViewModel.ReportType.Equals("3"))
                 {
                     //SI_StocksReport ReportTemp = db.SI_StocksReport.Find(Seq);
-                    SI_StocksReport ReportTemp = ReportRepository.Get(Seq);
+                    SI_StocksReport ReportTemp = SIReportRepository.Get(Seq);
                     CreateNewViewModel.CapitalStock = ReportTemp.CapitalStock;
                     CreateNewViewModel.Reason = ReportTemp.Reason;
                     CreateNewViewModel.ClosePrice = ReportTemp.ClosePrice;
@@ -175,7 +176,7 @@ namespace MvcDemoPrj.Controllers
         {
             using (var db = new FirstModel())
             {
-                SI_ResearcherVisit visit = VisitRepository.Get(CreateNewViewModel.Seq);
+                SI_ResearcherVisit visit = ResearcherVisitRepository.Get(CreateNewViewModel.Seq);
                 //SI_ResearcherVisit visit = db.SI_ResearcherVisit.Find(CreateNewViewModel.Seq);
                 try
                 {
@@ -187,13 +188,13 @@ namespace MvcDemoPrj.Controllers
                     visit.EmpName = CreateNewViewModel.EmpName;
                     visit.CreateDate = DateTime.Now;
                     visit.CreateUserId = "01520";
-                    VisitRepository.Update(visit);
+                    ResearcherVisitRepository.Update(visit);
                     //db.Entry(visit).State = EntityState.Modified;
                     //db.SaveChanges();
 
                     if (CreateNewViewModel.ReportType.Equals("2") || CreateNewViewModel.ReportType.Equals("3"))
                     {
-                        SI_StocksReport Stocks = ReportRepository.Get(CreateNewViewModel.Seq);
+                        SI_StocksReport Stocks = SIReportRepository.Get(CreateNewViewModel.Seq);
                         //SI_StocksReport Stocks = db.SI_StocksReport.Find(CreateNewViewModel.Seq);
                         if (Stocks == null)
                         {
@@ -271,7 +272,7 @@ namespace MvcDemoPrj.Controllers
                                 Stocks.Next_Flag = "E";
                                 Stocks.CreateUser = "01520";
                                 Stocks.CreateDate = DateTime.Now;
-                                ReportRepository.Create(Stocks);
+                                SIReportRepository.Create(Stocks);
                                 //db.SI_StocksReport.Add(Stocks);
                                 //db.SaveChanges();
                                 TempData["SuccessYN"] = "修改成功";
@@ -302,15 +303,16 @@ namespace MvcDemoPrj.Controllers
                             }
                             if (ModelState.IsValid)
                             {
-                                visit.Seq = CreateNewViewModel.Seq;
-                                visit.DataDate = CreateNewViewModel.DataDate;
-                                visit.CompanyId = CreateNewViewModel.CompanyId;
-                                visit.CompanyName = CreateNewViewModel.CompanyName;
-                                visit.ReportType = CreateNewViewModel.ReportType;
-                                visit.EmpName = CreateNewViewModel.EmpName;
-                                visit.CreateDate = DateTime.Now;
-                                visit.CreateUserId = "01520";
-                                this.VisitRepository.Create(visit);
+                                //visit.Seq = CreateNewViewModel.Seq;
+                                //visit.DataDate = CreateNewViewModel.DataDate;
+                                //visit.CompanyId = CreateNewViewModel.CompanyId;
+                                //visit.CompanyName = CreateNewViewModel.CompanyName;
+                                //visit.ReportType = CreateNewViewModel.ReportType;
+                                //visit.EmpName = CreateNewViewModel.EmpName;
+                                //visit.CreateDate = DateTime.Now;
+                                //visit.CreateUserId = "01520";
+                                //ResearcherVisitRepository.Update (visit);
+
                                 //db.Entry(visit).State = EntityState.Modified;
                                 //db.SaveChanges();
 
@@ -368,23 +370,22 @@ namespace MvcDemoPrj.Controllers
                                 Stocks.Next_Flag = "E";
                                 Stocks.CreateUser = "01520";
                                 Stocks.CreateDate = DateTime.Now;
-                                this.ReportRepository .Update(Stocks);
+                                SIReportRepository.Update(Stocks);
                                 //db.Entry(Stocks).State = EntityState.Modified;
                                 //db.SaveChanges();
                                 TempData["SuccessYN"] = "修改成功";
                                 return RedirectToAction("Index");
                             }
                         }
-
-
                     }
                     else
                     {
-                        SI_StocksReport Stocks = db.SI_StocksReport.Find(CreateNewViewModel.Seq);
+                        SI_StocksReport Stocks = SIReportRepository.Get (CreateNewViewModel.Seq);
                         if (Stocks != null)
                         {
-                            db.SI_StocksReport.Remove(Stocks);
-                            db.SaveChanges();
+                            SIReportRepository.Delete(Stocks);
+                            //db.SI_StocksReport.Remove(Stocks);
+                            //db.SaveChanges();
                         }
 
                     }
@@ -403,11 +404,6 @@ namespace MvcDemoPrj.Controllers
 
             }
 
-        }
-
-        public ActionResult FUCK()
-        {
-            return View();
         }
 
 
@@ -568,7 +564,7 @@ namespace MvcDemoPrj.Controllers
                         visit.EmpName = CreateNewViewModel.EmpName;
                         visit.CreateDate = DateTime.Now;
                         visit.CreateUserId = "01520";
-                        ResearcherVisiRepository.Create(visit);
+                        ResearcherVisitRepository.Create(visit);
                         ///this.VisitRepository.Create(visit);
                         //db.SI_ResearcherVisit.Add(visit);
                         //db.SaveChanges();
@@ -627,7 +623,7 @@ namespace MvcDemoPrj.Controllers
                         Stocks.Next_Flag = "E";
                         Stocks.CreateUser = "01520";
                         Stocks.CreateDate = DateTime.Now;
-                        this.ReportRepository.Create(Stocks);
+                        SIReportRepository.Create(Stocks);
                         //db.SI_StocksReport.Add(Stocks);
                         //db.SaveChanges();
                         TempData["SuccessYN"] = "新增成功";
@@ -647,7 +643,7 @@ namespace MvcDemoPrj.Controllers
                     visit.EmpName = CreateNewViewModel.EmpName;
                     visit.CreateDate = DateTime.Now;
                     visit.CreateUserId = "01520";
-                    this.VisitRepository.Create(visit);
+                    ResearcherVisitRepository.Create(visit);
                     //db.SI_ResearcherVisit.Add(visit);
                     //db.SaveChanges();
                     TempData["SuccessYN"] = "新增成功";

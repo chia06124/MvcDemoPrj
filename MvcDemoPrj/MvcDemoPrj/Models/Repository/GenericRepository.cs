@@ -59,9 +59,9 @@ namespace MvcDemoPrj.Models.Repository
             }
         }
 
-        public TEntity Get(Expression<Func<TEntity, bool>> predicate)
+        public TEntity Get(decimal SeqID)
         {
-            return db.Set<TEntity>().Find(predicate);
+            return db.Set<TEntity>().Find(SeqID);
         }
         public IQueryable<TEntity> GetAll()
         {

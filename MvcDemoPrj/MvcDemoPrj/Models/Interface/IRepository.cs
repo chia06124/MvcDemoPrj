@@ -13,7 +13,7 @@ namespace MvcDemoPrj.Models.Interface
         void Create(TEntity entity);
         void Update(TEntity entity);
         void Delete(TEntity entity);
-        TEntity Get(Expression<Func<TEntity, bool>> predicate);
+        TEntity Get(decimal Seq);
         IQueryable<TEntity> GetAll();
         void SaveChange();
     }
