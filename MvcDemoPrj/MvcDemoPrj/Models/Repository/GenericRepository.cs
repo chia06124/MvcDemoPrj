@@ -5,6 +5,7 @@ using System.Web;
 using MvcDemoPrj.Models.Interface;
 using System.Data.Entity;
 using System.Linq.Expressions;
+using Microsoft.Owin.Security;
 
 namespace MvcDemoPrj.Models.Repository
 {
@@ -68,6 +69,11 @@ namespace MvcDemoPrj.Models.Repository
             return db.Set<TEntity>().AsQueryable();
         }
 
+        public decimal GetMaxSeq()
+        {
+            return db.SI_ResearcherVisit.Select(p => p.Seq).Max() + 1;
+        }
+        
 
         public void SaveChange()
         {

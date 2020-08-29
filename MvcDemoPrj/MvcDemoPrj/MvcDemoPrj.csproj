@@ -178,14 +178,7 @@
     <Compile Include="DAL\NewModel.cs" />
     <Compile Include="DAL\FirstModel.cs" />
     <Compile Include="Models\Interface\IRepository.cs" />
-    <Compile Include="Models\Interface\ISI_ResearcherVisitRepository.cs" />
-    <Compile Include="Models\Interface\ISI_StocksReportRepository.cs" />
-    <Compile Include="Models\Interface\ISI_SysCodeMapRepository.cs" />
-    <Compile Include="Models\Interface\IVisitRepository.cs" />
     <Compile Include="Models\Repository\GenericRepository.cs" />
-    <Compile Include="Models\Repository\SI_ResearcherVisitRepository.cs" />
-    <Compile Include="Models\Repository\SI_StocksReportRepository.cs" />
-    <Compile Include="Models\Repository\SI_SysCodeMapRepository.cs" />
     <Compile Include="Models\SA_User.cs" />
     <Compile Include="Models\SI_ResearcherVisit.cs" />
     <Compile Include="Models\SI_StocksReport.cs" />
@@ -2260,7 +2253,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\ListView.cshtml" />
-    <Content Include="Views\Home\MyAction.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\Home\Delete.cshtml" />
