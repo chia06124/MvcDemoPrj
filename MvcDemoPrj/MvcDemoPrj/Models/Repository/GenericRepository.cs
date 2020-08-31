@@ -69,10 +69,10 @@ namespace MvcDemoPrj.Models.Repository
             return db.Set<TEntity>().AsQueryable();
         }
 
-        public decimal GetMaxSeq()
-        {
-            return db.SI_ResearcherVisit.Select(p => p.Seq).Max() + 1;
-        }
+        //public decimal GetMaxSeq()
+        //{
+        //    return db.SI_ResearcherVisit.Select(p => p.Seq).Max() + 1;
+        //}
         
 
         public void SaveChange()

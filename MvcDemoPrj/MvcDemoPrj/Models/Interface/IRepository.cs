@@ -15,7 +15,7 @@ namespace MvcDemoPrj.Models.Interface
         void Delete(TEntity entity);
         TEntity Get(decimal Seq);
         IQueryable<TEntity> GetAll();
-        decimal GetMaxSeq();
+        //decimal GetMaxSeq();
         void SaveChange();
     }
 }

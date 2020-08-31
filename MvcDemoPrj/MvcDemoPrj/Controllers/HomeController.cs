@@ -448,7 +448,7 @@ namespace MvcDemoPrj.Controllers
         public ActionResult Create(CreateNewViewModel CreateNewViewModel)
         {
             SI_ResearcherVisit visit = new SI_ResearcherVisit();
-            var num = ResearcherVisitRepository.GetMaxSeq();
+            var num = ResearcherVisitRepository.GetAll().Select (x=>x.Seq ).Max ()+1;
             try
             {
                 if (CreateNewViewModel.ReportType.Equals("2") || CreateNewViewModel.ReportType.Equals("3"))
