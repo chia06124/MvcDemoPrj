@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MvcDemoPrj.Models.Interface
+namespace MvcDemoPrj.SQLModel.Interface
 {
    public interface IRepository<TEntity>: IDisposable
         where TEntity:class

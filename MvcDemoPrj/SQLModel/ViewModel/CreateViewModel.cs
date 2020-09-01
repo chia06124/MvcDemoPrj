@@ -1,18 +1,12 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.Spatial;
-using System.ComponentModel;
 using System.Linq;
-using System.Web.Mvc;
-
-using System.Data.Entity;
-namespace MvcDemoPrj.Models.ViewModel
+using System.Web;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
+namespace MvcDemoPrj.SQLModel.ViewModel
 {
-    public class CreateNewViewModel
+    public class CreateViewModel
     {
         [Key]
         public decimal Seq { get; set; }
@@ -42,39 +36,30 @@ namespace MvcDemoPrj.Models.ViewModel
         [DisplayName("研究員姓名")]
         public string EmpName { get; set; }
 
-        [DisplayName("異動日期")]
+        [DisplayName("建立日期")]
         public DateTime CreateDate { get; set; }
 
-       
+        [Required]
         [StringLength(5)]
-        [DisplayName("研究員")]
+        [DisplayName("建立者")]
         public string CreateUserId { get; set; }
 
-        [Required]
         [DisplayName("股本")]
         public decimal CapitalStock { get; set; }
-
-
         [Required]
         [StringLength(1000)]
         [DisplayName("推薦理由")]
         public string Reason { get; set; }
-        [Required]
         [DisplayName("收盤價")]
         public decimal ClosePrice { get; set; }
-
         [DisplayName("目前PER(倍)")]
-        public decimal? PER { get; set; }
-
+        public decimal PER { get; set; }
         [DisplayName("目前PBR(倍)")]
-        public decimal? PBR { get; set; }
-
-        [DisplayName("今年稅後EPS")]
-        public decimal? EPS_ThisYear { get; set; }
-
-        [DisplayName("明年稅後EPS")]
-        public decimal? EPS_NextYear { get; set; }
-        [Required]
+        public decimal PBR { get; set; }
+        [DisplayName("稅後EPS(元)今年")]
+        public decimal EPS_ThisYear { get; set; }
+        [DisplayName("稅後EPS(元)明年")]
+        public decimal EPS_NextYear { get; set; }
         [DisplayName("目標價")]
         public decimal Targetprice { get; set; }
 
@@ -83,28 +68,23 @@ namespace MvcDemoPrj.Models.ViewModel
         [DisplayName("個股報告類別")]
         public string ReportType_BS { get; set; }
 
-        //[Required]
+        [Required]
         [StringLength(1)]
         [DisplayName("判斷買進第一筆與賣出結算標記")]
         public string Flag { get; set; }
-        [Required]
         [DisplayName("買進價格")]
         public decimal Buy_Price { get; set; }
-        [Required]
         [DisplayName("賣出價格")]
         public decimal Sell_Price { get; set; }
-       
 
-        //[Required]
+        [Required]
         [StringLength(5)]
         [DisplayName("建立者")]
         public string CreateUser { get; set; }
 
-        //[Required]
+        [Required]
         [StringLength(1)]
         [DisplayName("半年轉標記")]
         public string Next_Flag { get; set; }
-
-
     }
 }

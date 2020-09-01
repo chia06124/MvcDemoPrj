@@ -1,9 +1,11 @@
-namespace MvcDemoPrj.Models
+using System;
+using System.Data.Entity;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using MvcDemoPrj.SQLModel.Models;
+namespace MvcDemoPrj.SQLModel.DAL
 {
-    using System;
-    using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
+    
 
     public partial class FirstModel : DbContext
     {

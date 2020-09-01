@@ -5,14 +5,15 @@ using System.Web;
 using System.Web.Mvc;
 using MvcDemoPrj.Models;
 using System.Collections;
-using MvcDemoPrj.Models.ViewModel;
+using MvcDemoPrj.SQLModel.ViewModel;
 using MvcDemoPrj.DAL;
 using System.Net;
 using System.Data.Entity.Core.EntityClient;
 using System.Data.Entity;
 using System.Web.UI.WebControls;
-using MvcDemoPrj.Models.Interface;
-using MvcDemoPrj.Models.Repository;
+using MvcDemoPrj.SQLModel.Interface;
+using MvcDemoPrj.SQLModel.Repository;
+using MvcDemoPrj.SQLModel.Models;
 namespace MvcDemoPrj.Controllers
 {
     public class HomeController : Controller
@@ -139,8 +140,8 @@ namespace MvcDemoPrj.Controllers
         [ValidateAntiForgeryToken] //防止跨網站偽造請求攻擊
         public ActionResult Edit(CreateNewViewModel CreateNewViewModel)
         {
-            using (var db = new FirstModel())
-            {
+            //using (var db = new FirstModel())
+            //{
                 SI_ResearcherVisit visit = ResearcherVisitRepository.Get(CreateNewViewModel.Seq);
                 try
                 {
@@ -335,7 +336,7 @@ namespace MvcDemoPrj.Controllers
                     throw;
 
                 }
-            }
+            //}
 
         }
 

@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using MvcDemoPrj.Models.Interface;
+using MvcDemoPrj.SQLModel.Interface;
 using System.Data.Entity;
 using System.Linq.Expressions;
 using Microsoft.Owin.Security;
+using MvcDemoPrj.SQLModel.DAL;
 
-namespace MvcDemoPrj.Models.Repository
+namespace MvcDemoPrj.SQLModel.Repository
 {
     public class GenericRepository<TEntity> : IRepository<TEntity>
         where TEntity : class

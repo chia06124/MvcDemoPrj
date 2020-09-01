@@ -5,6 +5,7 @@ namespace MvcDemoPrj.DAL
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
     using MvcDemoPrj.Models;
+    using SQLModel.Models;
 
     public partial class Model2 : DbContext
     {

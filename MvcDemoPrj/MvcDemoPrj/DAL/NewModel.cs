@@ -6,6 +6,7 @@ namespace MvcDemoPrj.DAL
     using System.Linq;
     using MvcDemoPrj.DAL;
     using MvcDemoPrj.Models;
+    using SQLModel.Models;
 
     public partial class NewModel : DbContext
     {
