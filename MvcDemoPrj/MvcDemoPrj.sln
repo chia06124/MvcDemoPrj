@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcDemoPrj", "MvcDemoPrj\MvcDemoPrj.csproj", "{A4A689B6-99A4-4B66-A97B-735BEB7F958C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLModel", "SQLModel\SQLModel.csproj", "{F2F6BF13-2FEF-41E1-ADE8-1CB5592A7CA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcDemoPrjService", "MvcDemoPrjService\MvcDemoPrjService.csproj", "{F2C0F3A1-9E22-42F9-8C15-798CE5B1E094}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +23,15 @@ Global
 		{F2F6BF13-2FEF-41E1-ADE8-1CB5592A7CA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2F6BF13-2FEF-41E1-ADE8-1CB5592A7CA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2F6BF13-2FEF-41E1-ADE8-1CB5592A7CA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2C0F3A1-9E22-42F9-8C15-798CE5B1E094}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2C0F3A1-9E22-42F9-8C15-798CE5B1E094}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2C0F3A1-9E22-42F9-8C15-798CE5B1E094}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2C0F3A1-9E22-42F9-8C15-798CE5B1E094}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {38B37AA9-E607-4A0F-8920-BA93F1C8784A}
 	EndGlobalSection
 EndGlobal

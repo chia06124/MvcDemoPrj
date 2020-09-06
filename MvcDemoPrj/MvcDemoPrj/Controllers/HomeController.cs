@@ -14,16 +14,22 @@ using System.Web.UI.WebControls;
 using MvcDemoPrj.SQLModel.Interface;
 using MvcDemoPrj.SQLModel.Repository;
 using MvcDemoPrj.SQLModel.Models;
+using MvcDemoPrjService;
+
 namespace MvcDemoPrj.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly VisitService visitService;
+        private readonly ReportService reportService;
         private readonly IRepository<SI_ResearcherVisit> ResearcherVisitRepository;
         private readonly IRepository<SI_StocksReport> SIReportRepository;
         private readonly IRepository<sysCodeMap> sysCodeMapRepository;
         private readonly IRepository<SA_User> SAUserRepository;
         public HomeController()
         {
+            visitService = new VisitService();
+            reportService = new ReportService();
 
             this.ResearcherVisitRepository = new GenericRepository<SI_ResearcherVisit>();
             this.SIReportRepository = new GenericRepository<SI_StocksReport>();
@@ -102,7 +108,7 @@ namespace MvcDemoPrj.Controllers
         {
 
             CreateNewViewModel CreateNewViewModel = new CreateNewViewModel();
-            SI_ResearcherVisit VisitTemp = ResearcherVisitRepository.Get(Seq);
+            SI_ResearcherVisit VisitTemp = visitService.Get(Seq);
             if (VisitTemp == null)
             {
                 return HttpNotFound(); //404查無此頁面
@@ -117,21 +123,25 @@ namespace MvcDemoPrj.Controllers
             CreateNewViewModel.CreateUserId = VisitTemp.CreateUserId;
             if (CreateNewViewModel.ReportType.Equals("2") || CreateNewViewModel.ReportType.Equals("3"))
             {
-                SI_StocksReport ReportTemp = SIReportRepository.Get(Seq);
-                CreateNewViewModel.CapitalStock = ReportTemp.CapitalStock;
-                CreateNewViewModel.Reason = ReportTemp.Reason;
-                CreateNewViewModel.ClosePrice = ReportTemp.ClosePrice;
-                CreateNewViewModel.PER = ReportTemp.PER;
-                CreateNewViewModel.PBR = ReportTemp.PBR;
-                CreateNewViewModel.EPS_ThisYear = ReportTemp.EPS_ThisYear;
-                CreateNewViewModel.EPS_NextYear = ReportTemp.EPS_NextYear;
-                CreateNewViewModel.Targetprice = ReportTemp.Targetprice;
-                CreateNewViewModel.ReportType_BS = ReportTemp.ReportType_BS;
-                CreateNewViewModel.Flag = ReportTemp.Flag;
-                CreateNewViewModel.Buy_Price = ReportTemp.Buy_Price;
-                CreateNewViewModel.Sell_Price = ReportTemp.Sell_Price;
-                CreateNewViewModel.CreateUser = ReportTemp.CreateUser;
-                CreateNewViewModel.Next_Flag = ReportTemp.Next_Flag;
+                SI_StocksReport ReportTemp = reportService.Get(Seq);
+                if (ReportTemp!=null)
+                {
+                    CreateNewViewModel.CapitalStock = ReportTemp.CapitalStock;
+                    CreateNewViewModel.Reason = ReportTemp.Reason;
+                    CreateNewViewModel.ClosePrice = ReportTemp.ClosePrice;
+                    CreateNewViewModel.PER = ReportTemp.PER;
+                    CreateNewViewModel.PBR = ReportTemp.PBR;
+                    CreateNewViewModel.EPS_ThisYear = ReportTemp.EPS_ThisYear;
+                    CreateNewViewModel.EPS_NextYear = ReportTemp.EPS_NextYear;
+                    CreateNewViewModel.Targetprice = ReportTemp.Targetprice;
+                    CreateNewViewModel.ReportType_BS = ReportTemp.ReportType_BS;
+                    CreateNewViewModel.Flag = ReportTemp.Flag;
+                    CreateNewViewModel.Buy_Price = ReportTemp.Buy_Price;
+                    CreateNewViewModel.Sell_Price = ReportTemp.Sell_Price;
+                    CreateNewViewModel.CreateUser = ReportTemp.CreateUser;
+                    CreateNewViewModel.Next_Flag = ReportTemp.Next_Flag;
+                }
+                
             }
             return View(CreateNewViewModel);
         }
@@ -142,22 +152,23 @@ namespace MvcDemoPrj.Controllers
         {
             //using (var db = new FirstModel())
             //{
-                SI_ResearcherVisit visit = ResearcherVisitRepository.Get(CreateNewViewModel.Seq);
+            //SI_ResearcherVisit visit = ResearcherVisitRepository.Get(CreateNewViewModel.Seq);
+            SI_ResearcherVisit visit = visitService.Get(CreateNewViewModel.Seq);
                 try
                 {
-                    visit.Seq = CreateNewViewModel.Seq;
-                    visit.DataDate = CreateNewViewModel.DataDate;
-                    visit.CompanyId = CreateNewViewModel.CompanyId;
-                    visit.CompanyName = CreateNewViewModel.CompanyName;
-                    visit.ReportType = CreateNewViewModel.ReportType;
-                    visit.EmpName = CreateNewViewModel.EmpName;
-                    visit.CreateDate = DateTime.Now;
-                    visit.CreateUserId = "01520";
-                    ResearcherVisitRepository.Update(visit);
-
+                //visit.Seq = CreateNewViewModel.Seq;
+                //visit.DataDate = CreateNewViewModel.DataDate;
+                //visit.CompanyId = CreateNewViewModel.CompanyId;
+                //visit.CompanyName = CreateNewViewModel.CompanyName;
+                //visit.ReportType = CreateNewViewModel.ReportType;
+                //visit.EmpName = CreateNewViewModel.EmpName;
+                //visit.CreateDate = DateTime.Now;
+                //visit.CreateUserId = "01520";
+                //ResearcherVisitRepository.Update(visit);
+                visitService.Update(CreateNewViewModel);
                     if (CreateNewViewModel.ReportType.Equals("2") || CreateNewViewModel.ReportType.Equals("3"))
                     {
-                        SI_StocksReport Stocks = SIReportRepository.Get(CreateNewViewModel.Seq);
+                        SI_StocksReport Stocks = reportService.Get(CreateNewViewModel.Seq);
                         if (Stocks == null)
                         {
                             if (CreateNewViewModel.ReportType_BS.Equals("K") || CreateNewViewModel.ReportType_BS.Equals("S"))
@@ -178,61 +189,62 @@ namespace MvcDemoPrj.Controllers
                             }
                             if (ModelState.IsValid)
                             {
-                                Stocks = new SI_StocksReport();
-                                Stocks.Seq = CreateNewViewModel.Seq;
-                                Stocks.CompanyId = CreateNewViewModel.CompanyId;
-                                Stocks.CompanyName = CreateNewViewModel.CompanyName;
-                                Stocks.CapitalStock = CreateNewViewModel.CapitalStock;
-                                Stocks.ClosePrice = CreateNewViewModel.ClosePrice;
-                                Stocks.Buy_Price = CreateNewViewModel.Buy_Price;
-                                Stocks.Sell_Price = CreateNewViewModel.Sell_Price;
-                                Stocks.Targetprice = CreateNewViewModel.Targetprice;
+                            reportService.Create(CreateNewViewModel);
+                                //Stocks = new SI_StocksReport();
+                                //Stocks.Seq = CreateNewViewModel.Seq;
+                                //Stocks.CompanyId = CreateNewViewModel.CompanyId;
+                                //Stocks.CompanyName = CreateNewViewModel.CompanyName;
+                                //Stocks.CapitalStock = CreateNewViewModel.CapitalStock;
+                                //Stocks.ClosePrice = CreateNewViewModel.ClosePrice;
+                                //Stocks.Buy_Price = CreateNewViewModel.Buy_Price;
+                                //Stocks.Sell_Price = CreateNewViewModel.Sell_Price;
+                                //Stocks.Targetprice = CreateNewViewModel.Targetprice;
 
-                                if (CreateNewViewModel.PER == null)
-                                {
-                                    Stocks.PER = 0;
-                                }
-                                else
-                                {
-                                    Stocks.PER = CreateNewViewModel.PER;
-                                }
+                                //if (CreateNewViewModel.PER == null)
+                                //{
+                                //    Stocks.PER = 0;
+                                //}
+                                //else
+                                //{
+                                //    Stocks.PER = CreateNewViewModel.PER;
+                                //}
 
-                                if (CreateNewViewModel.PBR == null)
-                                {
-                                    Stocks.PBR = 0;
-                                }
-                                else
-                                {
-                                    Stocks.PBR = CreateNewViewModel.PBR;
-                                }
+                                //if (CreateNewViewModel.PBR == null)
+                                //{
+                                //    Stocks.PBR = 0;
+                                //}
+                                //else
+                                //{
+                                //    Stocks.PBR = CreateNewViewModel.PBR;
+                                //}
 
-                                if (CreateNewViewModel.EPS_ThisYear == null)
-                                {
-                                    Stocks.EPS_ThisYear = 0;
-                                }
-                                else
-                                {
-                                    Stocks.EPS_ThisYear = CreateNewViewModel.EPS_ThisYear;
-                                }
+                                //if (CreateNewViewModel.EPS_ThisYear == null)
+                                //{
+                                //    Stocks.EPS_ThisYear = 0;
+                                //}
+                                //else
+                                //{
+                                //    Stocks.EPS_ThisYear = CreateNewViewModel.EPS_ThisYear;
+                                //}
 
-                                if (CreateNewViewModel.EPS_NextYear == null)
-                                {
-                                    Stocks.EPS_NextYear = 0;
-                                }
-                                else
-                                {
-                                    Stocks.EPS_NextYear = CreateNewViewModel.EPS_NextYear;
-                                }
+                                //if (CreateNewViewModel.EPS_NextYear == null)
+                                //{
+                                //    Stocks.EPS_NextYear = 0;
+                                //}
+                                //else
+                                //{
+                                //    Stocks.EPS_NextYear = CreateNewViewModel.EPS_NextYear;
+                                //}
 
 
-                                Stocks.Reason = CreateNewViewModel.Reason;
+                                //Stocks.Reason = CreateNewViewModel.Reason;
 
-                                Stocks.ReportType_BS = CreateNewViewModel.ReportType_BS;
-                                Stocks.Flag = "Y";
-                                Stocks.Next_Flag = "E";
-                                Stocks.CreateUser = "01520";
-                                Stocks.CreateDate = DateTime.Now;
-                                SIReportRepository.Create(Stocks);
+                                //Stocks.ReportType_BS = CreateNewViewModel.ReportType_BS;
+                                //Stocks.Flag = "Y";
+                                //Stocks.Next_Flag = "E";
+                                //Stocks.CreateUser = "01520";
+                                //Stocks.CreateDate = DateTime.Now;
+                                //SIReportRepository.Create(Stocks);
                                 TempData["SuccessYN"] = "修改成功";
                                 return RedirectToAction("Index");
                             }
@@ -257,61 +269,62 @@ namespace MvcDemoPrj.Controllers
                             }
                             if (ModelState.IsValid)
                             {
-                                Stocks.Seq = CreateNewViewModel.Seq;
-                                Stocks.CompanyId = CreateNewViewModel.CompanyId;
-                                Stocks.CompanyName = CreateNewViewModel.CompanyName;
-                                Stocks.CapitalStock = CreateNewViewModel.CapitalStock;
-                                Stocks.ClosePrice = CreateNewViewModel.ClosePrice;
-                                Stocks.Buy_Price = CreateNewViewModel.Buy_Price;
-                                Stocks.Sell_Price = CreateNewViewModel.Sell_Price;
-                                Stocks.Targetprice = CreateNewViewModel.Targetprice;
+                            reportService.Update (CreateNewViewModel);
+                            //Stocks.Seq = CreateNewViewModel.Seq;
+                            //Stocks.CompanyId = CreateNewViewModel.CompanyId;
+                            //Stocks.CompanyName = CreateNewViewModel.CompanyName;
+                            //Stocks.CapitalStock = CreateNewViewModel.CapitalStock;
+                            //Stocks.ClosePrice = CreateNewViewModel.ClosePrice;
+                            //Stocks.Buy_Price = CreateNewViewModel.Buy_Price;
+                            //Stocks.Sell_Price = CreateNewViewModel.Sell_Price;
+                            //Stocks.Targetprice = CreateNewViewModel.Targetprice;
 
-                                if (CreateNewViewModel.PER == null)
-                                {
-                                    Stocks.PER = 0;
-                                }
-                                else
-                                {
-                                    Stocks.PER = CreateNewViewModel.PER;
-                                }
+                            //if (CreateNewViewModel.PER == null)
+                            //{
+                            //    Stocks.PER = 0;
+                            //}
+                            //else
+                            //{
+                            //    Stocks.PER = CreateNewViewModel.PER;
+                            //}
 
-                                if (CreateNewViewModel.PBR == null)
-                                {
-                                    Stocks.PBR = 0;
-                                }
-                                else
-                                {
-                                    Stocks.PBR = CreateNewViewModel.PBR;
-                                }
+                            //if (CreateNewViewModel.PBR == null)
+                            //{
+                            //    Stocks.PBR = 0;
+                            //}
+                            //else
+                            //{
+                            //    Stocks.PBR = CreateNewViewModel.PBR;
+                            //}
 
-                                if (CreateNewViewModel.EPS_ThisYear == null)
-                                {
-                                    Stocks.EPS_ThisYear = 0;
-                                }
-                                else
-                                {
-                                    Stocks.EPS_ThisYear = CreateNewViewModel.EPS_ThisYear;
-                                }
+                            //if (CreateNewViewModel.EPS_ThisYear == null)
+                            //{
+                            //    Stocks.EPS_ThisYear = 0;
+                            //}
+                            //else
+                            //{
+                            //    Stocks.EPS_ThisYear = CreateNewViewModel.EPS_ThisYear;
+                            //}
 
-                                if (CreateNewViewModel.EPS_NextYear == null)
-                                {
-                                    Stocks.EPS_NextYear = 0;
-                                }
-                                else
-                                {
-                                    Stocks.EPS_NextYear = CreateNewViewModel.EPS_NextYear;
-                                }
+                            //if (CreateNewViewModel.EPS_NextYear == null)
+                            //{
+                            //    Stocks.EPS_NextYear = 0;
+                            //}
+                            //else
+                            //{
+                            //    Stocks.EPS_NextYear = CreateNewViewModel.EPS_NextYear;
+                            //}
 
 
-                                Stocks.Reason = CreateNewViewModel.Reason;
+                            //Stocks.Reason = CreateNewViewModel.Reason;
 
-                                Stocks.ReportType_BS = CreateNewViewModel.ReportType_BS;
-                                Stocks.Flag = "Y";
-                                Stocks.Next_Flag = "E";
-                                Stocks.CreateUser = "01520";
-                                Stocks.CreateDate = DateTime.Now;
-                                SIReportRepository.Update(Stocks);
-                                TempData["SuccessYN"] = "修改成功";
+                            //Stocks.ReportType_BS = CreateNewViewModel.ReportType_BS;
+                            //Stocks.Flag = "Y";
+                            //Stocks.Next_Flag = "E";
+                            //Stocks.CreateUser = "01520";
+                            //Stocks.CreateDate = DateTime.Now;
+                            //SIReportRepository.Update(Stocks);
+                            TempData["SuccessYN"] = "修改成功";
                                 return RedirectToAction("Index");
                             }
                         }
@@ -348,51 +361,9 @@ namespace MvcDemoPrj.Controllers
 
         public ActionResult Index(string startDate, string EndDate, string EmpId)
         {
-
-            var today = DateTime.Today;
-
-            var query = (from b in ResearcherVisitRepository.GetAll().ToList()
-                         join Suser in SAUserRepository.GetAll().ToList() on b.CreateUserId equals Suser.UserId
-                         join codemap in sysCodeMapRepository.GetAll().ToList() on b.ReportType equals codemap.Item_Code
-                         where codemap.Class_Name == "ReportType"
-                         select new
-                         {
-                             Seq = b.Seq,
-                             DataDate = b.DataDate,
-                             CompanyId = b.CompanyId,
-                             CompanyName = b.CompanyName,
-                             Item_Name = codemap.Item_Name,
-                             EmpName = b.EmpName,
-                             CreateDate = b.CreateDate,
-                             UserName = Suser.UserName,
-                             CreateUserID = b.CreateUserId
-                         }).ToList()
-                         .Select(x => new viewModel1
-                         {
-                             Seq = x.Seq,
-                             DataDate = x.DataDate,
-                             CompanyId = x.CompanyId,
-                             CompanyName = x.CompanyName,
-                             Item_Name = x.Item_Name,
-                             EmpName = x.EmpName,
-                             CreateDate = x.CreateDate.ToString("yyyy/MM/dd"),
-                             UserName = x.UserName,
-                             CreateUserID = x.CreateUserID
-                         }).ToList();
-
-            if (!string.IsNullOrEmpty(EmpId))
-            {
-
-                query = query.Where(x => x.CreateUserID == EmpId).ToList();
-            }
-
-            if (!string.IsNullOrEmpty(startDate) && !string.IsNullOrEmpty(EndDate))
-            {
-                query = query.Where(x => x.DataDate.CompareTo(startDate) >= 0 && x.DataDate.CompareTo(EndDate) <= 0).ToList();
-            }
             var EmpList = (from b in SAUserRepository.GetAll() select new EmpViewModel { UserIdTemp = b.UserId, UserNameTemp = b.UserName }).ToList();
             ViewBag.EmpList = EmpList;
-            return View(query);
+            return View(visitService.GetAll(startDate, EndDate, EmpId));
 
         }
 
@@ -449,14 +420,13 @@ namespace MvcDemoPrj.Controllers
         [ValidateAntiForgeryToken] //防止跨網站偽造請求攻擊
         public ActionResult Create(CreateNewViewModel CreateNewViewModel)
         {
-            SI_ResearcherVisit visit = new SI_ResearcherVisit();
-            var num = ResearcherVisitRepository.GetAll().Select(x => x.Seq).Max() + 1;
+            //SI_ResearcherVisit visit = new SI_ResearcherVisit();
+            //var num = ResearcherVisitRepository.GetAll().Select(x => x.Seq).Max() + 1;
             try
             {
                 if (CreateNewViewModel.ReportType.Equals("2") || CreateNewViewModel.ReportType.Equals("3"))
                 {
-                    SI_StocksReport Stocks = new SI_StocksReport();
-                    System.Diagnostics.Debug.Write(CreateNewViewModel.PBR);
+                    //SI_StocksReport Stocks = new SI_StocksReport();
                     if (CreateNewViewModel.ReportType_BS.Equals("K") || CreateNewViewModel.ReportType_BS.Equals("S"))
                     {
                         ModelState.Remove("Buy_Price");
@@ -475,70 +445,73 @@ namespace MvcDemoPrj.Controllers
                     }
                     if (ModelState.IsValid)
                     {
-                        visit.Seq = num;
-                        visit.DataDate = CreateNewViewModel.DataDate;
-                        visit.CompanyId = CreateNewViewModel.CompanyId;
-                        visit.CompanyName = CreateNewViewModel.CompanyName;
-                        visit.ReportType = CreateNewViewModel.ReportType;
-                        visit.EmpName = CreateNewViewModel.EmpName;
-                        visit.CreateDate = DateTime.Now;
-                        visit.CreateUserId = "01520";
-                        ResearcherVisitRepository.Create(visit);
+                        //visit.Seq = num;
+                        //visit.DataDate = CreateNewViewModel.DataDate;
+                        //visit.CompanyId = CreateNewViewModel.CompanyId;
+                        //visit.CompanyName = CreateNewViewModel.CompanyName;
+                        //visit.ReportType = CreateNewViewModel.ReportType;
+                        //visit.EmpName = CreateNewViewModel.EmpName;
+                        //visit.CreateDate = DateTime.Now;
+                        //visit.CreateUserId = "01520";
+                        //ResearcherVisitRepository.Create(visit);
+                        visitService.Create(CreateNewViewModel);
 
-                        Stocks.Seq = num;
-                        Stocks.CompanyId = CreateNewViewModel.CompanyId;
-                        Stocks.CompanyName = CreateNewViewModel.CompanyName;
-                        Stocks.CapitalStock = CreateNewViewModel.CapitalStock;
-                        Stocks.ClosePrice = CreateNewViewModel.ClosePrice;
-                        Stocks.Buy_Price = CreateNewViewModel.Buy_Price;
-                        Stocks.Sell_Price = CreateNewViewModel.Sell_Price;
-                        Stocks.Targetprice = CreateNewViewModel.Targetprice;
+                        //Stocks.Seq = num;
+                        //Stocks.CompanyId = CreateNewViewModel.CompanyId;
+                        //Stocks.CompanyName = CreateNewViewModel.CompanyName;
+                        //Stocks.CapitalStock = CreateNewViewModel.CapitalStock;
+                        //Stocks.ClosePrice = CreateNewViewModel.ClosePrice;
+                        //Stocks.Buy_Price = CreateNewViewModel.Buy_Price;
+                        //Stocks.Sell_Price = CreateNewViewModel.Sell_Price;
+                        //Stocks.Targetprice = CreateNewViewModel.Targetprice;
 
-                        if (CreateNewViewModel.PER == null)
-                        {
-                            Stocks.PER = 0;
-                        }
-                        else
-                        {
-                            Stocks.PER = CreateNewViewModel.PER;
-                        }
+                        //if (CreateNewViewModel.PER == null)
+                        //{
+                        //    Stocks.PER = 0;
+                        //}
+                        //else
+                        //{
+                        //    Stocks.PER = CreateNewViewModel.PER;
+                        //}
 
-                        if (CreateNewViewModel.PBR == null)
-                        {
-                            Stocks.PBR = 0;
-                        }
-                        else
-                        {
-                            Stocks.PBR = CreateNewViewModel.PBR;
-                        }
+                        //if (CreateNewViewModel.PBR == null)
+                        //{
+                        //    Stocks.PBR = 0;
+                        //}
+                        //else
+                        //{
+                        //    Stocks.PBR = CreateNewViewModel.PBR;
+                        //}
 
-                        if (CreateNewViewModel.EPS_ThisYear == null)
-                        {
-                            Stocks.EPS_ThisYear = 0;
-                        }
-                        else
-                        {
-                            Stocks.EPS_ThisYear = CreateNewViewModel.EPS_ThisYear;
-                        }
+                        //if (CreateNewViewModel.EPS_ThisYear == null)
+                        //{
+                        //    Stocks.EPS_ThisYear = 0;
+                        //}
+                        //else
+                        //{
+                        //    Stocks.EPS_ThisYear = CreateNewViewModel.EPS_ThisYear;
+                        //}
 
-                        if (CreateNewViewModel.EPS_NextYear == null)
-                        {
-                            Stocks.EPS_NextYear = 0;
-                        }
-                        else
-                        {
-                            Stocks.EPS_NextYear = CreateNewViewModel.EPS_NextYear;
-                        }
+                        //if (CreateNewViewModel.EPS_NextYear == null)
+                        //{
+                        //    Stocks.EPS_NextYear = 0;
+                        //}
+                        //else
+                        //{
+                        //    Stocks.EPS_NextYear = CreateNewViewModel.EPS_NextYear;
+                        //}
 
 
-                        Stocks.Reason = CreateNewViewModel.Reason;
+                        //Stocks.Reason = CreateNewViewModel.Reason;
 
-                        Stocks.ReportType_BS = CreateNewViewModel.ReportType_BS;
-                        Stocks.Flag = "Y";
-                        Stocks.Next_Flag = "E";
-                        Stocks.CreateUser = "01520";
-                        Stocks.CreateDate = DateTime.Now;
-                        SIReportRepository.Create(Stocks);
+                        //Stocks.ReportType_BS = CreateNewViewModel.ReportType_BS;
+                        //Stocks.Flag = "Y";
+                        //Stocks.Next_Flag = "E";
+                        //Stocks.CreateUser = "01520";
+                        //Stocks.CreateDate = DateTime.Now;
+                        //SIReportRepository.Create(Stocks);
+                        reportService.Create(CreateNewViewModel);
+
                         TempData["SuccessYN"] = "新增成功";
                         return RedirectToAction("Create");
                     }
@@ -546,15 +519,16 @@ namespace MvcDemoPrj.Controllers
                 }
                 else
                 {
-                    visit.Seq = num;
-                    visit.DataDate = CreateNewViewModel.DataDate;
-                    visit.CompanyId = CreateNewViewModel.CompanyId;
-                    visit.CompanyName = CreateNewViewModel.CompanyName;
-                    visit.ReportType = CreateNewViewModel.ReportType;
-                    visit.EmpName = CreateNewViewModel.EmpName;
-                    visit.CreateDate = DateTime.Now;
-                    visit.CreateUserId = "01520";
-                    ResearcherVisitRepository.Create(visit);
+                    //visit.Seq = num;
+                    //visit.DataDate = CreateNewViewModel.DataDate;
+                    //visit.CompanyId = CreateNewViewModel.CompanyId;
+                    //visit.CompanyName = CreateNewViewModel.CompanyName;
+                    //visit.ReportType = CreateNewViewModel.ReportType;
+                    //visit.EmpName = CreateNewViewModel.EmpName;
+                    //visit.CreateDate = DateTime.Now;
+                    //visit.CreateUserId = "01520";
+                    //ResearcherVisitRepository.Create(visit);
+                    visitService.Create(CreateNewViewModel);
                     TempData["SuccessYN"] = "新增成功";
                     return RedirectToAction("Create");
                 }
