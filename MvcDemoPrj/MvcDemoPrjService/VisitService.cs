@@ -44,9 +44,11 @@ namespace MvcDemoPrjService
             visit.CreateUserId = "01520";
             ResearcherVisitRepository.Update(visit);
         }
-        public void Delete(SI_ResearcherVisit entity)
+        public void Delete(SI_ResearcherVisit visit)
         {
-
+            //SI_ResearcherVisit visit = ResearcherVisitRepository.Get(Seq);
+                ResearcherVisitRepository.Delete(visit);
+            
         }
         public List<viewModel1> GetAll(string startDate, string EndDate, string EmpId)
         {

@@ -131,9 +131,10 @@ namespace MvcDemoPrjService
             Stocks.CreateDate = DateTime.Now;
             SIReportRepository.Update(Stocks);
         }
-        public void Delete(SI_StocksReport entity)
+        public void Delete(SI_StocksReport Stocks)
         {
-
+            //SI_StocksReport Stocks = SIReportRepository.Get(Seq);
+            SIReportRepository.Delete(Stocks);
         }
 
         public SI_StocksReport Get(decimal SeqID)

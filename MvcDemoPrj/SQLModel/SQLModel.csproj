@@ -130,6 +130,8 @@
     <Compile Include="ViewModel\EmpViewModel.cs" />
     <Compile Include="ViewModel\PostCreateViewModel.cs" />
     <Compile Include="ViewModel\ReportTypeViewModel.cs" />
+    <Compile Include="ViewModel\SAViewModel.cs" />
+    <Compile Include="ViewModel\sysCodeMapViewModel.cs" />
     <Compile Include="ViewModel\viewModel1.cs" />
   </ItemGroup>
   <ItemGroup>

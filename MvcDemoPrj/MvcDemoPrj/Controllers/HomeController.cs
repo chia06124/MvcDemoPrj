@@ -22,35 +22,48 @@ namespace MvcDemoPrj.Controllers
     {
         private readonly VisitService visitService;
         private readonly ReportService reportService;
-        private readonly IRepository<SI_ResearcherVisit> ResearcherVisitRepository;
-        private readonly IRepository<SI_StocksReport> SIReportRepository;
-        private readonly IRepository<sysCodeMap> sysCodeMapRepository;
-        private readonly IRepository<SA_User> SAUserRepository;
+        private readonly SysCodeMapService sysCodeMapService;
+        private readonly SAService saService;
+        //private readonly IRepository<SI_ResearcherVisit> ResearcherVisitRepository;
+        //private readonly IRepository<SI_StocksReport> SIReportRepository;
+        //private readonly IRepository<sysCodeMap> sysCodeMapRepository;
+        //private readonly IRepository<SA_User> SAUserRepository;
         public HomeController()
         {
             visitService = new VisitService();
             reportService = new ReportService();
-
-            this.ResearcherVisitRepository = new GenericRepository<SI_ResearcherVisit>();
-            this.SIReportRepository = new GenericRepository<SI_StocksReport>();
-            this.sysCodeMapRepository = new GenericRepository<sysCodeMap>();
-            this.SAUserRepository = new GenericRepository<SA_User>();
+            sysCodeMapService= new  SysCodeMapService();
+            saService = new SAService();
+            //this.ResearcherVisitRepository = new GenericRepository<SI_ResearcherVisit>();
+            //this.SIReportRepository = new GenericRepository<SI_StocksReport>();
+            //this.sysCodeMapRepository = new GenericRepository<sysCodeMap>();
+            //this.SAUserRepository = new GenericRepository<SA_User>();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken] //防止跨網站偽造請求攻擊
-        public ActionResult Delete(int Seq, string ReportType)
+        public ActionResult Delete(decimal Seq, string ReportType)
         {
-
-            SI_ResearcherVisit visit = ResearcherVisitRepository.Get(Seq);
-            ResearcherVisitRepository.Delete(visit);
+            
+            SI_ResearcherVisit visit = visitService.Get(Seq);
+            if (visit != null)
+            {
+                visitService.Delete(visit);
+            }
+            //ResearcherVisitRepository.Delete(visit);
 
             try
             {
                 if (ReportType.Equals("2") || ReportType.Equals("3"))
                 {
-                    SI_StocksReport Stocks = SIReportRepository.Get(Seq);
-                    SIReportRepository.Delete(Stocks);
+
+                    SI_StocksReport Stocks = reportService.Get(Seq);
+                    if (Stocks != null)
+                    {
+                        reportService.Delete(Stocks);
+                    }
+                    
+                    //SIReportRepository.Delete(Stocks);
                 }
 
             }
@@ -68,7 +81,7 @@ namespace MvcDemoPrj.Controllers
         public ActionResult Delete(decimal Seq)
         {
             CreateNewViewModel CreateNewViewModel = new CreateNewViewModel();
-            SI_ResearcherVisit VisitTemp = ResearcherVisitRepository.Get(Seq);
+            SI_ResearcherVisit VisitTemp = visitService.Get(Seq);
             if (VisitTemp == null)
             {
                 return HttpNotFound(); //404查無此頁面
@@ -83,7 +96,7 @@ namespace MvcDemoPrj.Controllers
             CreateNewViewModel.CreateUserId = VisitTemp.CreateUserId;
             if (CreateNewViewModel.ReportType.Equals("2") || CreateNewViewModel.ReportType.Equals("3"))
             {
-                SI_StocksReport ReportTemp = SIReportRepository.Get(Seq);
+                SI_StocksReport ReportTemp = reportService.Get(Seq);
                 CreateNewViewModel.CapitalStock = ReportTemp.CapitalStock;
                 CreateNewViewModel.Reason = ReportTemp.Reason;
                 CreateNewViewModel.ClosePrice = ReportTemp.ClosePrice;
@@ -331,10 +344,10 @@ namespace MvcDemoPrj.Controllers
                     }
                     else
                     {
-                        SI_StocksReport Stocks = SIReportRepository.Get(CreateNewViewModel.Seq);
+                        SI_StocksReport Stocks = reportService .Get(CreateNewViewModel.Seq);
                         if (Stocks != null)
                         {
-                            SIReportRepository.Delete(Stocks);
+                        reportService.Delete(Stocks);
                         }
 
                     }
@@ -361,7 +374,7 @@ namespace MvcDemoPrj.Controllers
 
         public ActionResult Index(string startDate, string EndDate, string EmpId)
         {
-            var EmpList = (from b in SAUserRepository.GetAll() select new EmpViewModel { UserIdTemp = b.UserId, UserNameTemp = b.UserName }).ToList();
+            var EmpList = (from b in saService.GetAll() select new EmpViewModel { UserIdTemp = b.UserId, UserNameTemp = b.UserName }).ToList();
             ViewBag.EmpList = EmpList;
             return View(visitService.GetAll(startDate, EndDate, EmpId));
 
@@ -372,7 +385,7 @@ namespace MvcDemoPrj.Controllers
             try
             {
                 //報告類別
-                var ReportList = (from b in this.sysCodeMapRepository.GetAll() where b.Class_Name == "ReportType" select new ReportTypeViewModel { Item_Code = b.Item_Code, Item_Name = b.Item_Name }).ToList();
+                var ReportList = (from b in sysCodeMapService.GetAll() where b.Class_Name == "ReportType" select new ReportTypeViewModel { Item_Code = b.Item_Code, Item_Name = b.Item_Name }).ToList();
                 List<SelectListItem> items = new List<SelectListItem>();
                 foreach (var temp in ReportList)
                 {
@@ -385,7 +398,7 @@ namespace MvcDemoPrj.Controllers
                 ViewBag.Report = items;
 
                 //個股報告類別
-                var ReportType_BSList = (from b in this.sysCodeMapRepository.GetAll() where b.Class_Name == "ReportType_BSR" select new ReportTypeViewModel { Item_Code = b.Item_Code, Item_Name = b.Item_Name }).ToList();
+                var ReportType_BSList = (from b in sysCodeMapService.GetAll() where b.Class_Name == "ReportType_BSR" select new ReportTypeViewModel { Item_Code = b.Item_Code, Item_Name = b.Item_Name }).ToList();
                 List<SelectListItem> itemsReportType_BSList = new List<SelectListItem>();
                 foreach (var temp in ReportType_BSList)
                 {
@@ -398,7 +411,7 @@ namespace MvcDemoPrj.Controllers
                 ViewBag.ReportTypeTemp_BS = itemsReportType_BSList;
 
                 //推薦理由
-                var ReportTypeMemoList = (from b in this.sysCodeMapRepository.GetAll() where b.Class_Name == "Reason" select new ReportTypeViewModel { Item_Code = b.Item_Code, Item_Name = b.Item_Name }).ToList();
+                var ReportTypeMemoList = (from b in sysCodeMapService.GetAll() where b.Class_Name == "Reason" select new ReportTypeViewModel { Item_Code = b.Item_Code, Item_Name = b.Item_Name }).ToList();
                 ViewBag.ReportTypeMemoList = ReportTypeMemoList;
 
                 ViewBag.CreateDate = DateTime.Now.ToString("yyyy/MM/dd");
