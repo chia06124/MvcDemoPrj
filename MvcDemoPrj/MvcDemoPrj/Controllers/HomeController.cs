@@ -15,6 +15,7 @@ using MvcDemoPrj.SQLModel.Interface;
 using MvcDemoPrj.SQLModel.Repository;
 using MvcDemoPrj.SQLModel.Models;
 using MvcDemoPrjService;
+using log4net;
 
 namespace MvcDemoPrj.Controllers
 {
@@ -28,6 +29,7 @@ namespace MvcDemoPrj.Controllers
         //private readonly IRepository<SI_StocksReport> SIReportRepository;
         //private readonly IRepository<sysCodeMap> sysCodeMapRepository;
         //private readonly IRepository<SA_User> SAUserRepository;
+        public static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public HomeController()
         {
             visitService = new VisitService();
@@ -352,7 +354,8 @@ namespace MvcDemoPrj.Controllers
 
                     }
                     TempData["SuccessYN"] = "修改成功";
-                    return RedirectToAction("Index");
+                log.Info("修改成功--"+ CreateNewViewModel);
+                return RedirectToAction("Index");
                 }
                 catch (Exception ex)
                 {
